@@ -1,0 +1,449 @@
+% Point to the main file
+\documentclass[../../Main.tex]{subfiles}
+
+% ========== Start the document ==========
+\begin{document}
+
+\section{Section 2.6 - Matrices}
+
+\includegraphics[width=15cm]{directed_graph.png}
+
+\begin{definition}[Directed Graph]
+    This is a \yellowbox{directed graph} and could be used to model:
+
+    \begin{itemize}
+        \item How webpages are linked
+        \item Flights between cities
+        \item Who knows who
+    \end{itemize}
+
+    How can a computer store this directed graph?
+
+\end{definition}
+
+\begin{definition}[Matrix]
+    We will use a \yellowbox{matrix}, which is a rectangular array of numbers
+\end{definition}
+
+For this network, we define a matrix
+
+$$ A = \left[ a_{ij} \right] $$
+
+Where
+
+\[
+a_{ij} = 
+    \begin{cases}
+        0 & \text{if web page $i$ doesn't link to $j$} \\
+        1 & \text{if web page $i$ does link to $j$} \\
+    \end{cases}
+\]
+
+\begin{align*}
+    i &= \text{row (starts at 1)} \\
+    j &= \text{column (starts at 1)} \\
+\end{align*}
+
+The resulting matrix would look like
+
+\[
+\begin{bmatrix}
+    a_{11} & a_{12} & a_{13} & a_{14} \\
+    a_{21} & a_{22} & a_{23} & a_{24} \\
+    a_{31} & a_{32} & a_{33} & a_{34} \\
+    a_{41} & a_{42} & a_{43} & a_{44} \\
+\end{bmatrix}
+\]
+
+For this network, the matrix is
+
+\[
+A = 
+\begin{bmatrix}
+    1 & 1 & 0 & 0 \\
+    1 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1 \\
+    0 & 1 & 0 & 1 \\
+\end{bmatrix}
+\]
+
+Let's modify the graph now
+
+\includegraphics[width=15cm]{directed_graph_other.png}
+
+This matrix is
+
+\[
+B = 
+\begin{bmatrix}
+    1 & 1 & 0 & 0 \\
+    0 & 1 & 1 & 1 \\
+    0 & 0 & 0 & 0 \\
+    1 & 0 & 1 & 0 \\
+\end{bmatrix}
+\]
+
+\subsubsection{Matrix Addition and Subtraction}
+
+We define the addition of matrices by adding corresponding components
+
+\[
+A + B = 
+\begin{bmatrix}
+    2 & 2 & 0 & 0 \\
+    1 & 1 & 2 & 1 \\
+    0 & 0 & 0 & 1 \\
+    1 & 1 & 1 & 0 \\
+\end{bmatrix}
+\]
+
+The same can be said for Subtraction
+
+\[
+A - B = 
+\begin{bmatrix}
+    0 & 0 & 1 & 1 \\
+    1 & -1 & 1 & -1 \\
+    0 & 0 & 0 & 1 \\
+    -1 & 1 & -1 & 1 \\
+\end{bmatrix}
+\]
+
+\begin{note}
+    Two matrices can only be added/subtracted if they're the same size
+\end{note}
+
+\begin{question}
+    Going back to the first network, how many ways can we start at 1 and return to 1 after passing through
+    exactly 1 webpage?
+\end{question}
+
+\begin{align*}
+    1 &\rightarrow 1 \rightarrow 1 \\
+    1 &\rightarrow 2 \rightarrow 1 \\
+    a_{12} &\rightarrow a_{21} \\
+\end{align*}
+
+\[
+\left[
+    \begin{array}{cccc}
+        \rowcolor{yellow} \overset{\text{$a_{11}$}}{1} & \overset{\text{$a_{12}$}}{1} & 0 & 0 \\
+        1 & 0 & 1 & 0 \\
+        0 & 0 & 0 & 1 \\
+        0 & 1 & 0 & 1 \\
+    \end{array}
+\right]
+\left[
+    \begin{array}{>{\columncolor{green}}c ccc}
+        \overset{\text{$a_{11}$}}{1} & 1 & 0 & 0 \\
+        \overset{\text{$a_{21}$}}{1} & 0 & 1 & 0 \\
+        0 & 0 & 0 & 1 \\
+        0 & 1 & 0 & 1 \\
+    \end{array}
+\right]
+=
+\left[
+    \begin{array}{cccc}
+        2 & 1 & 1 & 0 \\
+        1 & 1 & 0 & 1 \\
+        0 & 1 & 0 & 1 \\
+        1 & 1 & 1 & 1 \\
+    \end{array}
+\right]
+\]
+
+\begin{example}
+    Let
+
+    \[
+    A =
+    \begin{bmatrix}
+        1 & 2 & 3 \\
+        4 & 5 & 6 \\
+    \end{bmatrix}
+    , \;
+    B =
+    \begin{bmatrix}
+    1 & 0 \\
+    -1 & 1 \\
+    0 & 1 \\
+    \end{bmatrix}
+    , \;
+    C =
+    \begin{bmatrix}
+    1 & 2 \\
+    2 & 4 \\
+    \end{bmatrix}
+    \]
+
+    \begin{enumerate}
+        \item
+        {
+            $A + B$
+
+            \begin{solution}
+                \textbf{Undefined}, due to dimensions
+            \end{solution}
+        }
+
+        \item 
+        {
+            $6A$
+
+            \begin{solution}
+                \[
+                    6A =
+                    \begin{bmatrix}
+                        6 & 12 & 18 \\
+                        24 & 30 & 36 \\
+                    \end{bmatrix}
+                \]
+            \end{solution}
+        }
+
+        \item
+        {
+            $AB$
+
+            \begin{solution}
+                \[
+                AB =
+                \left[
+                    \begin{array}{ccc}
+                        \rowcolor{yellow} 1 & 2 & 3 \\
+                        4 & 5 & 6 \\
+                    \end{array}
+                \right]
+                \left[
+                    \begin{array}{>{\columncolor{green}}c ccc}
+                        1 & 0 \\
+                        -1 & 1 \\
+                        0 & 1 \\
+                    \end{array}
+                \right]
+                =
+                \left[
+                    \begin{array}{cc}
+                        -1 & 5 \\
+                        -1 & 11 \\
+                    \end{array}
+                \right]
+                \]
+            \end{solution}
+        }
+
+        \item
+        {
+            $BA$
+
+            \begin{solution}
+                \[
+                BA =
+                \left[
+                    \begin{array}{cc}
+                        \rowcolor{yellow} 1 & 0 \\
+                        -1 & 1 \\
+                        0 & 1 \\
+                    \end{array}
+                \right]
+                \left[
+                    \begin{array}{>{\columncolor{green}}c cc}
+                        1 & 2 & 3 \\
+                        4 & 5 & 6 \\
+                    \end{array}
+                \right]
+                =
+                \left[
+                    \begin{array}{ccc}
+                        1 & 2 & 3 \\
+                        3 & 3 & 3 \\
+                        4 & 5 & 6 \\
+                    \end{array}
+                \right]
+                \]
+            \end{solution} 
+        }
+
+        \item
+        {
+            $BC$
+
+            \begin{solution}
+                \[
+                BC = 
+                \left[
+                    \begin{array}{cc}
+                        \rowcolor{yellow} 1 & 0 \\
+                        -1 & 1 \\
+                        0 & 1 \\
+                    \end{array}
+                \right]
+                \left[
+                    \begin{array}{>{\columncolor{green}}c c}
+                        1 & 2 \\
+                        2 & 4 \\
+                    \end{array}
+                \right]
+                =
+                \left[
+                    \begin{array}{cc}
+                        1 & 2 \\
+                        1 & 2 \\
+                        2 & 4 \\
+                    \end{array}
+                \right]
+                \]
+            \end{solution}
+        }
+
+        \item
+        {
+            $CB$
+
+            \begin{solution}
+                \textbf{Undefined}, due to dimensions
+            \end{solution}
+        }
+
+        \item
+        {
+            $C^2 = CC$
+
+            \begin{align*}
+            C^2 = CC
+            =
+            \left[
+                \begin{array}{cc}
+                    \rowcolor{yellow} 1 & 2 \\
+                    2 & 4 \\
+                \end{array}
+            \right]
+            \left[
+                \begin{array}{>{\columncolor{green}}c c}
+                    1 & 2 \\
+                    2 & 4 \\
+                \end{array}
+            \right]
+            &=
+            \left[
+                \begin{array}{cc}
+                    5 & 10 \\
+                    10 & 20 \\
+                \end{array}
+            \right] \\
+            &= 5C
+            \end{align*}
+        }
+
+        \item
+        {
+            $C^{11}$
+
+            \begin{align*}
+                C^2 &= 5C \\
+                C^3 &= C^2 \cdot C \\
+                &= 5C \cdot C \\
+                &= 5C^2 \\
+                &= 5^2 C \\
+                C^{11} &= 5^{10} C = 5^{10} 
+                \left[
+                    \begin{array}{cc}
+                        1 & 2 \\
+                        2 & 4 \\
+                    \end{array}
+                \right]
+            \end{align*}
+        }
+    \end{enumerate}
+\end{example}
+
+Okay let's now define some properties
+
+\subsection{Properties of Matricies}
+
+\begin{definition}[Additive Identity]
+    We define the \yellowbox{Additive Identity} for matrices as
+
+    \begin{align*}
+        \underset{\text{$n \times m$}}{A} + \vec{0} = \underset{\text{$n \times m$}}{A}, 
+        \;
+        \vec{0} =
+        \begin{bmatrix}
+            0 & 0 & \cdots & 0 \\
+            0 & 0 & \cdots & 0 \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \cdots & 0 \\
+        \end{bmatrix}
+    \end{align*}
+
+\end{definition}
+
+\begin{definition}[Multiplicative Identity]
+    We define the \yellowbox{Multiplicative Identity for matrices as}
+
+    \begin{align*}
+        \underset{\text{$n \times m$}}{A} \cdot I_n = A,
+        \;
+        I_n =
+        \begin{bmatrix}
+            1 & 0 & \cdots & 0 \\
+            0 & 1 & \cdots & 0 \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \cdots & 1 \\
+        \end{bmatrix}
+    \end{align*}
+
+    But $A$ must be \textbf{square}!
+\end{definition}
+
+Some matrices have a multiplicative inverse such that
+
+\begin{definition}[Multiplicative Inverse]
+    We define the \yellowbox{Multiplicative Inverse} of matrices as
+
+    $$ A \cdot B = I $$
+
+    But only \textbf{some} matrices have them, not all do!
+
+    Also, $A$ must be square to even qualify for possibly having one
+
+    For this class, we define
+
+    \begin{align*}
+        A =
+        \begin{bmatrix}
+            a & b \\
+            c & d \\
+        \end{bmatrix}
+        ,
+        \;
+        A^{-1} =
+        \frac{1}{ad - bc}
+        \begin{bmatrix}
+            d & -b \\
+            -c & a \\
+        \end{bmatrix}
+    \end{align*}
+\end{definition}
+
+\begin{example}
+    We have
+    
+    \begin{align*}
+        \begin{bmatrix}
+            4 & 3 \\
+            7 & 5 \\
+        \end{bmatrix}^{-1}
+        =
+        \frac{1}{20 - 21}
+        \begin{bmatrix}
+            5 & -3 \\
+            -7 & 4 \\
+        \end{bmatrix}
+    \end{align*}
+
+\end{example}
+
+
+% ========== End the document ==========
+\end{document}

@@ -1,0 +1,101 @@
+% Point to the main file
+\documentclass[../../Main.tex]{subfiles}
+
+% ========== Start the document ==========
+\begin{document}
+
+\section{Section 1.7 Intro to Proofs}
+
+What do we prove? 
+Usually that some pattern or formula is true.
+
+\begin{example}
+    \begin{align*}
+        6 + 8 &= 14 \\
+        12 + 16 &= 28 \\
+        2 + 2 &= 4 \\
+    \end{align*}
+
+    We believe that the sum of 2 even integers is even.
+
+    Try to prove that: even + even = even
+
+    \medskip
+
+    \begin{work}
+        \begin{center}
+            An even number can be defined as $2n$, where n is an integer
+            $$2n + 2m = 2(n + m)$$
+        \end{center}
+    \end{work}
+
+    \begin{proof}
+        \begin{center}
+            let $a, b$ be even integers.
+
+            Then there exists integers $n, m$ such that $a = 2n, b=2m$
+
+            $$ a + b = 2n + 2m = 2(m + n) $$ is even, as desired
+        \end{center}
+    \end{proof}
+
+\end{example}
+
+But writing it this way is too long. Let's define some notation:
+
+\subsection{Set Notation}
+
+\begin{tablewithheader}
+{|c|c|c|}
+{ Name & Symbol & Set Notation }
+    
+    Set of all natural numbers & $\mathbb{N}$ & $\{ 0, 1, 2, 3, \ldots \}$ \\
+    Set of all integers & $\mathbb{Z}$ & $\{ 0, -1, 1, -2, 2, \ldots \}$ \\
+    Set of positive integers & $\mathbb{Z}^+$ & $\{ 1, 2, 3, \ldots \}$ \\
+    Set of negative integers & $\mathbb{Z}^-$ & $\{ -1, -2, -3, \ldots \}$ \\
+    Set of rational numbers & $\mathbb{Q}$ & $\{ \frac{a}{b} \mid a,b \in \mathbb{Z}, b\not= 0 \}$ \\
+    Set of real numbers & $\mathbb{R}$ & Limit of all convergent sequences of real numbers \\
+    Set of all complex numbers & $\mathbb{C}$ & $\{ a+bi \mid a,b \in \mathbb{R}, i^2 =-1 \}$ \\
+
+\end{tablewithheader}
+
+$\exists$ means there exists
+
+Let's rewrite the previous example using this new notation
+
+\begin{center}
+    $$a,b \in \mathbb{Z} \text{, both even}$$
+    Then, $\exists m, n \in \mathbb{Z} \text{ such that}$
+    $$a = 2m, b = 2n$$
+
+    Their sum $a + b = 2m + 2n = 2(m + n)$
+
+    is even, as desired
+\end{center}
+
+% continue writing the other examples. For now, I'm going to skip them since I'm lazy
+
+\subsection{Methods of Proving $p \implies q$}
+
+\begin{enumerate}
+    \item
+        \textbf{Direct Proof:}
+
+        Start with $p$ and $math$ then conclude $q$
+
+    \item
+        \textbf{Indirect Proof:}
+
+        Prove the contrapositive proof $\neg q \implies \neg p$
+
+    \item
+        \textbf{Finite Cases:}
+
+        Use the fact that $p \equiv p_1 \lor p_2 \lor \ldots \lor p_n$
+
+        Then prove $(p_1 \implies q) \land (p_2 \implies q) \land \ldots \land (p_n \implies q)$
+
+\end{enumerate}
+
+% ========== End the document ==========
+\end{document}

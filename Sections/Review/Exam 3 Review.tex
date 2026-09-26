@@ -1,0 +1,237 @@
+% Point to the main file
+\documentclass[../../Main.tex]{subfiles}
+
+% ========== Start the document ==========
+\begin{document}
+
+\section{Review for Exam 3}
+
+\subsection{Wilson's Theorem}
+
+\begin{theorem}[Wilson's Theorem]
+    If $p$ is a prime integer, then
+
+    $$(p - 1)! \equiv p - 1 \pmod{p}$$
+    
+    or
+
+    $$(p - 1)! \equiv -1 \pmod{p}$$
+\end{theorem}
+
+But for composite numbers, we have
+
+\begin{theorem}[Some Unamed Theorem]
+    If $n$ is a composite integer greater than 4,
+
+    then
+
+    $$(n-1)! \equiv 0 \pmod{n}$$
+
+    If $n = 4$, then $$3! \equiv 2 \pmod{4}$$
+\end{theorem}
+
+\subsection{Fermat's Little Theorem}
+
+\begin{theorem}[Fermat's Little Theorem]
+    If $a \in \setZ$ with, 
+    
+    \begin{enumerate}
+        \item $p$ is prime
+        \item $\text{gcd}(a, p) = 1$
+    \end{enumerate}
+ 
+    $$a^{p - 1} \equiv 1 \pmod{p}$$
+\end{theorem}
+
+\subsection{Extended Fermat's Little Theorem}
+
+\begin{theorem}[Extended Fermat's Little Theorem]
+    If $a, p, q \in \setZ$ with
+    
+    \begin{enumerate}
+        \item $p$ and $q$ are distinct primes
+        \item gcd$(a, pq) = 1$
+    \end{enumerate}
+
+    Then
+
+    $$a^{(p-1)(q-1)} \equiv 1 \pmod{pq}$$
+\end{theorem}
+
+\subsection{Bezout's Theorem}
+
+\begin{theorem}[B\'{e}zout's Theorem]
+
+    Basically
+
+    $$a, b \in \setZ^+ \implies \exists x, y \in \setZ, ax + by = \text{gcd}(a, b)$$
+\end{theorem}
+
+When given a problem that's like find $x, y$ in $ax + by = \text{gcd}(a,b)$ (where they give you $a$ and $b$), just
+do Euclidean and stop when you get to the actual GCD then back solve
+
+\subsection{Is a number prime or composite?}
+
+Lowkey just brute force up until 
+
+$$\lceil \sqrt{n} \rceil$$
+
+\subsection{Prime Factorization}
+
+Let's look at how to find the number of divisors in a number $n$
+
+\begin{definition}[Prime Factorization]
+    \textbf{Prime factorization} is breaking up a number into prime factors. An example is
+
+    \begin{align*}
+        24 &= 6 \cdot 4 \\
+        &= (3 \cdot 2)(2 \cdot 2) \\
+        &= 3^1 \cdot 2^3
+    \end{align*}
+
+    The prime factors are 3 and 2.
+\end{definition}
+
+In order to find the number of divisors, we must first break up $n$ into it's prime factors
+
+$$n = p_1^{e_1} \cdot p_2^{e_2} \cdot \ldots \cdot p_k^{e_k}$$
+
+\begin{center}
+    $p_k$: Prime factor \\
+    $e_k$: Occurences
+\end{center}
+
+The number of divisors is then
+
+$$(e_1 + 1)(e_2 + 1) \ldots (e_k + 1)$$
+
+\subsection{Chinese Remainder Theorem}
+
+Given the system: (I'm just gonna use up to 3 for this)
+
+\begin{align*}
+    x &\equiv a_1 \pmod{m_1} \\
+    x &\equiv a_2 \pmod{m_2} \\
+    x &\equiv a_3 \pmod{m_3} \\
+\end{align*}
+
+The system has a \textbf{unique solution} if $m_1, m_2, m_3$ are pairwise coprime. If not, then it \textit{could possibly} have a solution but not necessarily
+
+\begin{enumerate}
+    \item 
+    {
+        Expand the first equation
+
+        \begin{align*}
+            x &\equiv a_1 \pmod{m_1}
+        \end{align*}
+
+        implies
+
+        \begin{align*}
+            \Aboxed{x = m_1 k_1 + a_1}, \; k_1 \in \setZ
+        \end{align*}
+    }
+
+    \item
+    {
+        Plug that into the second equation
+
+        \begin{align*}
+            x &\equiv a_2 \pmod{m_2} \\
+            m_1 k_1 + a_1 &\equiv a_2 \pmod{m_2} \\
+        \end{align*}
+
+        And solve for $k_1$
+
+        \begin{align*}
+            m_1 k_1 + a_1 &\equiv a_2 \pmod{m_2} \\
+            m_1 k_1 &\equiv a_2 - a_1 \pmod{m_2} \\
+            m_1^{-1} k_1 &\equiv m_1^{-1}(a_2 - a_1) \pmod{m_2} \\
+            k_1 &\equiv m_1^{-1}(a_2 - a_1) \pmod{m_2} \\
+            \Aboxed{k_1 &\equiv c_1} \pmod{m_2} \tag{$c_1$ is shorthand} \\
+        \end{align*}
+
+        \begin{note}
+            This isn't a formula, just steps with arbitrary variables. You'll need to find the inverse of $m_1$
+        \end{note}
+
+        And expand that last equation
+
+        \begin{align*}
+            k_1 &\equiv c_1 \pmod{m_2} \\
+        \end{align*}
+
+        implies
+
+        \begin{align*}
+            \Aboxed{k_1 &= m_2 k_2 + c_1}, \; k_2 \in \setZ \\
+        \end{align*}
+    } 
+
+    \item 
+    {
+        Plug that into our equation for $x$
+
+        \begin{align*}
+            x &= m_1 k_1 + a_1 \\
+            \Aboxed{x &= m_1 (m_2 k_2 + c_1) + a_1} \\
+        \end{align*}
+
+        Plug that into the last equation
+
+        \begin{align*}
+            m_1 (m_2 k_2 + c_1) + a_1 &\equiv a_3 \pmod{m_3}
+        \end{align*}
+
+        and solve for $k_2 \pmod{m_3}$
+
+        \begin{align*}
+            &\vdots \\
+            \Aboxed{k_2 &\equiv c_2 \pmod{m_3}} \\
+        \end{align*}
+
+        Expand that equation
+
+        \begin{align*}
+            \Aboxed{k_2 = m_3 k_3 + c_2}, \; k_3 \in \setZ
+        \end{align*}
+    }
+
+    \item 
+    {
+        Finally, plug that last equation into our SECOND equation for $x$
+
+        \begin{align*}
+            x &= m_1 (m_2 k_2 + c_1) + a_1 \\
+            x &= m_1(m_2(m_3 k_3 + c_2) + c_1) + a_1 \\
+            \Aboxed{x &= m_1m_2m_3k_3 + c_3} \\
+        \end{align*}
+
+        Now we UN-expand this equation and see that
+
+        \begin{align*}
+            \Aboxed{x &\equiv c_3} \pmod{m_1m_2m_3}
+        \end{align*}
+    }
+
+\end{enumerate}
+
+Basically, starting with the first equation
+
+\begin{enumerate}
+    \item \yellowbox{Expand first, solving for $x$}
+    \item \yellowbox{Plug $x$ into second}
+    \item \greenbox{Solve for $k_1$}
+    \item \greenbox{Expand $k_1$}
+    \item \greenbox{Plug $k_1$ back into first expanded of $x$ (one with $k_1$)}
+    \item Solve for $k_2$
+    \item Expand $k_2$
+    \item Plug $k_2$ back into second expanded of $x$ (one with $k_2$)
+    \item \bluebox{Unexpand back into modulus}
+\end{enumerate}
+
+Just do \yellowbox{these lines} for the first equation, and \greenbox{these lines} for each other equation
+
+% ========== End the document ==========
+\end{document}

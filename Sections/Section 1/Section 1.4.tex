@@ -1,0 +1,282 @@
+% Point to the main file
+\documentclass[../../Main.tex]{subfiles}
+
+% ========== Start the document ==========
+\begin{document}
+
+\section{Section 1.4 - Propositional Functions and Quantifiers}
+
+First, let's start with an example
+
+\begin{example}
+    Is $x + 3 = 10$ a proposition?
+    
+    \begin{solution}
+        No, since $x$ is not know
+    \end{solution}
+
+    \medskip
+    
+    However, if $x$ is known, then $x + 3 = 10$ is a proposition
+
+    The truth value depends on the value of $x$
+\end{example}
+
+\begin{definition}[Propositional Function]
+    We call $x + 3 = 10$ a \textbf{propositional function} since the truth value of the proposition depends on the value of $x$
+\end{definition}
+
+\begin{example}[Examples of Propositional Functions]
+    For the given propositonal functions, determine the truth value for the given value of variable(s)
+
+    \begin{enumerate}
+
+        \item 
+            $P(x): x + 3 = 10$
+    
+            \begin{alphabet}
+                \item
+                {
+                    $P(6)$
+
+                    \begin{solution}
+                        \FALSE since $6 + 3 \not= 10$
+                    \end{solution}
+                }
+    
+                \item
+                {
+                    $P(7)$
+
+                    \begin{solution}
+                        \TRUE since $7 + 3 = 10$
+                    \end{solution}
+                }
+            \end{alphabet}
+
+        \item 
+            $P(a, b, c): a^2 + b^2 = c^2$
+
+            \begin{alphabet}
+                \item 
+                    $P(11, 60, 61)$
+
+                    \begin{solution}
+                        \TRUE
+                        \\
+                        $11^2 + 60^2 = 121 + 3600 = 3721$
+                        \\
+                        $61^2 = (60 + 1)^2 = 3600 + 120 + 1 = 3721$
+                    \end{solution}
+
+                \item
+                    $P(147, 201, 513)$
+
+                    \begin{solution}
+                        \FALSE
+                        \\
+                        $147^2 + 201^2 = \text{odd} + \text{odd} = \text{even}$
+                        \\
+                        $513^2 = \text{odd} \neq \text{even}$
+                    \end{solution}
+            \end{alphabet}
+
+    \end{enumerate}
+\end{example}
+
+\begin{example}[Examples of Notation]
+    \begin{enumerate}
+
+        \item 
+            Is "there exists a real number $x$ such that $x + 3 = 10$?" a proposition?
+        
+            \begin{solution}
+                Yes, and this proposition is \TRUE since $x = 7$ works
+            \end{solution}
+        
+            We can also rewrite this as:
+        
+            $$\exists x \in \mathbb{R} \mid x + 3 = 10$$
+
+        \item 
+            Is "for all real numbers $x$, $x + 3 = 10$" a proposition?
+
+            \begin{solution}
+                Yes, but the proposition is \FALSE since $x = 6$ doesn't work
+            \end{solution}
+            
+            We can also rewrite this as
+
+            $$\forall x \in \mathbb{R} \mid x + 3 = 10$$
+        
+    \end{enumerate}
+\end{example}
+
+\begin{definition}[Quantifiers]
+    The \textbf{existential quantifier} $\exists$ means "there exists"
+    \\
+    The \textbf{universal quantifier} $\forall$ means "for all" or "for every"
+\end{definition}
+
+\begin{example}[Examples of Quantifiers]
+    Write each proposition using quantifiers, and determine their truth values
+    
+    \begin{enumerate}
+        \item 
+            There exists an integer $x$ such that $x^2 + 2 > 3x$
+
+            \begin{solution}
+                $$\exists x \in \mathbb{Z} \mid x^2 + 2 > 3x$$
+
+                \TRUE since $x = 3$ gives $9 + 2 > 9$
+            \end{solution}
+        
+
+        \item 
+            For all real numbers $x$, $x^2 + 2 > 3x$
+
+            \begin{solution}
+                $$\forall x \in \mathbb{R} \mid x^2 + 2 > 3x$$
+
+                \FALSE since $x = 1$ gives $1 + 2 > 3$
+            \end{solution}
+
+        \begin{note}
+            We only need one counter example to disprove a proposition that has $\forall$
+        \end{note}
+
+        \item
+            There exists an integer $x$ such that $x^3 = 31687$
+
+            \begin{solution}
+                $$\exists x \in \mathbb{Z} \mid x^3 = 31687$$            
+
+                \FALSE since $\sqrt[3]{31687} \not \in \mathbb{Z}$
+            \end{solution}
+
+        \begin{note}
+            We needed to verify that every integer does not satisfy the proposition in order to prove it
+        \end{note}
+        
+    \end{enumerate}
+\end{example}
+
+The negations of each quantifier are as follows:
+
+$$\neg \forall \equiv \exists$$
+$$\neg \exists \equiv \forall$$
+
+\begin{example}[Negation of Quantifiers]
+    Give the negation of the following propositions:
+
+    \begin{enumerate}
+        \item
+            $\forall x \in \mathbb{R} \mid x^2 + 1 > 0$ \TRUE
+            
+            \begin{solution}
+                $\exists x \in \mathbb{R} \mid x^2 + 1 \leq 0$ \FALSE
+            \end{solution}
+
+        \item
+            $\exists a \in \mathbb{Z} \mid a^3 + 2 = 3a$ \TRUE $(a = 1)$
+
+            \begin{solution}
+                $\forall a \in \mathbb{Z} \mid a^3 + 2 \not = 3a$ \FALSE
+            \end{solution}
+
+        \item 
+            For every real number $x$, $x^2 + 30 < 11x$ \FALSE $(x=1)$
+
+            \begin{solution}
+                $\exists x \in \mathbb{R} \mid x^2 + 30 \geq 11x$ \TRUE
+            \end{solution}
+
+        \item 
+            For every prime integer $p > 3$, $p^2 - 1$ is divisible by 24 \TRUE
+
+            \begin{solution}
+                There exists a prime integer $p > 3$, $p^2 - 1$ is not divisible by 24 \FALSE
+            \end{solution}
+
+            \begin{work}
+                $$p^2 - 1$$
+
+                \begin{center}
+                    We want $p^2 -1$ divisible by both 8 and 3
+                \end{center}
+
+                $$(p^2 -1 ) = (p -1)(p + 1)$$
+                
+                \begin{center}
+                    $(p - 1)(p + 1) = (\text{even})(\text{even}$)
+                \end{center}
+
+                \begin{itemize}
+                    \item p is prime
+                    \item $p > 3$
+                    \item p is odd
+                \end{itemize}
+                
+            \end{work}
+        
+    \end{enumerate}
+\end{example}
+
+\begin{example}
+    \;
+    \begin{tablewithheader}
+    { |c|c|c| }
+    { Statement & When \TRUE & When \FALSE }
+    
+    $\forall x, P(x)$ & $P(x)$ is \TRUE for all $x$ & There exists at least one $x$ such that $P(x)$ is \FALSE \\
+    $\exists x, P(x)$ & There exists at least one $x$ such that $P(x)$ is \TRUE & For all $x$ such that $P(x)$ is \FALSE \\
+
+    \end{tablewithheader}
+\end{example}
+
+\begin{example}[Examples with Negation]
+    \;
+    \begin{tablewithheader}
+    { |c|c|c|c| }
+    { Statement & Equivalent & When \TRUE & When \FALSE }
+
+    $\neg \forall x, P(x)$ & $\exists x, \neg P(x)$ & There is at least one $x$ such that $P(x)$ is \FALSE & For all $x$, $P(x)$ is \TRUE \\
+    $\neg \exists x, P(x)$ & $\forall x, \neg P(x)$ & $P(x)$ is \FALSE for all $x$ & There exists at least one $x$ such that $P(x)$ is \TRUE \\
+
+    \end{tablewithheader}
+\end{example}
+
+\begin{example}[Examples of Rewriting with Quantifiers]
+    Rewrite the following with Quantifiers
+
+    \begin{enumerate}
+        \item 
+            For all positive integers, either $6n +1$ or $6n -1$ is prime
+            \begin{solution}
+                $\forall n \in \mathbb{Z}^+, 6n-1 \text{ is prime } \lor 6n + 1 \text{ is prime }$
+                \\
+                \FALSE since if $n = 20$ then $6n - 1 = 119$ and $6n + 1 121$ are \textbf{composite} (not prime)
+            \end{solution}
+
+        \item 
+            There exists an integer $n$ such that $n^2 + n + 41$ is composite
+            \begin{solution}
+                $\exists n \in \mathbb{Z}, n^2 + n + 41$ is composite
+                \\
+                \TRUE since if $n = 41$ then 
+                
+                \begin{align*}
+                    n^2 + n + 41 &= 41^2 + 41 + 41 \\
+                    &= 41(41 + 1 + 1)
+                \end{align*}
+
+                \begin{center}
+                    which is composite
+                \end{center}
+            \end{solution}
+
+    \end{enumerate}
+\end{example}
+
+% ========== End the document ==========
+\end{document}

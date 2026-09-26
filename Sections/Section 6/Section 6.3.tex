@@ -1,0 +1,150 @@
+% Point to the main file
+\documentclass[../../Main.tex]{subfiles}
+
+% ========== Start the document ==========
+\begin{document}
+
+\section{Section 6.3 - Permuations and Combinations}
+
+Let's start with permutations
+
+\subsection{Permutations}
+
+Suppose you have 8 different books. How many ways can the books on a shelf be arranged if... 
+
+\begin{enumerate}
+    \item 
+    {
+        The shelf fits all 8 books?
+
+        $$\underline{8} \cdot \underline{7} \cdot \underline{6} \cdot \underline{5} \cdot \underline{4} \cdot \underline{3} \cdot \underline{2} \cdot \underline{1} = 8! = \boxed{40320}$$
+    }
+
+    \item
+    {
+        The shelf fits 5 books
+
+        $$\underline{8} \cdot \underline{7} \cdot \underline{6} \cdot \underline{5} \cdot \underline{4} = \frac{8 \cdot 7 \cdot 6 \cdot 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1}{3 \cdot 2 \cdot 1} = \frac{8!}{3!} = \frac{8!}{(8 - 5)!} = \boxed{6720}$$
+
+        Here, the  order matters. We call this a \textbf{permutation}
+    }
+\end{enumerate}
+
+\begin{definition}[Permutation]
+    A \yellowbox{Permutation} is one specific way a group of items can be arranged where order matters. 
+    In general, if we have $n$ objects and we want to arrange $k$ of them, then the number of ways is given by
+
+    $$\prescript{}{n}{P}_k = \frac{n!}{(n - k)!}$$
+\end{definition}
+
+\begin{example}
+    How many ways can the president, vice president, and treasuer be assigned from a group of 4 poeple?
+
+    $$\underbrace{4}_{P} \cdot \underbrace{3}_{VP} \cdot \underbrace{2}_{T} = \boxed{24}$$
+
+    or, using the formula
+
+    $$\prescript{}{4}{P}_3 = \frac{4!}{(4 - 3)!} = \frac{4!}{1!} = \boxed{24}$$
+\end{example}
+
+Now let's move on to Combinations
+
+\subsection{Combinations}
+
+\begin{example}
+    How many committees of 3 people can be formed from 4 people?
+
+    Here, order \textbf{DOES NOT} matters
+
+    Here, there are 4 different committees
+
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        ABC & ABD & ACD & BCD \\
+        \hline
+    \end{tabular}
+
+    You can arrange the 3 people 6 different ways, given by 
+
+    $$\prescript{}{3}{P}_3 = 3! = 6$$
+
+    \begin{note}
+        I would write everything out but I'm too lazy
+    \end{note}
+
+    Another way of getting that there are 4 committees is
+    
+    
+    $$\frac{\text{total \# ordered arrangements}}{\text{\# ways of permuting that arrangement}} = \frac{24}{6} = \frac{\frac{4!}{(4 - 3)!}}{3!} = \frac{4!}{3!(4 - 3)!}$$
+
+    This is the number of \textbf{Combinations}
+\end{example}
+
+\begin{definition}[Combination]
+    A \yellowbox{Combinaton} is just an arrangement where order does not matter.
+
+    The number of combinations of $k$ items taken from $n$ items is
+
+    $${n \choose k} = \prescript{}{n}{C}_k = \frac{n!}{k!(n - k)!}$$
+
+    You would say "n choose k"
+
+    Think of this as "how many ways can you arrange $k$ things in $n$ slots"
+\end{definition}
+
+\begin{example}
+
+    \begin{enumerate}
+        \item
+        {
+            How many ways can 2 cards be dealt from a standard deck of cards?
+
+            \begin{center}
+                52 cards, want 2 cards
+            \end{center}
+
+            \begin{align*}
+                {52 \choose 2} &= \frac{52!}{2!{52 - 2}!} \\
+                &= \frac{52!}{2! 50!} \\
+                &= \frac{52 \cdot 51}{2} \\
+                &= \boxed{1326} \\
+            \end{align*}
+        }
+
+        \item
+        {
+            A coin is flipped 10 times. How many ways can exactly 4 of the flips be heads?
+
+            \begin{align*}
+                {10 \choose 4} &= \frac{10!}{4!6!} \\
+                &= \boxed{210} \\
+            \end{align*}
+
+            notice how this also works for 6 flips to be tails!
+        }
+
+        \item
+        {
+            Ten distinct points are labeled on a circle. How many quadrilaterals can be drawn using these points?
+
+            $${10 \choose 4} = \frac{10!}{4!6!} = \boxed{210}$$
+        }
+    \end{enumerate}
+
+    There's a LOT more examples but I'm too lazy to write them all out. Just go back to the notes and write them out later
+
+\end{example}
+
+Let's prove that ${n + 1 \choose k} = {n \choose k - 1} + {n \choose k}$
+
+\begin{poof}
+    \begin{align*}
+        {n \choose k - 1} + {n \choose k} &= \frac{n!}{(k - 1)!(n - (k - 1))!} + \frac{n!}{k!(n - k)!} \\
+        &= 
+    \end{align*}
+
+    uhhh do later (it's on the very back of 6.3)
+\end{poof}
+
+% ========== End the document ==========
+\end{document}  

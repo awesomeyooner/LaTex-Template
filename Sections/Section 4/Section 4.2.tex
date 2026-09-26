@@ -1,0 +1,269 @@
+% Point to the main file
+\documentclass[../../Main.tex]{subfiles}
+
+% ========== Start the document ==========
+\begin{document}
+
+\section{Section 4.2 - Binary}
+
+Let's compute
+
+$$67^2025 \pmod{77}$$
+
+\begin{work}
+
+    Let' see if FLT works
+
+    \begin{center}
+        $77 = 7 \cdot 11$ is \textbf{NOT} prime, so FLT does not apply
+    \end{center}
+
+    Let's see if EFLT works
+
+    \begin{center}
+        \begin{enumerate}
+            \item $77 = 7 \cdot 11$ is the product of 2 distinct primes
+            \item gcd$(67, 77) = 1$
+        \end{enumerate}
+
+        So EFLT applies
+    \end{center}
+
+    \begin{align*}
+        6^{(7 - 1)(11 - 1)} &\equiv 1 \pmod{77} \\
+        67^{60} &\equiv 1 \pmod{77} \\
+    \end{align*}
+
+    Breaking up 2025...
+    $$2025 = 33 \cdot 60 + 45$$
+
+    \begin{align*}
+        67^{2025} \equiv 67^{45} \pmod{77} \\
+    \end{align*}
+
+    Break up 45 into powers of 2
+
+    \begin{align*}
+        67 \pmod{77} &= 67 \\
+        67^2 \pmod{77} &= 23 \\
+        67^4 \pmod{77} &= 23^2 \pmod{77} \\
+        &= 67 \\
+        67^8 \pmod{77} &= 23 \\
+        67^{16} \pmod{77} &= 67 \\
+        67^{32} \pmod{77} &= 23 \\
+    \end{align*}
+
+    \begin{align*}
+        67^{2025} &\equiv 67^{45} \pmod{77} \\
+        &\equiv 67^{32 + 8 + 4 + 1} \pmod{77} \\
+        &\equiv 67^{32} \cdot 67^8 \cdot 67^4 \cdot 67^1 \pmod{77} \\
+        &\equiv 23 \cdot 23 \cdot 67 \cdot 67 \cdot 67 \\
+        &\equiv 23^2 \cdot 67^2 \pmod{77} \\
+        \Aboxed{&\equiv 1} \pmod{77} \\
+    \end{align*}
+
+    How do we express 2025 as powers of 2?
+
+    Let's list the powers of 2
+
+    \begin{align*}
+        2^0 &= 1 \\
+        2^1 &= 2 \\
+        2^2 &= 4 \\
+        2^3 &= 8 \\
+        2^4 &= 16 \\
+        2^5 &= 32 \\
+        &\vdots \\
+        2^{10} &= 1024 \\
+        2^{11} &= 2048 \\
+    \end{align*}
+
+    Now let's break up 2025 using a method similar to the Euclidean Algorithm
+
+    \begin{align*}
+        2025 &= 2^{10} + 1001 \\
+        1001 &= 2^9 + 489 \\
+        489 &= 2^8 + 233 \\
+        233 &= 2^7 + 105 \\
+        105 &= 2^6 + 41 \\
+        41 &= 2^5 + 9 \\
+        9 &= 2^3 + 2^0 \\
+    \end{align*}
+
+    $$2025 = 2^{10} + 2^9 + 2^8 + 2^7 + 2^6 + 2^5 + 2^3 + 2^0$$
+    
+    We can use this to write it in \textbf{binary representation}.
+
+    \begin{align*}
+        \underbrace{1}_{2^{10}}
+        \underbrace{1}_{2^9}
+        \underbrace{1}_{2^8}
+        \underbrace{1}_{2^7}
+        \underbrace{1}_{2^6}
+        \underbrace{1}_{2^5}
+        \underbrace{0}_{2^4}
+        \underbrace{1}_{2^3}
+        \underbrace{0}_{2^2}
+        \underbrace{0}_{2^1}
+        \underbrace{1_2}_{2^0}
+    \end{align*}
+
+    \begin{note}
+        The 2 subscript denotes that this is in binary / base 2
+    \end{note}
+
+    Where 1 and 0 represent the coefficient attached to each power. Since it's 1 and 0, it simply represents the power being present and 0 being absent
+
+    But notice that if the number $n$ is odd, then the last number of the binary representation is 1
+
+    Else if $n$ is even then the last digit will be 0
+
+    In other words
+
+    \begin{center}
+        $n \mod{2} = 1$ if odd \\
+        $n \mod{2} = 0$ if even \\
+    \end{center}
+
+    \begin{align*}
+        2025 &= 2 \cdot 1012 + \yellowbox{1} \\
+        1012 &= 2 \cdot 506 + \yellowbox{0} \\
+        506 &= 2 \cdot 253 + \yellowbox{0} \\
+        253 &= 2 \cdot 126 + \yellowbox{1} \\
+        126 &= 2 \cdot 63 + \yellowbox{0} \\
+        63 &= 2 \cdot 31 + \yellowbox{1} \\
+        31 &= 2 \cdot 15 + \yellowbox{1} \\
+        15 &= 2 \cdot 7 + \yellowbox{1} \\
+        7 &= 2 \cdot 3 + \yellowbox{1} \\
+        3 &= 2 \cdot 1 + \yellowbox{1} \\
+        1 &= 2 \cdot 0 + \yellowbox{1} \\
+    \end{align*}
+
+    Writing the sequence of remainders backwards we see
+
+    \begin{align*}
+        \underbrace{1}_{\text{last}}
+        1 \;
+        1 \;
+        1 \;
+        1 \;
+        1 \;
+        0 \;
+        1 \;
+        0 \;
+        0 \;
+        \underbrace{1_2}_{\text{first}}
+        = 2025
+    \end{align*}
+
+\end{work}
+
+But why does this work?
+
+Given $n \in \setZ$
+
+Want $n = a_k2^k + a_{k - 1}2^{k - 1} + \ldots + a_2 2^2 + a_1 2 + a_0$
+
+Using the division algorithm,
+
+$$n = 2q_0 - a_0$$
+
+Then 
+
+$$q_0 = \frac{n - a_0}{2}$$
+
+Now repeat this with $q_0$
+
+\begin{align*}
+    q_0 = &2q_1 + a_1 \\
+    &\vdots
+\end{align*}
+
+Let's do an example.
+
+\begin{example}
+    Write 1577 in binary
+
+    \begin{align*}
+        1577 &= 2 \cdot 788 + \yellowbox{1} \\
+        788 &= 2 \cdot 394 + \yellowbox{0} \\
+        394 &= 2 \cdot 197 + \yellowbox{0} \\
+        197 &= 2 \cdot 98 + \yellowbox{1} \\
+        98 &= 2 \cdot 49 + \yellowbox{0} \\
+        49 &= 2 \cdot 24 + \yellowbox{1} \\
+        24 &= 2 \cdot 12 + \yellowbox{0} \\
+        12 &= 2 \cdot 6 + \yellowbox{0} \\
+        6 &= 2 \cdot 3 + \yellowbox{0} \\
+        3 &= 2 \cdot 1 + \yellowbox{1} \\
+        1 &= 2 \cdot 0 + \yellowbox{1} \\
+    \end{align*}
+
+    Writing the bottom to top left to right...
+
+    $$\boxed{11000101001}$$
+
+    We could check this by just doing 
+
+    $$1577 = 2^{10} + 2^9 + \ldots $$
+    
+\end{example}
+
+\subsection{Base n Representation}
+
+Y'know, 2 isn't special. We could actually use any number!
+
+Let's try representing 1577 in base 8. Remember that each remainder we get is the coefficient to the corresponding power
+
+\begin{align*}
+    1577 &= 8 \cdot 197 + \yellowbox{1} \\
+    197 &= 8 \cdot 24 + \yellowbox{5} \\
+    24 &= 8 \cdot 3 + \yellowbox{0} \\
+    3 &= 8 \cdot 0 + \yellowbox{3} \\
+\end{align*}
+
+Rewriting this, we get
+
+\begin{align*}
+    \underbrace{3}_{8^3}
+    \underbrace{0}_{8^3}
+    \underbrace{5}_{8^2}
+    \underbrace{1}_{8^0}
+\end{align*}
+
+So 
+
+$$1577 = 3 \cdot 8^3 + 5 \cdot 8^1 + 1 \cdot 8^0$$
+
+Now let's do it with base 16
+
+\begin{align*}
+    1577 &= 16 \cdot 98 + \yellowbox{9} \\
+    98 &= 16 \cdot 6 + \yellowbox{2} \\
+    6 &= 16 \cdot 0 + \yellowbox{6} \\
+\end{align*}
+
+$$\boxed{1577 = 629_{16}}$$
+
+$$1577 = 6 \cdot 16^2 + 2 \cdot 16^1 + 9 \cdot 16^0$$
+
+For our last example, write the $AB0CD_{16}$ in base 10 (aka normal numbers)
+
+Recall that
+
+\begin{align*}
+    A &= 10 \\
+    B &= 11 \\
+    &\vdots \\
+\end{align*}
+
+$AB0CD$ is just $10 \; 11 \; 0 \; 12 \; 13$
+
+Since there's 5 "numbers" that means we start with $16^{5 - 1} = 16^4$
+
+\begin{align*}
+    AB0CD_{16} &= 10 \cdot 16^4 + 11 \cdot 16^3 + 0 \cdot 16^2 + 12 \cdot 16^1 + 13 \cdot 16^1 \\
+    &= \boxed{700621} \tag{\text{just plug into calc}}
+\end{align*}
+
+% ========== End the document ==========
+\end{document}

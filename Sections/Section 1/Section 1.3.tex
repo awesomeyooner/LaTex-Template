@@ -1,0 +1,239 @@
+% Point to the main file
+\documentclass[../../Main.tex]{subfiles}
+
+% ========== Start the document ==========
+\begin{document}
+
+\section{Section 1.3 - Logical Equivalence}
+
+\begin{recall}[Logical Equivalence]
+    Recall that two propositions are \textbf{logically equivalent} if they have the same truth table
+\end{recall}
+
+\subsection{Testing for Equivalence using Truth Tables}
+
+\begin{example}
+    Determine if the following are logically equivalent
+
+    \begin{enumerate}
+
+        \item $p \implies q$ and $\neg p \lor q$
+        \begin{solution}
+            \;
+            \begin{tablewithheader}
+            { |c|c|s|c|s| }
+            { $p$ & $q$ & $p \implies q$ & $\neg p$ & $\neg p \lor q$ }
+            
+                \T & \T & \T & \F & \T \\
+                \T & \F & \F & \F & \F \\ 
+                \F & \T & \T & \T & \T \\
+                \F & \F & \T & \T & \T \\
+
+            \end{tablewithheader}
+
+            $$\therefore p \implies q \equiv \neg p \lor q$$
+        \end{solution}
+
+        \item $\neg (p \land q)$ and $\neg p \lor \neg q$
+        \begin{solution}
+            \;
+            \begin{tablewithheader}
+            { |c|c|c|s|c|c|s| }
+            { $p$ & $q$ & $p \land q$ & $\neg (p \land q)$ & $\neg p$ & $\neg q$ & $\neg p \lor \neg q$ }
+            
+                \T & \T & \T & \F & \F & \F & \F \\
+                \T & \F & \F & \T & \F & \T & \T \\
+                \F & \T & \F & \T & \T & \F & \T \\
+                \F & \F & \F & \T & \T & \T & \T \\
+            \end{tablewithheader}
+
+            $$\therefore \neg (p \land q) \equiv \neg p \lor \neg q$$
+        \end{solution}
+
+        \item $(p \implies q) \lor (q \implies r)$ and $p \implies (q \lor r)$
+        \begin{solution}
+            \;
+            \begin{tablewithheader}
+            { |c|c|c|c|c|s|c|s| }
+            { $p$ & $q$ & $r$ & $p \implies r$ & $q \implies r$ & $(p \implies r) \lor (q \implies r)$ & $q \lor r$ & $p \implies (q \lor r)$ }
+            
+                \T & \T & \T & \T & \T & \T & \T & \T \\
+                \T & \T & \F & \F & \F & \F & \T & \T \\
+                \T & \F & \T & \T & \T & \T & \T & \T \\
+                \T & \F & \F & \F & \T & \T & \F & \F \\
+                \F & \T & \T & \T & \T & \T & \T & \T \\
+                \F & \T & \F & \T & \F & \T & \T & \T \\
+                \F & \F & \T & \T & \T & \T & \T & \T \\
+                \F & \F & \F & \T & \T & \T & \F & \T \\
+            \end{tablewithheader}
+
+            $$\therefore (p \implies q) \lor (q \implies r) \not\equiv p \implies (q \lor r)$$
+        \end{solution}
+        
+    \end{enumerate}
+
+\end{example}
+
+So far we know the following:
+
+\begin{itemize}
+    \item $p \implies q \equiv \neg p \lor q$
+
+    \item
+    {
+        DeMorgan's Law
+
+        \begin{itemize}
+            \item $\neg (p \lor q) \equiv \neg p \land \neg q$
+            \item $\neg (p \land q) \equiv \neg p \lor \neg q$
+        \end{itemize}
+    }
+
+    \item 
+    {
+        Commutative (swap places)
+
+        \begin{itemize}
+            \item $p \lor q \equiv q \lor p$
+            \item $p \land q \equiv q \land p$
+        \end{itemize}
+    }
+
+    \item
+    {
+        Associative (swap grouping)
+
+        \begin{itemize}
+            \item $(p \lor q) \lor r \equiv p \lor (q \lor r)$
+            \item $(p \land q) \land r \equiv p \land (q \land r)$
+        \end{itemize}
+    }
+
+    \item
+    {
+        Distributive (distribuing operations)
+
+        \begin{itemize}
+            \item $p \lor (q \land r) \equiv (p \lor q) \land (p \lor r)$
+            \item $p \land (q \lor r) \equiv (p \land q) \lor (p \land r)$
+        \end{itemize}
+    }
+
+    \item
+    {
+        Identity
+
+        \begin{itemize}
+            \item $p \land T \equiv p$
+            \item $p \lor F \equiv p$ 
+        \end{itemize}
+    }
+
+    \item
+    {
+        Domination Laws
+
+        \begin{itemize}
+            \item $p \lor T \equiv T$
+            \item $p \land F \equiv F$
+        \end{itemize}
+    }
+
+    \item
+    {
+        Impotent Laws
+
+        \begin{itemize}
+            \item $p \lor p \equiv p$
+            \item $p \land p \equiv p$
+        \end{itemize}
+    }
+
+\end{itemize}
+
+\begin{definition}[Tautology and Contradiction]
+    A proposition that is always \TRUE is a \underline{\textbf{tautology}}
+    \\
+    A proposition that is always \FALSE is a \underline{\textbf{contradiction}}
+\end{definition}
+
+\begin{note}
+    When proving tautologies or contradictions, you could either:
+
+    \begin{center}
+        \begin{enumerate}
+            \item Use Truth Tables
+            \item Use the Laws from earlier to reduce a compound proposition into \TRUE or \FALSE
+        \end{enumerate}
+    \end{center}
+
+    But it's advised to use Truth Tables, since it's easy to get lost in your work when using the Laws
+
+    Also, ALWAYS start by \textbf{converting conditionals}
+\end{note}
+
+\begin{example}[Examples of Tautologies and Contradictions]
+    Determine if the following are tautologies, contradictions, or neither
+
+    \begin{enumerate}
+        \item
+        {
+            $(p \land q) \implies q$
+
+            Proving with Truth Tables
+            
+            \begin{tablewithheader}
+            { |c|c|c|c|s| }
+            { $p$ & $q$ & $p \land q$ & $q$ & $(p \land q) \implies q$ }
+                \T & \T & \T & \T & \T \\
+                \T & \F & \F & \F & \T \\
+                \F & \T & \F & \T & \T \\
+                \F & \F & \F & \F & \T \\
+            \end{tablewithheader}
+
+            $\therefore (p \land q) \implies q \equiv$ tautology
+
+            Proving with Logical Equations
+
+            \begin{align*}
+                (p \land q) \implies q
+                &\equiv \neg (p \land q) \lor q \tag{Convert Conditional} \\
+                &\equiv (\neg p \lor \neg q) \lor q \tag{DeMorgan's Law} \\
+                &\equiv \neg p \lor (\neg q \lor q) \tag{Associative} \\
+                &\equiv \neg p \lor T \\
+                &\equiv T \tag{Domination} \\
+            \end{align*}
+
+            $\therefore (p \land q) \implies q \equiv$ tautology
+        }
+
+        \item
+        {
+            Theres another example but I'm too lazy
+        }
+
+    \end{enumerate}
+\end{example}
+
+\begin{note}
+    When proving the \textbf{logical equivalence} of two propositions, start with the \yellowbox{MORE COMPLICATED} proposition
+\end{note}
+
+\begin{example}[Proving Logical Equivalence of Two Propositions]
+    Determine if $(p \lor q) \implies r \equiv (p \implies r) \land (q \implies r)$
+    \\
+    $(p \implies r) \land (q \implies r)$ seems more complicated, so we'll start with that
+    
+    \begin{align*}
+        (p \implies r) \land (q \implies r)
+        &\equiv (\neg p \lor r) \land (\neg q \lor r) \tag{Convert Conditionals} \\
+        &\equiv (\neg p \land \neg q) \lor r \tag{Un-Distribute} \\
+        &\equiv \neg (p \lor q) \lor r \tag{DeMorgan's Law} \\
+        &\equiv (p \lor q) \implies r \tag{Convert back to Conditional}
+    \end{align*}
+
+    $\therefore (p \lor q) \implies r \equiv (p \implies r) \land (q \implies r)$
+\end{example}
+
+% ========== End the document ==========
+\end{document}

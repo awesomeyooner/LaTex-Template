@@ -1,0 +1,38 @@
+% Point to the main file
+\documentclass[../../Main.tex]{subfiles}
+
+% ========== Start the document ==========
+\begin{document}
+
+\section{Section 6.2 - Pigeonhole Principle}
+
+\begin{definition}[Pigeonhole Principle]
+    If there are $n$ boxes and more than $n$ objects places in these boxes, at least one box contains more than one object.
+
+    At least one box will contain 
+
+    $$\lceil \frac{k}{n} \rceil$$
+
+    objects
+\end{definition}
+
+\includegraphics[height=5cm]{pigeon_hole.png}
+
+\begin{example}
+    There are 43 people in this room. Are we guaranteed that
+
+    \begin{enumerate}
+        \item
+        {
+            At least 2 people have the same birth month?
+
+            \begin{solution}
+                Yes, since 12 months < 43 people
+            \end{solution}
+        }
+
+    \end{enumerate}
+\end{example}
+
+% ========== End the document ==========
+\end{document}

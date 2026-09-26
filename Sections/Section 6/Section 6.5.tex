@@ -1,0 +1,113 @@
+% Point to the main file
+\documentclass[../../Main.tex]{subfiles}
+
+% ========== Start the document ==========
+\begin{document}
+
+\section{Section 6.5 - Stars and Bars}
+
+This section will just cover one idea, which is \textbf{Stars and Bars}
+
+Let's start with an example
+
+\begin{example}
+    Omar buys 9 icecreams. If the flavors available are chocolate and vanilla, how many possible orders can Omar make?
+    An order in the sense like 5 chocolate 4 vanilla or 4 vanilla 5 chocolate
+
+    Let's brute force this first
+
+    \begin{tablewithheader}
+    { |c|c| }
+    { Chocolate & Vanilla }
+        0 & 9 \\
+        1 & 8 \\
+        2 & 7 \\
+        3 & 6 \\
+        4 & 5 \\
+        5 & 4 \\
+        6 & 3 \\
+        7 & 2 \\
+        8 & 1 \\
+        9 & 1 \\
+    \end{tablewithheader}
+
+    So there are 10 orders possible.
+
+    Let's do this analytically.
+
+    We are essentially solving
+
+    $$a + b = 9$$
+
+    Where $a$ and $b$ are whole numbers (includes 0).
+
+    Thinking of this as symbols, we can write
+
+    $$\underbrace{\star \star \star \star \mid \star \star \star \star \star}_{10 \text{ symbols}}$$
+
+    Where the bar represents the divider between chocolate and vanilla and the stars represent the number of ice creams for each flavor.
+
+    We basically just have to count how many \textbf{arrangements} for the bar can be made. This is just a combination.
+
+    $${10 \choose 1} = \frac{10!}{9! \cdot 1!} = \boxed{10}$$
+
+    Now that we have this example done, we can form the actual rule
+\end{example}
+
+\begin{definition}[Stars and Bars]
+    If you have $n$ slots with $k$ options to choose from for each slot and
+
+    \begin{enumerate}
+        \item Order does not matter
+        \item All $n$ slots must be filled
+        \item An option can be used 0 times
+    \end{enumerate}
+
+    Then there are 
+
+    $${n + k - 1 \choose k - 1} = \frac{(n + k - 1)!}{n! \cdot (k - 1)!}$$
+
+    Possibilities
+
+    Another way of thinking of this is stars and bars
+
+    Let
+
+    \begin{align*}
+        s: &\; \text{Stars, num slots} \\
+        b: &\; \text{Bars, options - 1} \\
+    \end{align*}
+
+    Then the combinations is
+
+    $${s + b \choose b} = \frac{(s + b)!}{s! \cdot b!}$$
+
+    You are essentially solving for
+
+    $$x_1 + x_2 + \ldots + x_k = n$$
+
+    Where
+
+    $$x_1, x_2, \ldots, x_k \geq 0$$
+
+    In general, if the options must be used at least $c$ times such that
+    
+    $$x_1, x_2, \ldots, x_k \geq c$$
+
+    Then the possibilities is just
+
+    $${n + k(1 - c) - 1 \choose k - 1}$$
+
+    For instance, if 
+
+    $$x_1, x_2, \ldots, x_k \geq 1$$
+
+    Possibilities are
+
+    $${n - 1 \choose k - 1}$$
+
+
+\end{definition}
+
+% ========== End the document ==========
+\end{document}

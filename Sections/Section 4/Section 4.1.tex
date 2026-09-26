@@ -1,0 +1,378 @@
+% Point to the main file
+\documentclass[../../Main.tex]{subfiles}
+
+% ========== Start the document ==========
+\begin{document}
+
+\section{Section 4.1 - Divisibility}
+
+\begin{question}
+    When is an integer divisible by 2?
+
+    \begin{solution}
+        When an integer ends in $0, 2, 4, 6, 8$
+    \end{solution}
+
+    Let's prove this after we develop some notation
+\end{question}
+
+\begin{definition}[Divides]
+    For integers $a, b, \in \setZ$, we say "a \yellowbox{divides} b" if b is divisibly by a and we write
+
+    \begin{align*}
+        a &\mid b \tag{\text{\TRUE value}} \\
+        a &\not \mid b \tag{\text{\FALSE value}} \\
+    \end{align*}
+
+\end{definition}
+
+\begin{example}
+    
+    $2 \mid 48$ since 48 is divisible by 2
+
+    but $7 \not \mid 48$ since 48 is not divisible by 7
+
+    Let's prove
+
+    \begin{center}
+        for $n \in \setZ, 2 \mid n$ if $\exists k \in \setZ$ such that $n = 10k$ or $10k + 2$ or $10k + 4$ or $10k + 6$ or $10k + 8$
+        
+        We could also say
+
+        $\exists k \in \setZ$ such that $n = 10k + r$ where
+
+        $r = \{0, 2, 4, 6, 8\}$
+    \end{center}
+
+    \begin{poof}
+        (Proof of the converse)
+
+        Let $n \in setZ$
+
+        Then base 10 representation of $n$ is of the form
+
+        $$n = d_k 10^k + d_{k - 1} 10^{k - 1} + \ldots + d_1 10 + d_0$$
+
+        Since $2 \mid n$, then $n = 2m$ for some $m \in \setZ$
+
+        We have 
+
+        \begin{align*}
+            n &= 10(d_k 10^ {k - 1} + d_{k - 1} 10^{k - 2} + \ldots + d_1) + d_0 \\
+            n &= 2\left[5 \left(d_k 10^ {k - 1} + d_{k - 1} 10^{k - 2} + \ldots + d_1\right)\right] + d_0 \\
+        \end{align*}
+
+        Solving for $d_0$ we get
+
+        \begin{align*}
+            d_0 = n - 2\left[5 \left(d_k 10^ {k - 1} + d_{k - 1} 10^{k - 2} + \ldots + d_1\right)\right]
+        \end{align*}
+
+        Since $d_0$ is the sum of two even numbers, then $d_0$ is even and $d_0 \in \left\{0, 2, 4, 6, 8\right\}$
+
+    \end{poof}
+\end{example}
+
+Let's prove some of the properties of the "divides" symbol
+
+In particular, let's rewrite what $a \mid b$ means for $a, b \in \setZ$
+
+So, $a \mid b$ means
+
+$$\exists k \in \setZ \; \text{such that} \; b = ak$$
+
+We believe if two integers are divisible by an integer, then their sum is divisible by that integer
+
+We prove $a, b, c \in \setZ, a \mid b, a \mid c, \implies a \mid (b + c)$
+
+\begin{poof}
+    \begin{align*}
+        a \mid b & \implies \exists k \in \setZ \; \text{such that} \; b = ak \\
+        a \mid c & \implies \exists n \in \setZ \; \text{such that} \; c = an \\
+    \end{align*}
+
+    Then
+
+    \begin{align*}
+        b + c = ak + an = a(k + n) \\
+        \therefore a \mid (b + c) \; \text{as desired} \\
+    \end{align*}
+
+    \begin{note}
+        This also works for \textbf{subtraction}
+    \end{note}
+\end{poof}
+
+\begin{proposition}[Modulus Multiplication]
+    $a, b, c \in \setZ, \; a \mid b, \; a \mid c \implies a^2 \mid bc$
+
+    \begin{poof}
+        \begin{align*}
+            a \mid b &\implies \exists k \in \setZ \; \text{such that} \; b = ak \\
+            a \mid c &\implies \exists n \in \setZ \; \text{such that} \; c = an \\
+        \end{align*}
+
+        Then
+
+        \begin{align*}
+            bc &= (ak)(an) \\
+            &= a^2 (kn), \; \text{proving $a^2 \mid bc$ as desired}
+        \end{align*}
+    \end{poof}
+\end{proposition}
+
+\begin{proposition}[Constant Factor]
+    $a, b, c \in \setZ, a \mid b \implies a \mid bc$
+
+    \begin{poof}
+        \begin{align*}
+            a \mid b &\implies \exists k \in \setZ \; \text{such that} \; b = ak \\
+            bc &= akc = a(kc), \; \text{implying} \; a \mid bc, \; \text{as desired}
+        \end{align*}
+    \end{poof}
+\end{proposition}
+
+Let's rewrite the old proof from earlier, this time proving the actual proposition rather than contrapositive
+
+\begin{proposition}
+    For $n \in \setZ$, where $n = 10k + r, r \in \left\{0, 2, 4, 6, 8\right\}, \; \text{then} \; 2 \mid n$
+
+    \begin{poof}
+        
+        $$\forall r \in \left\{0, 2, 4, 6, 8\right\}, \exists m \in \setZ \; \text{such that} \; r = 2m $$
+
+        Subbing this in
+
+        \begin{align*}
+            n = 10k + r &= 10 k + 2m \\
+            &= 2(5k + m), \; \text{implying} \; 2 \mid n, \; \text{as desired} \\
+        \end{align*}
+    \end{poof}
+\end{proposition}
+
+\begin{proposition}
+    For $n \in \setZ$, if the sum of the digits is divisible by 3, then the integer $n$ is divisible by 3
+
+    \begin{proof}
+        \begin{align*}
+            n &= d_k 10^k + d_{k - 1} 10^{k - 1} + \ldots + d_1 10 + d_0 \\
+            n &= (10^k - 1)d_k + (10^{k-1} - 1)d_{k-1} + \ldots + 99d_2 + 9d_1 + \underbrace{(d_k + d_{k-1} + \ldots + d_2 + d_1 + d_0)}_{\text{sum of digits}} \\
+        \end{align*}
+
+        Because $10^k$ and so on will always be a bunch of 9's, we see that
+
+        $$3 \mid (10^k - 1)d_k + (10^{k-1} - 1)d_{k-1} + \ldots + 99d_2 + 9d_1$$
+        
+        And
+
+        $$3 \mid (d_k + d_{k-1} + \ldots + d_2 + d_1 + d_0) \; \text{by hypothesis}$$
+
+        \begin{center}
+            $\therefore n$ is the sum of 2 multiples of t3, proving that $3 \mid n$ as desired
+        \end{center}
+    \end{proof}
+\end{proposition}
+
+Here's just a table for divisibility rules
+
+\begin{tablewithheader}
+{ |c|c| }
+{ $n$ is divisible by & if }
+
+    2 & last digit is even \\
+    3 & sum of digits is divisible by 3 \\
+    4 & last 2 digits is divisible by 4 \\
+    5 & last digit is 0 or 5 \\
+    6 & divisible by both 2 and 3 \\
+    7 & He showed us but I forgot \\
+    8 & last 3 digits divisible by 8 \\
+    9 & sum of digits is divisible by 9 \\
+    10 & last digit is 0 \\
+
+\end{tablewithheader}
+
+\begin{definition}[Division Algorithm]
+    The \yellowbox{division algorithm} is a way of expressing division with integers
+
+    $$ \forall a \in \setZ \forall d \setZ^+ \exists q \in \setZ \exists ! r \in \left\{0, 1, 2, 3, \ldots, d - 1\right\}, a = dq + r $$
+
+    Where
+
+    \begin{align*}
+        d &: \; \text{divisor} \\
+        q &: \; \text{quotient} \\
+        r &: \; \text{remainder} \\
+    \end{align*}
+
+\end{definition}
+
+\begin{example}
+    Let $a = 341$ and $d = 7$
+
+    $$ 341 = \underbrace{7}_{\text{divisor}} \cdot \underbrace{48}_{\text{quotient}} + \underbrace{5}_{\text{remainder}}$$
+\end{example}
+
+However we can write this in a more compact way
+
+$$ 341 \pmod{\underbrace{7}_{\text{divisor}}} = \underbrace{5}_{\text{remainder}} $$
+
+\begin{example}
+    Let's give examples of division, we're practically finding the remainder
+
+    \begin{enumerate}
+        \item
+        {
+            \begin{align*}
+                \frac{6568}{9} &= 729.777 \\
+                & 6568 - 9 \cdot 729 = 7
+            \end{align*}
+        }
+        
+        \item
+        {
+            \begin{align*}
+                \frac{343348}{7} &= 49049.714 \\
+                & 343348 - 7 \cdot 49049 = 5 \\
+            \end{align*}
+        }
+
+        \item
+        {
+            \begin{align*}
+                \frac{-100}{13} &= -7.6923 \\
+                & -100 - 13(-7) = -9 \\
+                &= -100 - 13(-8) = 4 \\
+                -100 &= (13)(-8) + 4 \\
+            \end{align*}
+        }
+
+        \begin{note}
+            For negatives, round down to the next negative integer in order to get a positive remainder
+        \end{note}
+    \end{enumerate}
+\end{example}
+
+\begin{example}
+    Let's do more examples but with mod
+
+    \begin{enumerate}
+        \item $$1023 \pmod{11} = 0$$
+        \item $$6568 \pmod{9} = 7$$
+        \item $$343348 \pmod{7} = 5$$
+        \item $$-100 \pmod{13} = 4$$
+    \end{enumerate}
+\end{example}
+
+\begin{definition}[Congruence]
+    Let $a, b \in \setZ$ and $m \in \setZ^+$
+
+    We say $a$ is \yellowbox{congruent} to $b$ modulo $m$ if
+
+    $$a \pmod{m} = b \pmod{m}$$
+
+    This is basically saying are the remainders the same
+
+    Written as
+
+    $$a \equiv b \pmod{m}$$
+
+    And if they're not then
+
+    $$a \not \equiv b \pmod{m}$$
+
+    \begin{note}
+        If $a \pmod{m} = b \pmod{m}$ then by \textbf{Division Algorithm}
+
+        $$ a = mq_a + r \; \text{and} \; b = mq_b + r$$
+
+        Subtrating the equations we get
+
+        \begin{align*}
+            a - b &= (mq_a + r) - (mq_b + r) \\
+            &= m(q_a - q_b) \\
+            \Aboxed{& \therefore m \mid (a - b)} \\
+        \end{align*}
+    \end{note}
+\end{definition}
+
+\begin{proposition}
+    Let $a, b, c, d \in \setZ, m \in \setZ^+$
+
+    Suppose $a \equiv b \pmod{m}$ and $c \equiv d \pmod{m}$
+
+    \begin{enumerate}
+        \item
+        {
+            $a + c \equiv b + d \pmod{m}$
+
+            \begin{poof}
+                \begin{align*}
+                    a \equiv b \pmod{m} &\implies m \mid (a - b) \\
+                    c \equiv d \pmod{m} &\implies m \mid (c - d) \\
+                \end{align*}
+
+                Then
+
+                \begin{align*}
+                    m &\mid \left[(a-b) + (c-d)\right] \\
+                    m &\mid \left[(a + c) - (b + d)\right] \\
+                    \Aboxed{& a + c \equiv b + d \pmod{m}} \text{as desired} \\
+                \end{align*}
+            
+            \end{poof}
+        }
+
+        \item
+        {
+            $ac \equiv bd \pmod{m}$
+
+            \begin{poof}
+                \begin{align*}
+                    a \equiv b \pmod{m} &\implies m \mid (a - b) \\
+                    c \equiv d \pmod{m} &\implies m \mid (c - d) \\
+                \end{align*}
+                \begin{align*}
+                    m \mid (a-b) &\implies \exists k_1 \in \setZ \; \text{such that} \; a - b = mk_1 \\
+                    m \mid (c-d) &\implies \exists k_2 \in \setZ \; \text{such that} \; c - d = mk_2 \\
+                \end{align*}
+
+                Then $a = b + mk_1$ and $c = d + mk_2$
+
+                \begin{align*}
+                    ac &= (b + mk_1) + (d + mk_2) \tag{FOIL} \\
+                    &= bd + bmk_2 + dmk_1 + m^2 k_1k_2 \\ 
+                \end{align*}
+
+                Moving $bd$
+
+                \begin{align*}
+                    ac - bd &= bmk_2 + dmk_1 + m^2 k_1k_2 \\
+                    &= m(bk_2 + dk_1 + mk_1k_2) \\
+                    \Aboxed{& \therefore m \mid (ac - bd)}
+                \end{align*}
+            \end{poof}
+        }
+
+        \item
+        {
+            if $h \in \setZ$ then $ah \equiv bh \pmod{m}$
+
+            \begin{poof}
+                \begin{align*}
+                    a \equiv b \pmod{m} \implies m \mid (a - b)
+                \end{align*}
+
+                Then since $h \in \setZ$, we have
+
+                \begin{align*}
+                    & m \mid h(a - b) \\
+                    & m \mid (ah - bh) \\
+                    \Aboxed{& ah \equiv bh \pmod{m}} \\
+                \end{align*}
+            \end{poof}
+        }
+    \end{enumerate}
+\end{proposition}
+
+% ========== End the document ==========
+\end{document}

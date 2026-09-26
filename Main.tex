@@ -1,0 +1,44 @@
+\documentclass{report}
+
+% Contains all the "\usepackage" commands
+\input{include/preamble.tex}
+
+% Contains all the "\newtheorem" commands
+\input{include/theorems.tex}
+
+% Contains all the "\newcommand" commands
+\input{include/macros.tex}
+
+% Contains misc fonts
+\input{include/letterfonts.tex}
+
+
+% Headers
+\title{\Huge{Math 6A}\\Discrete Math}
+\author{\huge{Aaron Yoon}}
+\date{}
+
+% Start the Document
+\begin{document}
+
+\maketitle
+\newpage% or \cleardoublepage
+% \pdfbookmark[<level>]{<title>}{<dest>}
+\pdfbookmark[section]{\contentsname}{toc}
+\tableofcontents
+
+\pagebreak
+
+% Add Sections
+\subfile{Sections/Section 1/Section 1.tex}
+\subfile{Sections/Section 2/Section 2.tex}
+\setcounter{chapter}{3}
+\subfile{Sections/Section 4/Section 4.tex}
+\subfile{Sections/Section 5/Section 5.tex}
+\subfile{Sections/Section 6/Section 6.tex}
+\subfile{Sections/Section 7/Section 7.tex}
+\subfile{Sections/Section 8/Section 8.tex}
+\subfile{Sections/Review/Exam Reviews.tex}
+
+% End of Document
+\end{document}

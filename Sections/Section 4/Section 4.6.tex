@@ -1,0 +1,344 @@
+% Point to the main file
+\documentclass[../../Main.tex]{subfiles}
+
+% ========== Start the document ==========
+\begin{document}
+
+\section{Section 4.6 - Cryptography}
+
+Sorry in advance to anyone reading this since the professor never really gave a proper intro to this section and I'm too lazy right now to write an actual intro
+
+But basically this section is about methods of encrypting data
+
+Let's start with defining our messages
+
+\begin{center}
+    $\underbrace{\text{A}}_{00}$ \; $\underbrace{\text{B}}_{01}$ \; $\underbrace{\text{C}}_{02}$ \; $\underbrace{\text{D}}_{03}$ \; $\underbrace{\text{E}}_{04}$ \\
+    $\underbrace{\text{F}}_{05}$ \; $\underbrace{\text{G}}_{06}$ \; $\underbrace{\text{H}}_{07}$ \; $\underbrace{\text{I}}_{08}$ \; $\underbrace{\text{J}}_{09}$ \\
+    $\underbrace{\text{K}}_{10}$ \; $\underbrace{\text{L}}_{11}$ \; $\underbrace{\text{M}}_{12}$ \; $\underbrace{\text{N}}_{13}$ \; $\underbrace{\text{O}}_{14}$ \\
+    $\underbrace{\text{P}}_{15}$ \; $\underbrace{\text{Q}}_{16}$ \; $\underbrace{\text{R}}_{17}$ \; $\underbrace{\text{S}}_{18}$ \; $\underbrace{\text{T}}_{19}$ \\
+    $\underbrace{\text{U}}_{20}$ \; $\underbrace{\text{V}}_{21}$ \; $\underbrace{\text{W}}_{22}$ \; $\underbrace{\text{X}}_{23}$ \; $\underbrace{\text{Y}}_{24}$ \; $\underbrace{\text{Z}}_{25}$ \\
+\end{center}
+
+\begin{definition}[Encryption]
+    Given a message $P$ (plain text), like \textbf{H E L L O}
+
+    using some method $b$ to change the message into $C$ (cyphertext)
+\end{definition}
+
+\begin{example}
+    Let's use $P$ from earlier, \textbf{H E L L O}, and get $C$ by shifting the number value of each letter by $+1$
+
+    \begin{center}
+        $\underbrace{\text{H}}_{07}$ \; $\underbrace{\text{E}}_{04}$ \; $\underbrace{\text{L}}_{11}$ \; $\underbrace{\text{L}}_{11}$ \; $\underbrace{\text{O}}_{14}$ \\
+        
+        ${\downarrow}_{+1}$ \\
+
+        $\underbrace{\text{I}}_{08}$ \; $\underbrace{\text{F}}_{05}$ \; $\underbrace{\text{M}}_{12}$ \; $\underbrace{\text{M}}_{12}$ \; $\underbrace{\text{P}}_{15}$ \\
+    \end{center}
+
+    or you could do 
+
+    $$x \mapsto ax + b$$
+
+    This is called the \textbf{Caesar Cipher}
+\end{example}
+
+\begin{definition}[Exponentiation Cycle]
+    Let's define this by doing an example
+
+    \begin{example}
+        Let's call $P$ $M$ for this example ($M$ for message)
+
+        We need to choose a prime number bigger than 26 (since there are 26 letters)
+
+        Let's do $p = 43$
+
+        and choose an exponent
+
+        Let's do $e = 5$
+
+        Remember that our encrypted message is $C$
+
+        Let's just do the $\underbrace{\text{H}}_{07}$ in HELLO since I'm lazy
+
+        Let's start by \textbf{encrypting} our message.
+
+        This means that
+
+        $p = 43$
+
+        $e = 5$
+
+        $M = 7$
+
+        \begin{align*}
+            C &\equiv M^e \pmod{p} \\
+            C &\equiv 7^5 \pmod{43} \\
+            &\equiv 16,807 \pmod{43} \\
+            \Aboxed{&\equiv 37 \pmod{43}} \\
+        \end{align*}
+
+        Boom, so 37 is our encrypted message that the receiver has to decrypt.
+
+        Now let's look at how to \textbf{decrypt} the message
+ 
+        We KNOW $$C \equiv M^e \pmod{p}$$
+
+        But we WANT $$C^d \equiv M \pmod{p}$$ (trying to find $d$) because we need to find $M$
+
+        Plugging the KNOW (first equation) into the WANT (second equation), we get
+
+        \begin{align*}
+            \left(M^e\right)^d &\equiv M \pmod{p} \\
+            M^{ed} &\equiv M \pmod{p} \\
+            M^{ed} \cdot M^{-1} &\equiv M \cdot M^{-1} \pmod{p} \\
+            M^{ed - 1} &\equiv 1 \pmod{p}
+        \end{align*}
+
+        \begin{recall}
+            From 4.4, we saw that
+
+            $$a^k \equiv 1 \pmod{p}, \; k \equiv 0 \pmod{p - 1}$$
+        \end{recall}
+
+        In this case, $k = ed - 1$, and we see that
+
+        \begin{align*}
+            ed - 1 &\equiv 0 \pmod{p - 1} \\
+            \Aboxed{ed &\equiv 1 \pmod{p - 1}}
+        \end{align*}
+
+        And since we know $e$ and $p$, we can find $d$
+
+        \begin{align*}
+            ed &\equiv 1 \pmod{p - 1} \\
+            5d &\equiv 1 \pmod{42} \\
+            5d &\equiv 85 \pmod{42} \tag{add $2 \cdot 42$} \\
+            5d &\ \equiv 5 \cdot 17 \pmod{42} \\
+            \Aboxed{d &\equiv 17 \pmod{42}} \\
+        \end{align*}
+
+        \begin{note}
+            We used a shortcut way of finding the inverse but you'd typically use the Euclidean Algorithm
+        \end{note}
+
+        \begin{recall}
+            Also, note that we found what $d$ is $\pmod{p - 1}$ and not $\pmod{p}$. From 4.4 again, we can see
+
+            $$a^x \equiv a^y \pmod{p} \text{ if } x \equiv y \pmod{p - 1}$$
+
+            There's a lot of algebra to prove that we can use this value of $d$ even though it's a different mod, but I'm too lazy to prove it so just trust
+        \end{recall}
+
+        Okay so now that we know that $d \equiv 17 \pmod{42}$
+
+        From the decrypter's standpoint, let's recap what know so far
+
+        $p = 43$
+        
+        $e = 5$
+
+        $d = 17$
+
+        $C = 37$
+
+        We want to find $M$
+
+        Let's use the equation from earlier
+
+        $$C^d \equiv M \pmod{p}$$
+
+        So now we just solve
+
+        $$37^{17} \equiv M \pmod{43}$$
+
+        \begin{align*}
+            37^{17} &\equiv (-6)^{17} \pmod{43} \\
+            &\equiv - (6)^{17} \pmod{43} \\
+        \end{align*}
+
+        \begin{align*}
+            6 \pmod{43} &= 6 \\
+            6^2 \pmod{43} &= 36 \\
+            6^4 \pmod{43} &= 36^2 \\
+            &= 6 \\
+            6^8 \pmod{43} &= 36 \\
+            6^{16} \pmod{43} &= 6 \\
+        \end{align*}
+
+        \begin{align*}
+            37^{17} &\equiv - (6)^{16} \cdot 6 \pmod{43} \\
+            &\equiv -6 \cdot 6 \pmod{43} \\
+            &\equiv -36 \pmod{43} \\
+            \Aboxed{&\equiv 7 \pmod{43}} \\
+        \end{align*}
+
+        Which is what we expect!
+
+    \end{example}
+    
+\end{definition}
+
+\begin{definition}[RSA Encryption]
+    An extension of what we just did is \yellowbox{RSA Encryption}, which uses \textbf{Extended Fermat's Little Theorem} instead of normal FLT
+
+    The way it works is you choose 2 distinct primes, $p$ and $q$
+
+    $$p = 29, \; q = 47$$
+
+    \begin{align*}
+        N = pq &= 29 \cdot 47 \\
+        &= 1363
+    \end{align*}
+
+    And choose an exponent that is relatively prime of $p$ and $q$
+
+    $$e = 5$$
+
+    Let's say our message is $\underbrace{\text{H}}_{07}$ again
+
+    $$M = 7$$
+
+    To encrypt, we do
+
+    $$C \equiv M^e \pmod{N}$$
+    
+\end{definition}
+
+% If you want, include examples of RSA and simple RSA
+
+Okay let's recap. We just went over 2 exponentiation cyphers
+
+\begin{enumerate}
+    \item
+    {
+        Given a prime $p$ and exponent $e$ that are relatively prime to each other (both public)
+
+        \begin{align*}
+            C &\equiv M^e \pmod{p} \\
+            C^d &\equiv M \pmod{p} \\
+        \end{align*}
+
+        \begin{align*}
+            M^{ed} &\equiv M \pmod{p} \\
+            M^{ed - 1} &\equiv 1 \pmod{p} \\
+            \implies ed &\equiv 1 \pmod{p - 1} \\
+        \end{align*}
+    }
+
+    \item
+    {
+        Given 2 distinct primes $p, q$ and exponent $e$ where $N = pq$ and $e$ are both public
+
+        \begin{align*}
+            C &\equiv M^e \pmod{N} \\
+            C^d &\equiv M \pmod{N} \\
+        \end{align*}
+
+        \begin{align*}
+            M^{ed} &\equiv M \pmod{N} \\
+            M^{ed - 1} &\equiv 1 \pmod{N} \\
+            \implies ed &\equiv 1 \pmod{(p - 1)(q - 1)}
+        \end{align*}
+    }
+\end{enumerate}
+
+Let's introduce another cypher, but let's start with an example
+
+\begin{example}
+
+    Let's do HELLO again
+
+    \begin{center}
+        $\underbrace{\text{H}}_{07}$ $\underbrace{\text{E}}_{04}$ $\underbrace{\text{L}}_{11}$ $\underbrace{\text{L}}_{11}$ $\underbrace{\text{O}}_{14}$ 
+    \end{center}
+
+    But let's put each letter into pairs (and let's add a random letter since HELLO is 5 letters long)
+
+    \begin{center}
+        $\boxed{\underbrace{\text{H}}_{07} \underbrace{\text{E}}_{04}}$ 
+        $\boxed{\underbrace{\text{L}}_{11} \underbrace{\text{L}}_{11}}$ 
+        $\boxed{\underbrace{\text{O}}_{14} \underbrace{\text{Z}}_{25}}$ 
+    \end{center}
+
+    Let's now look at our first pair / block $\boxed{\underbrace{\text{H}}_{07} \underbrace{\text{E}}_{04}}$ 
+
+    \begin{align*}
+        M &= 0704 \\
+        &= 704 \\
+        p &= 43, q = 59 \\
+        (p - 1)(q - 1) &= 42 \cdot 58 \\
+        &= 2436 \\
+        N &= pq = 2537 \\
+        e &= 55 \\
+    \end{align*}
+
+    Let's start by encrypting $M$, that is
+
+    \begin{align*}
+        C &\equiv M^e \pmod{N} \\
+        C &\equiv 704^{55} \pmod{2537} \\
+    \end{align*}
+
+    Solving for $C$...
+    
+    Okay I'm too lazy to write it all out but just reduce $704^{55}$ into powers of 2 and you get
+
+    \begin{align*}
+        704^{55} &\equiv 637 \pmod{2537} \\
+        C &\equiv \boxed{637} \pmod{2537} \\
+    \end{align*}
+    
+    Now let's decrypt $C$, that is
+
+    \begin{align*}
+        M \equiv C^d \pmod{N}
+    \end{align*}
+
+    To do this, we must solve
+
+    \begin{align*}
+        ed &\equiv 1 \pmod{(p - 1)(q - 1)} \\
+        55d &\equiv 1 \pmod{2436}
+    \end{align*}
+
+    Now let's find $55^{-1}$
+
+    We do this with the Euclidean Algorithm
+
+    \begin{align*}
+        2436 &= 44 \cdot 55 + 16 \\
+        55 &= 3 \cdot 16 + 7 \\
+        16 &= 2 \cdot 7 + 2 \\
+        7 &= 3 \cdot 2 + 1 \\
+    \end{align*}
+
+    \begin{align*}
+        1 &= 7 - 3 \cdot 2 \\
+        2 &= 16 - 2 \cdot 7 \\
+        7 &= 55 - 3 \cdot 16 \\
+        16 &= 2436 - 44 \cdot 55 \\
+    \end{align*}
+
+    \begin{align*}
+        1 &= 7 - 3 \cdot (16 - 2 \cdot 7) \\
+        1 &= 7 \cdot 7 - 3 \cdot 16 \\
+        1 &= 7 (55 - 3 \cdot 16) - 3 \cdot 16 \\
+        1 &= 7 \cdot 55 - 24 \cdot 16 \\
+        1 &= 7 \cdot 55 - 24 (2436 - 44 \cdot 55) \\
+        1 &= \yellowbox{1063} \cdot 55 - 24 \cdot 2436 \\
+        55^{-1} &\equiv 1063 \pmod{2436} \\
+        d &\equiv \boxed{1063} \pmod{2436} \\
+    \end{align*}
+
+    \begin{align*}
+        M &\equiv C^d \pmod{N} \\
+        M &\equiv 637^{1063} \pmod{2537} \\
+        \Aboxed{M &\equiv 704} \pmod{2537} \\
+    \end{align*}
+
+\end{example}
+
+% ========== End the document ==========
+\end{document}

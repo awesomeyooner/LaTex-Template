@@ -1,0 +1,150 @@
+% Point to the main file
+\documentclass[../../Main.tex]{subfiles}
+
+% ========== Start the document ==========
+\begin{document}
+
+\section{Section 1.5 - Nested Quantifiers}
+
+Let $\mathbb{P}$ be the set of prime integers
+
+$$\mathbb{P} = \{ 2, 3, 5, 7, 11, \ldots \}$$
+
+With this in mind, we can write the following in two ways:
+
+\begin{center}
+    Consider the statement "for all positive integers $n$, $6n - 1$ or $6n + 1$ is prime"
+\end{center}
+
+\begin{enumerate}
+    \item $\forall n \in \mathbb{Z}^+, 6n - 1 \in \mathbb{P} \lor 6n + 1 \in \mathbb{P}$
+    \item $\forall n \in \mathbb{Z}^+ \exists p \in \mathbb{P}, 6n - 1 = p \lor 6n + 1 = p$
+\end{enumerate}
+
+\begin{example}[Example of Nested Quantifiers]
+    
+    \begin{enumerate}
+        \item
+            For all real $x$ there exists a real number $y$ such that $xy = 1$
+
+            $$\forall x \in \mathbb{R} \exists y \in \mathbb{R}, xy = 1$$
+
+            \begin{center}
+                \FALSE, since if $x = 0$, then $xy = 0 \not = 1$
+            \end{center}
+
+        \item 
+            For all positive real $x$, there exists a real number $y$ such that $xy = 1$
+            $$\forall x \in \mathbb{R}^+ \exists y \in \mathbb{R}, xy = 1$$
+            \begin{center}
+                \TRUE since if $x \in \mathbb{R}^+$, then $x > 0$, and if $y = \frac{1}{x}$, then $xy = x \frac{1}{x} = 1$
+            \end{center}
+
+            \begin{note}
+                Given $x$, we can find $y$
+
+                \yellowbox{$y$ depends on $x$}
+            \end{note}
+
+        But what happens if we switch $\forall$ and $\exists$?
+
+        \item
+            $\exists y \in \mathbb{R} \forall x \in \mathbb{R}^+, xy = 1$
+
+            \begin{center}
+                \FALSE since if $x = 1$, then $y = 1$, but if $x = 2$, then $y = \frac{1}{2}$, and $1 \not = \frac{1}{2}$
+            \end{center}
+
+            \begin{note}
+                There is a single $y$ that works \textbf{FOR ALL} $x$
+
+                \yellowbox{$y$ does not depend on $x$}
+            \end{note}
+
+        \item
+            For all  positive integers $a$ and $b$, we have $ab > 0$
+
+            $$\forall a \in \mathbb{Z}^+ \forall b \in \mathbb{Z}^+, ab >0$$
+
+            \begin{note}
+                This is the same as $\forall a, b \in \mathbb{Z}^+$
+            \end{note}
+
+            \begin{center}
+                \TRUE since $a,b \in \mathbb{Z}^+$, then $a > 0$ and $b > 0$, hence $ab > 0$
+            \end{center}
+
+        \item
+            There exists integers $a$, and $b$ such that $a^2 + b^2 = 464$
+            $$\exists a \in \mathbb{Z} \exists b \in \mathbb{Z}, a^2 + b^2 = 464$$
+            $$\exists b \in \mathbb{Z} \exists a \in \mathbb{Z}, a^2 + b^2 = 464$$
+
+            \begin{center}
+                \TRUE $a = 8$, $b = 20$, 
+                
+                \begin{align*}
+                    a^2 + b^2 &= 8^2 + 20^2 \\
+                    &= 64 + 400 \\
+                    &= 464 \\
+                \end{align*}
+            
+            \end{center}
+
+        \begin{note}
+            The order of the \textbf{SAME} quantifier doesn't matter, only for \textbf{DIFFERENT} quantifiers does it matter
+        \end{note}
+
+    \end{enumerate}
+
+\end{example}
+
+\begin{example}
+    Rewrite the following using Quantifiers
+
+    \begin{enumerate}
+        \item 
+            "There exists positive integers $a$ and $b$ such that $a^2 + b^2 = 15625$
+
+            \begin{alphabet}
+                \item 
+                    Write as Quantifier
+
+                    $$\exists a \in \mathbb{Z}^+ \exists b \in \mathbb{Z}^+, a^2 + b^2 = 15625$$
+
+                \item
+                    Write the negation
+
+                    $$\forall a \in \mathbb{Z}^+ \forall b \in \mathbb{Z}^+, a^2 + b^2 \not = 15625$$
+
+                    \begin{work}
+                        \begin{align*}
+                            a^2 + b^2 &= 5^6 \\
+                            a^2 + b^2 &= 5^4 \cdot 5^2 \\
+                        \end{align*}
+
+                        \begin{align*}
+                            3^2 + 4^2 &= 5^2 \\
+                            5^4(3^2 + 4^2) &= 5^4 \cdot 5^2 \\
+                            5^4 \cdot 3^2 + 5^4 \cdot 4^2 &= 5^6 \\
+                            (5^2 \cdot 3)^2 + (5^2 \cdot 4)^2 &= 5^6 \\
+                            (75)^2 + (100)^2 &= 5^6 \\
+                        \end{align*}
+                        
+                        $$\therefore a = 75, b = 100 \\$$
+
+                        \begin{center}
+                            \TRUE
+                        \end{center}
+
+                    \end{work}
+
+            \end{alphabet}
+
+    \end{enumerate}
+\end{example}
+
+There's more examples but I'm just too lazy to write them
+if you get the chance, they're on page 3 of your notes
+
+% ========== End the document ==========
+\end{document}

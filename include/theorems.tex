@@ -1,0 +1,172 @@
+
+% Header Command
+\newcommand{\header}[2]
+{%
+    \noindent\textbf{\underline{#1}}\textbf{:} #2
+}
+
+% Definition
+\newcommand{\mydef}[1]
+{%
+    \header{Definition}{#1}
+}
+
+\newlength{\spaceabove}
+\newlength{\spacebelow}
+
+\setlength{\spaceabove}{20pt}
+\setlength{\spacebelow}{20pt}
+
+% DEFINITION
+\newtheoremstyle{definitionstyle}
+  {\spaceabove}   % Space above
+  {\spacebelow}   % Space below
+  {}      % Body font
+  {}      % Indent
+  {\bfseries}  % Head font
+  {}      % Punctuation after head
+  {\newline} % Space after head
+  {\underline{\thmname{#1}}\thmnumber{ #2}\thmnote{ (#3)}}
+
+\theoremstyle{definitionstyle}
+\newtheorem{definition}{Definition}
+
+% EXAMPLE
+\newtheoremstyle{examplestyle}
+  {\spaceabove}   % Space above
+  {\spacebelow}   % Space below
+  {}      % Body font
+  {}      % Indent
+  {\bfseries}  % Head font
+  {}      % Punctuation after head
+  {\newline} % Space after head
+  {\underline{\thmname{#1}}\thmnumber{ #2}\thmnote{ (#3)}}
+
+\theoremstyle{examplestyle}
+\newtheorem{example}{Example}
+
+% RECALL
+\newtheoremstyle{recallstyle}
+  {\spaceabove}   % Space above
+  {\spacebelow}   % Space below
+  {}      % Body font
+  {}      % Indent
+  {\bfseries}  % Head font
+  {}      % Punctuation after head
+  {\newline} % Space after head
+  {\underline{\thmname{#1}}\thmnumber{ #2}\thmnote{ (#3)}}
+
+\theoremstyle{recallstyle}
+\newtheorem{recall}{Recall}
+
+% NOTE
+\newtheoremstyle{notestyle}
+  {\spaceabove}   % Space above
+  {\spacebelow}   % Space below
+  {}      % Body font
+  {}      % Indent
+  {\bfseries}  % Head font
+  {}      % Punctuation after head
+  {\newline} % Space after head
+  {\underline{\thmname{#1}}}
+
+\theoremstyle{notestyle}
+\newtheorem{note}{Note}
+
+% QUESTION
+\newtheoremstyle{questionstyle}
+  {\spaceabove}   % Space above
+  {\spacebelow}   % Space below
+  {}      % Body font
+  {}      % Indent
+  {\bfseries}  % Head font
+  {}      % Punctuation after head
+  {\newline} % Space after head
+  {\underline{\thmname{#1}}}
+
+\theoremstyle{questionstyle}
+\newtheorem{question}{Question}
+
+% THEOREM
+\newtheoremstyle{theoremstyle}
+  {\spaceabove}   % Space above
+  {\spacebelow}   % Space below
+  {}      % Body font
+  {}      % Indent
+  {\bfseries}  % Head font
+  {}      % Punctuation after head
+  {\newline} % Space after head
+  {\underline{\thmname{#1}}\thmnumber{ #2}\thmnote{ (#3)}}
+
+\theoremstyle{theoremstyle}
+\newtheorem{theorem}{Theorem}
+
+% PROPOSITION
+\newtheoremstyle{propositionstyle}
+  {\spaceabove}   % Space above
+  {\spacebelow}   % Space below
+  {}      % Body font
+  {}      % Indent
+  {\bfseries}  % Head font
+  {}      % Punctuation after head
+  {\newline} % Space after head
+  {\underline{\thmname{#1}}\thmnumber{ #2}\thmnote{ (#3)}}
+
+\theoremstyle{propositionstyle}
+\newtheorem{proposition}{Proposition}
+
+% CLAIM
+\newtheoremstyle{claimstyle}
+  {\spaceabove}   % Space above
+  {\spacebelow}   % Space below
+  {}      % Body font
+  {}      % Indent
+  {\bfseries}  % Head font
+  {}      % Punctuation after head
+  {\newline} % Space after head
+  {\underline{\thmname{#1}}\thmnumber{ #2}\thmnote{ (#3)}}
+
+\theoremstyle{claimstyle}
+\newtheorem{claim}{Claim}
+
+% SOLUTION
+\newtheoremstyle{solutionstyle}
+  {\spaceabove}   % Space above
+  {\spacebelow}   % Space below
+  {}      % Body font
+  {}      % Indent
+  {\bfseries\itshape}  % Head font
+  {}      % Punctuation after head
+  {\newline} % Space after head
+  {\text{\thmname{#1}}:\thmnote{ (#3)}}
+
+\theoremstyle{solutionstyle}
+\newtheorem{solution}{Solution}
+
+% WORK
+\newtheoremstyle{workstyle}
+  {\spaceabove}   % Space above
+  {\spacebelow}   % Space below
+  {}      % Body font
+  {}      % Indent
+  {\itshape}  % Head font
+  {}      % Punctuation after head
+  {\newline} % Space after head
+  {\text{\thmname{#1}}\thmnote{ (#3)}}
+
+\theoremstyle{workstyle}
+\newtheorem{work}{Work}
+
+% PROOF
+\newtheoremstyle{proofstyle}
+  {\spaceabove}   % Space above
+  {\spacebelow}   % Space below
+  {}      % Body font
+  {}      % Indent
+  {\itshape}  % Head font
+  {}      % Punctuation after head
+  {\newline} % Space after head
+  {\text{\thmname{#1}}\thmnote{ (#3)}}
+
+\theoremstyle{proofstyle}
+\newtheorem{poof}{Proof}

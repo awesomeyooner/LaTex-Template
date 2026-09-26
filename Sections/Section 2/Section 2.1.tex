@@ -1,0 +1,212 @@
+% Point to the main file
+\documentclass[../../Main.tex]{subfiles}
+
+% ========== Start the document ==========
+\begin{document}
+
+\section{Section 2.1 - The Joy of Sets}
+
+\begin{definition}[Sets and Elements]
+    A \textbf{set} is an unordered collection of objects called \textbf{elements}
+\end{definition}
+
+\begin{align*}
+    \setN &= \mathinset{1, 2, 3, 4, \ldots } \quad \text{(Natural Numbers)} \\
+    \text{Whole Numbers} &= \mathinset{0, 1, 2, 3, \ldots} \\
+    \setZ &= \mathinset{0, -1, 1, -2, 2, -3, 3, \ldots} \\
+    \setQ &= \mathinset{ \frac{a}{b} \mid a, b \in \setZ, b \not = 0} \\
+    \setR &= \text{limit of all convergent sequences of rational numbers} \\
+    \setC &= \mathinset{a + bi \mid a, b \in \setR, i^2 = -1}
+\end{align*}
+
+\begin{note}
+    This notation for \setQ is called \textbf{Set Builder Notation}
+
+    \noindent It's read as "\setQ is the set $\frac{a}{b}$ such that $a, b \in \setZ, b \not = 0$"
+\end{note}
+
+\begin{note}
+    Notice that every natural number is a whole number. So we say "the set of natural numbers is a \textbf{subset} of the set of whole numbers"
+\end{note}
+
+\begin{tikzpicture}
+    % color of set of Natural numbers
+    \colorlet{colN}{Red!60}
+    % color of set of Whole Numbers
+    \colorlet{colW}{OrangeRed!60}
+    % color of set of Integers
+    \colorlet{colZ}{Orange!60}
+    % color of set of Rational numbers
+    \colorlet{colQ}{Gold!60}
+    % color of set of Real numbers
+    \colorlet{colR}{ForestGreen!50}
+    % color of set of Complex numbers
+    \colorlet{colC}{CornflowerBlue!80}
+    % color of set of Hypercomplex numbers
+    \colorlet{colH}{BlueViolet!50}
+    % color of set of Transcendental numbers
+    % \colorlet{colT}{Green!30}
+
+    % center coordinate of Natural numbers
+    \coordinate (oN) at (0.0, 0.0);
+    % center coordinate of Whole Numbers
+    \coordinate (oW) at (0.5, 0.5);
+    % center coordinate of Integers
+    \coordinate (oZ) at (1.0, 1.0);
+    % center coordinate of Rational numbers
+    \coordinate (oQ) at (1.5, 1.5);
+    % center coordinate of Real numbers
+    \coordinate (oR) at (2.0, 2.0);
+    % center coordinate of Complex numbers
+    \coordinate (oC) at (2.5, 2.5);
+
+    % set of Natural numbers
+    \def\sN{(oN) ellipse (2.5 and 1.0)}
+    % set of Whole numbers
+    \def\sW{(oW) ellipse (3.5 and 2.0)}
+    % set of Integers numbers
+    \def\sZ{(oZ) ellipse (4.5 and 3.0)}
+    % set of Rational numbers
+    \def\sQ{(oQ) ellipse (5.5 and 4.0)}
+    % set of Real numbers
+    \def\sR{(oR) ellipse (6.5 and 5.0)}
+    % set of Complex numbers
+    \def\sC{(oC) ellipse (7.5 and 6.0)}
+
+    % fill sets in reverse order of size
+    \filldraw[fill=colC]\sC;
+    \filldraw[fill=colR]\sR;
+    \filldraw[fill=colQ]\sQ;
+    \filldraw[fill=colZ]\sZ;
+    \filldraw[fill=colW]\sW;
+    \filldraw[fill=colN]\sN;
+
+    % add set label for each set
+    \node[font=\huge] (N) at (-.2, 0.5) {\setN};
+    \node[font=\huge] (W) at (0.8, 2.0) {\text{Whole}};
+    \node[font=\huge] (Z) at (1.8, 3.5) {\setZ};
+    \node[font=\huge] (Q) at (2.8, 4.9) {\setQ};
+    \node[font=\huge] (R) at (3.8, 6.3) {\setR};
+    \node[font=\huge] (C) at (4.8, 7.8) {\setC};
+    %\node[font=\large] (T) at (0.8, 4.9) {\T};
+
+    % add name label for each set
+    \node[font=\large] [below=0ex of N] {Natural};
+    \node[font=\large] [below=0ex of W] {Whole};
+    \node[font=\large] [below=0ex of Z] {Integer};
+    \node[font=\large] [below=0ex of Q] {Rational};
+    \node[font=\large] [below=0ex of R] {Real};
+    \node[font=\large] [below=0ex of C] {Complex};
+
+    % add number examples for each set
+    \node[font=\small] [below right=3.5ex and -1em of N] {$1,2,3,4$};
+    \node[font=\small] [below right=3.5ex and -1em of W] {$0,1,2,3,4$};
+    \node[font=\small] [below right=3.5ex and 1.5em of Z] {$-4,-3,-2,-1$};
+    \node[font=\small] [below right=3.5ex and 2em of Q] {$-\frac{1}{2},\frac{22}{7},\frac{355}{113}$};
+    \node[font=\small,align=left] [below right=1.5ex and 1em of R] {$\sqrt{2},\sqrt{3},\varphi$,\\ \quad$\pi,\gamma$};
+    \node[font=\small] [below right=3.5ex and 1em of C] {$\sqrt{-1},i,\sqrt{i}$};
+\end{tikzpicture}
+
+\medskip
+
+\begin{definition}[Elements in Sets]
+    If $x$ is an element of the set $\mathit{A}$, then we write
+    $$x \in \mathit{A} $$
+\end{definition}
+
+\includegraphics[width=5cm, height=5cm]{x_in_A.png}
+
+\begin{definition}[Empty Set]
+    The set containing no elements is called the \yellowbox{empty set}, and is denoted by $\{ \}$ or $\varnothing$
+\end{definition}
+
+Given sets $\mathit{A}$ and $\mathit{B}$ such that for all $x \in \mathit{A}$ we have $x \in \mathit{B}$, then we say \yellowbox{$\mathit{A}$ is a subset of $\mathit{B}$} and we write
+$$\mathit{A} \subseteq \mathit{B}$$
+
+Which can mean two things:
+
+\includegraphics[width=10cm]{A_subset_B.png}
+
+\begin{definition}[Proper Sets]
+    If there exists $x \in \mathit{B}$ with $x \not \in \mathit{A}$, then we say that $\mathit{A}$ is a \yellowbox{proper subset} of $\mathit{B}$ and we write 
+    $$\mathit{A} \subsetneq \mathit{B}$$ 
+\end{definition}
+
+\begin{definition}[Cardinality]
+    Given a set $\mathit{A}$, the \yellowbox{cardinality} of a set is the number of elements int he set $\mathit{A}$, denoted by 
+    $$| \mathit{A} |$$
+\end{definition}
+
+\begin{definition}[Power Set]
+    The \yellowbox{power set} of a given set $\mathit{S}$ is the set of all subsets of $\mathit{S}$, denoted by 
+    $$\mathcal{P}(\mathit{S})$$
+
+    $$ | \mathcal{P}(\mathit{S}) | = 2^{|S|}$$
+
+    \begin{note}
+        This includes the empty set, $\{ \}$
+    \end{note}
+
+\end{definition}
+
+\begin{definition}[Cartesian Product]
+    Given sets \mathset{A, B}, the \yellowbox{cartesian product} is the set 
+    $$\mathset{A \times B} = \{ (a, b) \mid a \in \mathset{A}, b \in \mathset{B} \}$$
+
+    $$ |A \times B| = |A| \cdot |B| $$
+
+    $$ A^2 = A \times A $$ 
+\end{definition}
+
+\begin{example}
+    Let $\mathset{A} = \{ 1, 2, 3 \}, \mathset{B} = \{ 1, 2 \}$
+
+    \begin{alphabet}
+        \item
+            Is $\mathset{A} \subseteq \mathset{B}$?
+            
+            \begin{solution}
+                No since $3 \in \mathset{A}, 3 \not \in \mathset{B}$
+            \end{solution}
+
+        \item
+            Is $\mathset{B} \in \mathset{A}$?
+
+            \begin{solution}
+                Yes since for all $x \in \mathset{B}, x \in \mathset{A}$ 
+            \end{solution}
+
+        \item
+            What is the power set of \mathset{B}?
+
+            \begin{solution}
+                $\mathcal{P} = \{ \{ \}, \{ 1 \}, \{ 2 \}, \{ 1, 2 \} \}$
+            \end{solution}
+        \item
+            What is the power set of \mathset{A}?
+
+            \begin{solution}
+                $\mathcal{P}(\mathset{A}) = \mathinset{ \mathinset{}, \mathinset{1}, \mathinset{2}, \mathinset{3}, \mathinset{1, 2} \mathinset{1, 3}, \mathinset{2, 3}, \mathinset{1, 2, 3} }$
+            \end{solution}
+
+            \begin{note}
+                If \mathset{A} is a finite set (ie $| \mathset{A} |$ is finite), then $| \mathcal{P} (\mathset{A}) | = 2^{|\mathset{A}|}$ 
+            \end{note} 
+
+        \item
+            Determine $\mathset{A} \times \mathset{B}$
+            
+            \begin{solution}
+                $$ \mathset{A} \times \mathset{B} = \mathinset{ (1, 1), (1, 2) (2, 1) (2, 2), (3, 1), (3, 2) } $$
+
+                $$ \mathset{B} \times \mathset{A} = \mathinset{ (1, 1), (1, 2), (1, 3), (2, 1), (2, 2), (2, 3) } $$
+
+                $$ \mathset{A} \times \mathset{B} \not = \mathset{B} \times \mathset{A}$$
+
+                $$ | \mathset{A} \times \mathset{B} | = | \mathset{B} \times \mathset{A} | = | \mathset{A} | \cdot | \mathset{B} | $$
+            \end{solution}
+    \end{alphabet}
+\end{example}
+
+% ========== End the document ==========
+\end{document}

@@ -1,0 +1,618 @@
+% Point to the main file
+\documentclass[../../Main.tex]{subfiles}
+
+% ========== Start the document ==========
+\begin{document}
+
+\section{Section 4.4 - Linear Congruences}
+
+To think of linear congruences, let's start with an example
+
+\begin{example}
+    A group of soldiers line up in rows of 8. However, there are 4 soldiers left over.
+    When the soldiers line up in rows of 7, there are 5 soliders left over.
+    What is the least possible number of soldiers in the group?
+
+    Let $x= \text{number of soliders}$
+
+    From the description, we know:
+
+    \begin{align*}
+        \yellowbox{$x \equiv 4 \pmod{8}$} \\
+        \greenbox{$x \equiv 5 \pmod {7}$} \\
+    \end{align*}
+
+    This also means that
+
+    \begin{align*}
+        \yellowbox{$\exists k_1 \in \setZ \; \text{such that } x = 8k_1 + 4$} \\
+        \greenbox{$8k_1 + 4 \equiv 5 \pmod{7}$} \tag{substitute $x$}\\
+        8k_1 \equiv 1 \pmod{7} \\
+        k_1 \equiv 1 \pmod{7} \tag{since $8^{-1}$ is 1}
+    \end{align*}
+
+    Expanding that last equation, we get
+
+    \begin{align*}
+        \exists k_2 \in \setZ, \; k_1 = 7k_2 + 1
+    \end{align*}
+
+    Substituing $k_1$ back into the equation for $x$, we get
+
+    \begin{align*}
+        x &= 8k_1 + 4 \tag{original} \\
+        x &= 8(7k_2 + 1) + 4 \tag{substitute} \\
+        x &= 56k_2 + 12
+    \end{align*}
+
+    Since we're looking for the smallest number of soldiers, we can set $k_2 = 0$ and
+    we get $\boxed{x = 12}$ as our final answer
+
+    This is actually an example of the \textbf{Chinese Remainder Theorem}
+\end{example}
+
+\begin{definition}[Relatively Prime]
+    Two numbers $a, b \in \setZ$ are \yellowbox{relatively prime} if 
+
+    $$\text{gcd}(a, b) = 1$$
+\end{definition}
+
+\begin{theorem}[Chinese Remainder Theorem]
+    Basically
+
+    Let $m_1, m_2, \ldots, m_n \in \setZ^+$ which are pairwise relatively prime (they're all relatively prime to each other)
+    and $a_1, a_2, \ldots, a_n \in \setZ$, then the system
+
+    \begin{align*}
+        x &\equiv a_1 \pmod{m_1} \\
+        x &\equiv a_2 \pmod{m_2} \\
+        \vdots \\
+        x &\equiv a_n \pmod{m_n} \\
+    \end{align*}
+
+    Has a unique solution that's mod $M = m_1 \cdot m_2 \cdot \ldots \cdot m_2$
+\end{theorem}
+
+\begin{example}
+    Let's start with the system
+
+    \begin{align*}
+        x &\equiv 14 \pmod{16} \\
+        x &\equiv 21 \pmod{31} \\
+        x &\equiv 12 \pmod{41} \\
+    \end{align*}
+
+    We start by rewriting the first equation
+
+    $$x = 16k_1 + 14$$
+
+    And substituting it into the second equation
+
+    $$16k_1 + 14 \equiv 21 \pmod{31}$$
+
+    Now isolate $k_1$. You need to find $16^{-1}$, but thankfully we have some shortcuts
+
+    \begin{align*}
+        16k_1 &\equiv 7 \pmod{31} \\
+        32k_1 &\equiv 14 \pmod{31} \tag{multiply 2} \\
+        k_1 &= 14 \pmod{31} \tag{$32 \equiv 1 \pmod{31}$} \\
+    \end{align*}
+
+    Now that we have $k_1$, let's expand it 
+
+    \begin{align*}
+        k_1 &= 31k_2 + 14
+    \end{align*}
+
+    And plug it back into our equation of $x$
+
+    \begin{align*}
+        x &= 16k_1 + 14 \tag{original} \\
+        x &= 16(31k_2 + 14) + 14 \\
+        x &= 16 \cdot 31k_2 + 16 \cdot 14 + 14 \\
+        \Aboxed{x &= 496 k_2 + 238} \\
+    \end{align*}
+
+    Now that we have a new equation for $x$ involving $k_2$, let's use our last equation
+
+    \begin{align*}
+        x &\equiv 12 \pmod{41} \tag{last equation} \\
+        496k_2 + 238 &\equiv 12 \pmod{41} \\
+        496k_2 &\equiv -226 \pmod{41} \\
+        4k_2 &\equiv 20 \pmod{41} \tag{reduce 496 and -226} \\
+    \end{align*}
+
+    Now we gotta find $4^{-1} \pmod{41}$
+
+    Let's use the Euclidean Algorithm
+
+    \begin{align*}
+        41 &= 10 \cdot 4 + 1 \\
+        1 &= 41 - 10 \cdot 4 \\
+        4^{-1} &\equiv -10 \pmod{41} \\
+        \Aboxed{4^{-1} &\equiv 31 \pmod{41}} \tag{add 41} \\
+    \end{align*}
+
+    Now that we have $4^{-1}$, we solve
+
+    \begin{align*}
+        4k_2 &\equiv 20 \pmod{41} \\
+        4^{-1} \cdot 4k_2 &\equiv 4^{-1} \cdot 20 \pmod{41} \\
+        31 \cdot 4k_2 &\equiv 31 \cdot 20 \pmod{41} \\
+        k_2 &\equiv 620 \pmod{41} \\
+        \Aboxed{k_2 &\equiv 5 \pmod{41}} \\
+    \end{align*}
+
+    Now that we solved for $k_2$, let's expand it one last time
+
+    \begin{align*}
+        k_2 &= 41k_3 + 5
+    \end{align*}
+
+    And plug it back into our equation for $x$ involving $k_2$
+
+    \begin{align*}
+        x &= 496 k_2 + 238 \tag{original} \\
+        x &= 496(41k_3 + 5) + 238 \tag{substituted} \\
+        \Aboxed{x &= 20336k_3 + 2718} \tag{simply} \\
+    \end{align*}
+
+    Now that we simplified for the equation, we see that it represents
+
+    $$\boxed{x \equiv 2718 \pmod{20336}}$$
+
+    And you can see from the Chinese Remainder Theorem that our mod is actually the product of our moduli
+
+    $$M = 20336 = 16 \cdot 31 \cdot 41$$
+\end{example}
+
+That was... very long, so let's write out the steps:
+
+\subsection{Steps for Solving Linear Congruences}
+
+Given the system: (I'm just gonna use up to 3 for this)
+
+\begin{align*}
+    x &\equiv a_1 \pmod{m_1} \\
+    x &\equiv a_2 \pmod{m_2} \\
+    x &\equiv a_3 \pmod{m_3} \\
+\end{align*}
+
+The system has a \textbf{unique solution} if $m_1, m_2, m_3$ are pairwise coprime. If not, then it \textit{could possibly} have a solution but not necessarily
+
+\begin{enumerate}
+    \item 
+    {
+        Expand the first equation
+
+        \begin{align*}
+            x &\equiv a_1 \pmod{m_1}
+        \end{align*}
+
+        implies
+
+        \begin{align*}
+            \Aboxed{x = m_1 k_1 + a_1}, \; k_1 \in \setZ
+        \end{align*}
+    }
+
+    \item
+    {
+        Plug that into the second equation
+
+        \begin{align*}
+            x &\equiv a_2 \pmod{m_2} \\
+            m_1 k_1 + a_1 &\equiv a_2 \pmod{m_2} \\
+        \end{align*}
+
+        And solve for $k_1$
+
+        \begin{align*}
+            m_1 k_1 + a_1 &\equiv a_2 \pmod{m_2} \\
+            m_1 k_1 &\equiv a_2 - a_1 \pmod{m_2} \\
+            m_1^{-1} k_1 &\equiv m_1^{-1}(a_2 - a_1) \pmod{m_2} \\
+            k_1 &\equiv m_1^{-1}(a_2 - a_1) \pmod{m_2} \\
+            \Aboxed{k_1 &\equiv c_1} \pmod{m_2} \tag{$c_1$ is shorthand} \\
+        \end{align*}
+
+        \begin{note}
+            This isn't a formula, just steps with arbitrary variables. You'll need to find the inverse of $m_1$
+        \end{note}
+
+        And expand that last equation
+
+        \begin{align*}
+            k_1 &\equiv c_1 \pmod{m_2} \\
+        \end{align*}
+
+        implies
+
+        \begin{align*}
+            \Aboxed{k_1 &= m_2 k_2 + c_1}, \; k_2 \in \setZ \\
+        \end{align*}
+    } 
+
+    \item 
+    {
+        Plug that into our equation for $x$
+
+        \begin{align*}
+            x &= m_1 k_1 + a_1 \\
+            \Aboxed{x &= m_1 (m_2 k_2 + c_1) + a_1} \\
+        \end{align*}
+
+        Plug that into the last equation
+
+        \begin{align*}
+            m_1 (m_2 k_2 + c_1) + a_1 &\equiv a_3 \pmod{m_3}
+        \end{align*}
+
+        and solve for $k_2 \pmod{m_3}$
+
+        \begin{align*}
+            &\vdots \\
+            \Aboxed{k_2 &\equiv c_2 \pmod{m_3}} \\
+        \end{align*}
+
+        Expand that equation
+
+        \begin{align*}
+            \Aboxed{k_2 = m_3 k_3 + c_2}, \; k_3 \in \setZ
+        \end{align*}
+    }
+
+    \item 
+    {
+        Finally, plug that last equation into our SECOND equation for $x$
+
+        \begin{align*}
+            x &= m_1 (m_2 k_2 + c_1) + a_1 \\
+            x &= m_1(m_2(m_3 k_3 + c_2) + c_1) + a_1 \\
+            \Aboxed{x &= m_1m_2m_3k_3 + c_3} \\
+        \end{align*}
+
+        Now we UN-expand this equation and see that
+
+        \begin{align*}
+            \Aboxed{x &\equiv c_3} \pmod{m_1m_2m_3}
+        \end{align*}
+    }
+
+\end{enumerate}
+
+Basically, starting with the first equation
+
+\begin{enumerate}
+    \item \yellowbox{Expand first, solving for $x$}
+    \item \yellowbox{Plug $x$ into second}
+    \item \greenbox{Solve for $k_1$}
+    \item \greenbox{Expand $k_1$}
+    \item \greenbox{Plug $k_1$ back into first expanded of $x$ (one with $k_1$)}
+    \item Solve for $k_2$
+    \item Expand $k_2$
+    \item Plug $k_2$ back into second expanded of $x$ (one with $k_2$)
+    \item \bluebox{Unexpand back into modulus}
+\end{enumerate}
+
+Just do \yellowbox{these lines} for the first equation, and \greenbox{these lines} for each other equation
+
+Let's do something else now
+
+\subsection{Factorials}
+
+\begin{enumerate}
+    \item $1! \pmod{2} = 1$
+    \item $2! \pmod{3} = 2$
+    \item $3! \pmod{4} = 2$
+    \item $4! \pmod{5} = 4$
+    \item $5! \pmod{6} = 0, \; 5! = 5 \cdot 4 \cdot \yellowbox{3} \cdot \yellowbox{2} \cdot 1 \pmod{6} = 0$
+    \item $6! \pmod{7} = 6$
+    \item $7! \pmod{8} = 0, \; 7! = 7 \cdot 6 \cdot 5 \cdot \yellowbox{4} \cdot 3 \cdot \yellowbox{2} \cdot 1 \pmod{8} = 0$
+    \item $8! \pmod{9} = 0, \; 8! = 8 \cdot 7 \cdot \yellowbox{6} \cdot 5 \cdot 4 \cdot \yellowbox{3} \cdot 2 \cdot 1 \pmod{9} = 0$
+    \item $9! \pmod{10} = 0, \; 9! = 9 \cdot 8 \cdot 7 \cdot 6 \cdot \yellowbox{5} \cdot 4 \cdot 3 \cdot \yellowbox{2} \cdot 1 \pmod{10} = 0$
+    \item $10! \pmod{11} = 10$
+    \item $999! \pmod{1000} = 0$ since 1000 is composite
+\end{enumerate}
+
+Notice that for all the ones that are not 0, the modulus is prime (except 4)
+
+This brings us to our next theorems
+
+\subsection{Wilson's Theorem}
+
+\begin{theorem}[Wilson's Theorem]
+    If $p$ is a prime integer, then
+
+    $$(p - 1)! \equiv p - 1 \pmod{p}$$
+    
+    or
+
+    $$(p - 1)! \equiv -1 \pmod{p}$$
+\end{theorem}
+
+But for composite numbers, we have
+
+\begin{theorem}[Some Unamed Theorem]
+    If $n$ is a composite integer greater than 4,
+
+    then
+
+    $$(n-1)! \equiv 0 \pmod{n}$$
+
+    If $n = 4$, then $$3! \equiv 2 \pmod{4}$$
+\end{theorem}
+
+\subsection{Fermat's Little Theorem}
+
+There's examples that derive this, but I'm too lazy
+
+\begin{theorem}[Fermat's Little Theorem]
+    If $a \in \setZ$ with, 
+    
+    \begin{enumerate}
+        \item $p$ is prime
+        \item $\text{gcd}(a, p) = 1$
+    \end{enumerate}
+ 
+    $$a^{p - 1} \equiv 1 \pmod{p}$$
+
+    \begin{poof}
+        Consider $S = \{1, 2, \ldots, p - 1\}, p \in \setZ$
+
+        Let's define a function $f: S \rightarrow S, f(x) = ax \pmod{p}$
+
+        \begin{example}
+            Let $p = 7, a = 3$
+
+            Then $S = \{1, 2, 3, 4, 5, 6\}$ and $f(x) = 3x \pmod{7}$
+
+            \begin{tablewithheader}
+            { |c|c| }
+            { $x$ & $f(x)$ }
+                1 & 3 \\
+                2 & 6 \\
+                3 & 2 \\
+                4 & 5 \\
+                5 & 1 \\
+                6 & 4 \\
+            \end{tablewithheader}
+
+            We see that $f$ is a \textbf{bijection}
+            
+            so we claim $f$ is a \textbf{bijection}
+
+            Why?
+
+            Let $y \in S$
+
+            We must solve 
+            
+            $$ax \equiv y \pmod{p}$$
+
+            and since gcd$(a, p) = 1$, then $a^{-1}$ exists $\pmod{p}$
+
+            Therefore, $a^{-1}(ax) \equiv a^{-1}y \pmod{p}$
+
+            or
+
+            $$x \equiv a^{-1}y \pmod{p}$$
+
+            \begin{center}
+                we conclude that $f$ is \textbf{onto (surjective)}
+            \end{center}
+
+            For the injective part, suppose $f(x_1) = f(x_2)$
+
+            Then $$ax_1 \equiv ax_2 \pmod{p}$$
+
+            Since 
+            \begin{center}
+                gcd$(a, p) = 1$, then $a^{-1}$ exists $\pmod{p}$
+            \end{center}
+
+            Therefore $$a^{-1}(ax_1) \equiv a^{-1}(ax_2) \pmod{p}$$
+
+            or
+
+            $$x_1 \equiv x_2 \pmod{p}$$
+
+            We concldue $f$ is \textbf{one to one (injective)}
+
+            Now let's consider the product $f(1) \cdot f(2) \cdot \ldots \cdot f(p - 1)$
+
+            \begin{align*}
+                f(1) \cdot f(2) \cdot \ldots \cdot f(p - 1) &\equiv 1 \cdot 2 \cdot 3 \cdot 4 \cdot 5 \cdot 6 \pmod{p} \\
+                a \cdot 2a \cdot \ldots \cdot (p - 1)a &\equiv 1 \cdot 2 \cdot \ldots \cdot (p - 1) \pmod{p} \\
+                a^{p - 1} \left[1 \cdot 2 \cdot \ldots \cdot (p - 1) \right] &\equiv 1 \cdot 2 \cdot \ldots \cdot (p - 1) \pmod{p} \\
+            \end{align*}
+
+            By $\underbrace{\text{Wilson's Theorem}}_{(p - 1)! \; \equiv \; p - 1 \pmod{p}}$ we get
+
+            \begin{align*}
+                a^{p - 1}! &\equiv (p - 1)! \pmod{p} \\
+                a^{p - 1}(p - 1) &\equiv p - 1 \pmod{p} \\
+                a^{p - 1} &\equiv 1 \pmod{p} \text{ as desired} \\
+            \end{align*}
+
+        \end{example}
+    \end{poof}
+
+\end{theorem}
+
+Let's do some examples
+
+\begin{example}
+    Compute the following
+
+    \begin{align*}
+        9^{2026} &\pmod{11} \\
+        &a: 9 \\
+        &p: 11 \\
+    \end{align*}
+
+    $$\text{gcd}(9, 11) = 1$$
+
+    By Fermat's Little Theorem,
+
+    $$9^{10} \equiv 1 \pmod{11}$$
+
+    We can use this to break up 2026
+
+    \begin{align*}
+        9^{2026} &\equiv 9^{202 \cdot 10 + 6} \pmod{11} \\
+        &\equiv 9^{202 \cdot 10} \cdot 9^6 \pmod{11} \\
+        &\equiv 9^6 \pmod{11} \\
+    \end{align*}
+
+    Remember that we can subtract 11 from 9, so $9 \equiv -2 \pmod{11}$
+
+    This makes
+
+    \begin{align*}
+        &\equiv 9^6 \pmod{11} \\
+        &\equiv (-2)^6 \pmod{11} \\
+        &\equiv 64 \pmod{11} \\
+        \Aboxed{&\equiv 9 \pmod{11}}
+    \end{align*}
+
+
+\end{example}
+
+\subsection{Extended Fermat's Little Theorem}
+
+There's also an extension of this
+
+\begin{theorem}[Extended Fermat's Little Theorem]
+    If $a, p, q \in \setZ$ with
+    
+    \begin{enumerate}
+        \item $p$ and $q$ are distinct primes
+        \item gcd$(a, pq) = 1$
+    \end{enumerate}
+
+    Then
+
+    $$a^{(p-1)(q-1)} \equiv 1 \pmod{pq}$$
+\end{theorem}
+
+\begin{example}
+    Compute
+
+    \begin{enumerate}
+        \item
+        {
+            $$13^{2026} \pmod{253}$$
+
+            First, lets check:
+
+            \begin{enumerate}
+                \item $253 = 11 \cdot 23$ \\ p = 11, q = 23, are distinct primes
+                \item gcd$(13, 253) = 1$
+            \end{enumerate}
+
+            This means we can use Extended Fermat's Little Theorem (EFLT)
+
+            \begin{align*}
+                13^{(11 - 1)(23 - 1)} &\equiv 1 \pmod{253} \\
+                13^{10 \cdot 22} &\equiv 1 \pmod{253} \\
+                13^{220} &\equiv 1 \pmod{253} \\
+            \end{align*}
+
+            Breaking up 2026,
+
+            $$2026 = 9 \cdot 220 + 46 \pmod{253}$$
+
+            This means
+
+            $$13^{2026} \equiv 13^{46} \pmod{253}$$
+
+            \begin{align*}
+                13 \pmod{253} &= 13 \\
+                13^2 \pmod{253} &= 13^2 \\
+                &= 169 \\
+                13^4 \pmod{253} &= 169^2 \pmod{253} \\
+                &= 225 \\
+                13^8 \pmod{253} &= 225^2 \pmod{253} \\
+                &= 25 \\
+                13^{16} \pmod{253} &= 25^2 \pmod{253} \\
+                &= 119 \\
+                13^{32} \pmod{253} &= 119^2 \pmod{253} \\
+                &= 246 
+            \end{align*}
+
+            Now let's break up 46 into powers of 2
+
+            \begin{align*}
+                13^{2026} &\equiv 13^{46} \\
+                &\equiv 13^{32} \cdot 13^8 \cdot 13^4 \cdot 13^2 \pmod{253} \\
+                &\equiv 246 \cdot 25 \cdot 225 \cdot 169 \pmod{253} \\
+                \Aboxed{&\equiv 31}
+            \end{align*}
+        } % item
+
+        \item 
+        {
+            $$24^{2026} \pmod{31}$$
+
+            \begin{enumerate}
+                \item $p = 31$ is prime
+                \item gcd$(24, 31) = 1$
+            \end{enumerate}
+
+            so FLT applies
+
+            \begin{align*}
+                24^{31 - 1} &\equiv 1 \pmod{31} \\
+                24^{30} &\equiv 1 \pmod{31} \\
+            \end{align*}
+
+            $$2026 = 67 \cdot 30 + 16$$
+
+            \begin{align*}
+                24^{2026} &\equiv 24^{67 \cdot 30 + 16} \pmod{31} \\
+                &\equiv \left( 24^{30} \right)^{67} \cdot 24^{16} \pmod{31} \\
+                &\equiv 1^{67} \cdot 24^{16} \pmod{31} \\
+                &\equiv 24^{16} \pmod{31} \\
+                &\equiv 7 \pmod{31} \tag{brute forced}\\
+             \end{align*}
+        } % item
+    \end{enumerate}
+\end{example}
+
+\subsection{An Implication of Fermat's Little Theorem}
+
+\begin{definition}[Implication of FLT]
+    I'm not sure if this is called something but recall that Fermat's Little theorem states that
+
+    If $a \in \setZ$ with, 
+    
+    \begin{enumerate}
+        \item $p$ is prime
+        \item $\text{gcd}(a, p) = 1$
+    \end{enumerate}
+ 
+    $$a^{p - 1} \equiv 1 \pmod{p}$$
+
+    But actually, any multiple of $p - 1$ will make $a$ equivalent to 1 mod $p$
+
+    We can rewrite this as
+
+    $$a^{k(p - 1)} \equiv 1 \pmod{p}, \; k \in \setZ^+$$
+
+    But this another way of saying this is
+
+    $$\boxed{a^k \equiv 1 \pmod{p}, \; k \equiv 0 \pmod{p - 1}}$$
+
+    The second half just means that $k$ is a multiple of $p - 1$
+
+    So TDLR, if $a$ is raised to a multiple of $p - 1$, then it is equivalent to 1 mod $p$
+
+    This also implies that
+
+    $$a^x \equiv a^y \pmod{p} \text{ if } x \equiv y \pmod{p - 1}$$
+
+    We'll see this being used later
+
+\end{definition}
+% ========== End the document ==========
+\end{document}

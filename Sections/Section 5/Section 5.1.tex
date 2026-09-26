@@ -1,0 +1,297 @@
+% Point to the main file
+\documentclass[../../Main.tex]{subfiles}
+
+% ========== Start the document ==========
+\begin{document}
+
+\section{Section 5.1 - Proof By Induction}
+
+This section really only covers one thing and that proving by induction
+
+Let's start by proving that
+
+$$\sum_{k = 1}^{n}(2k - 1) = n^2$$
+
+Proof 1: Break everything up
+
+\begin{align*}
+    \sum_{k = 1}^{n}(2k - 1) &= \sum_{k = 1}^{n} (2k) - \sum_{k = 1}^{n} \\
+    &= 2 \sum_{k = 1}^{n} k - \sum_{k = 1}^{n} 1 \\
+    &= 2 \cdot \frac{n(n + 1)}{2} - n \\
+    &= n^2 + n - n \\
+    \Aboxed{&= n^2} \\
+\end{align*}
+
+Proof 2: Represent as a picture (dots)
+
+\begin{align*}
+    \sum_{k = 1}^{1} (2k - 1) &= 1 = 1^2 \\
+    \begin{matrix}
+        \bullet
+    \end{matrix} \\
+    % 
+    \sum_{k = 1}^{2} (2k - 1) &= 1 + 3 = 2^2 \\
+    \begin{matrix}
+        \bullet & \bullet \\
+        \bullet & \bullet \\
+    \end{matrix} \\
+    % 
+    \sum_{k = 1}^{5} (2k - 1) &= 1 + 3 + 5= 1^2 \\
+    \begin{matrix}
+        \bullet & \bullet & \bullet \\
+        \bullet & \bullet & \bullet \\
+        \bullet & \bullet & \bullet \\
+    \end{matrix}
+\end{align*}
+
+If $\sum_{k = 1}^{n} (2k - 1) = n^2$
+
+\[
+\begin{NiceMatrix}
+    \bullet & \cdots & \bullet \\
+    \vdots & \ddots & \vdots \\
+    \bullet & \cdots & \bullet \\
+\CodeAfter
+  \OverBrace{1-1}{1-3}{n}
+\end{NiceMatrix}
+\]
+
+This is a square matrix so $n \times n$
+
+Then $$\sum_{k = 1}^{n + 1} (2k - 1) = \left[ 1 + 3 + 5 + \ldots + (2n - 1)\right] + (2n + 1)$$
+
+\[
+\begin{NiceMatrix}
+    \bullet & \cdots & \bullet & \bullet \\
+    \vdots & \ddots & \vdots & \vdots \\
+    \bullet & \cdots & \bullet & \bullet \\
+    \bullet & \ldots & \bullet & \bullet \\
+\CodeAfter
+  \OverBrace{1-1}{1-3}{n}
+\end{NiceMatrix}
+\]
+
+The extra line is $n \times 1$ and $1 \times n$, so we have $2n$ more dots, and with the extra corner dot, we get
+
+\begin{align*}
+    n^2 + 2n + 1 &= (n + 1)^2
+\end{align*}
+
+But we're just assuming that the general formula $= n^2$ is true
+
+\begin{definition}[Proof by Induction]
+
+\textbf{Proof by Induction} is basically proving that if a statement about the case $n$ is true, then proving the case $n + 1$ will also prove every case
+
+Let $P(n)$ be the proposition functon 
+
+$$P(n): \sum_{k = 1}^{n} (2k - 1) = n^2 \text{ for } n \in \setZ^+$$
+
+\begin{center}
+    Base Case: P$(1)$ is true \\
+    Inductive Case: P$(n) \implies$ P$(n + 1)$
+\end{center}
+
+The above implies
+
+\begin{align*}
+    P(1) &\implies P(2) \\
+    P(2) &\implies P(3) \\
+    &\vdots \\
+    P(n) &\implies P(n + 1) \\
+\end{align*}
+
+So we conclude that P$(n)$ is true $\forall n \in \setZ^+$
+
+This is specifically called \textbf{Weak Induction}
+
+\textbf{Strong Induction} is
+
+\begin{center}
+    Base Case: P$(1)$ is true \\
+    Inductive Case: $P(1) \land P(2) \land \ldots \land P(n) \implies P(n + 1)$
+\end{center}
+
+
+\end{definition}
+
+Let's do some examples
+
+\begin{example}
+    Prove the following
+
+    \begin{enumerate}
+        \item
+        {
+            $$\sum_{k = 1}^{n}k^3 = \left[ \frac{n (n + 1)}{2}\right]^2$$
+
+            \begin{poof}
+                BASE CASE:
+
+                \begin{align*}
+                    \sum_{k = 1}^{1}k^3 &= 1^3 = 1 \\
+                    &= \left[ \frac{n (n + 1)}{2}\right]^2 = \left[ \frac{1(1 + 1)}{2}\right]^2 = 1 \\
+                \end{align*}
+
+                So the case $n = 1$ is true
+
+                INDUCITVE CASE:
+
+                Assume that $\sum_{k = 1}^{n}k^3 = \left[ \frac{n (n + 1)}{2}\right]^2$
+
+                We then prove $\sum_{k = 1}^{n + 1}k^3 = \left[ \frac{n + 1 (n + 2)}{2}\right]^2$
+
+                Let's do this by making the more complicated part (the proving part) equal to the simpler one
+
+                \begin{align*}
+                    \sum_{k = 1}^{n + 1}k^3 = \sum_{k = 1}^{n}k^3 + (n + 1)^3 &= 
+                    \sum_{k = 1}^{n + 1}k^3 = \left[ \frac{n(n + 2)}{2}\right]^2 + (n + 1)^3 \\
+                    &= \frac{n^2(n + 1)^2}{4} + (n + 1)^3 \\
+                    &= (n + 1)^2 \cdot \left[ \frac{n^2}{4} + (n + 1)\right] \\
+                    &= (n + 1)^2 \cdot \left[ \frac{n^2 + 4n + 4}{4} \right] \\
+                    &= (n + 1)^2 \cdot \frac{(n + 2)^2}{4} \\
+                    &= \frac{(n + 1)^2(n + 2)^2}{4} \\
+                    \Aboxed{&= \left[\frac{(n + 1)(n + 2)}{2}\right]^2}
+                \end{align*}
+            \end{poof}
+        }
+
+        \item
+        {
+            $$\sum_{k = 1}^{n} k^2 = \frac{n (n + 1)(2n + 1)}{6} \text{ for } n \in \setZ^+$$
+
+            \begin{poof}
+                BASE CASE:
+
+                \begin{align*}
+                    \sum_{k = 1}^{1} k^2 &= 1^2 = 1 \\
+                    \frac{n (n + 1)(2n + 1)}{6} &= \frac{1 \cdot (1 + 1)(2 + 1)}{6} = \frac{2 \cdot 3}{6} = 1 \\
+                \end{align*}
+
+                So out base case $n = 1$ is true
+                
+                INDUCTIVE CASE:
+
+                Assume: $\sum_{k = 1}^{n} k^2 = \frac{n (n + 1)(2n + 1)}{6}$
+
+                We prove: $\sum_{k = 1}^{n + 1} k^2 = \frac{(n + 1)(n + 2)(2n + 3)}{6}$
+
+                Again, lets start with the more complicated looking one and make it look like the simpler one
+
+                \begin{align*}
+                    \sum_{k = 1}^{n + 1} k^2 &= \sum_{k = 1}^{n} k^2 + (n + 1)^2 \\
+                    &= \frac{n (n + 1)(2n + 1)}{6} + \frac{6(n + 1)^2}{6} \\ 
+                    &= (n + 1)\left[ \frac{n(2n + 1)}{6} + \frac{6(n + 1)}{6} \right] \\
+                    &= (n + 1)\left[ \frac{2n^2 + n + 6n + 1}{6} \right] \\
+                    &= (n + 1)\left[ \frac{2n^2 + 7n + 1}{6} \right] \\
+                    &= (n + 1)\left[ \frac{(n + 2)(2n + 3)}{6} \right] \\
+                    \Aboxed{&= \frac{(n + 1)(n + 2)(2n + 3)}{6}} \text{, as desired} \\
+                \end{align*}
+            \end{poof}
+        }
+
+        \item
+        {
+            $$2^n \leq n! \text{ for } n \geq 4$$
+
+            \begin{poof}
+                BASE CASE: 
+                \begin{align*}
+                    2^4 &= 16 \\
+                    4! &= 24 \\
+                    16 < 24 \\
+                    \therefore 2^4 \leq 4!
+                \end{align*}
+
+                So our base case $n = 4$ is true
+
+                INDUCTIVE CASE:
+
+                Assume: $2^n \leq n!$
+
+                We Prove: $2^{n + 1} \leq (n + 1)!$
+
+                \begin{align*}
+                    2^{n + 1} &= 2 \cdot 2^n \\
+                    2^{n + 1} &\leq 2 \cdot n! \leq (n + 1) \cdot n! \tag{since $2 \leq (n + 1)$} \\
+                    \Aboxed{&= 2^{n + 1} \leq (n + 1)!}
+                \end{align*}
+
+                \begin{note}
+                    This one's kinda lame since we're dealing with inequalities
+                \end{note}
+
+            \end{poof}
+        }
+    \end{enumerate}
+\end{example}
+
+Let's do another proof but more words
+
+Let's prove:
+
+\begin{center}
+    Every positive interger greater than 1 is a product of prime powers
+\end{center}
+
+\begin{poof}
+    BASE CASE: $n = 2$ is a prime power
+    INDUCTIVE CASE:
+
+    Assume: $n$ is a product of prime powers
+
+    We prove: $n + 1$ is also a product of prime powers
+
+    Case 1:
+
+    $n + 1$ is a prime
+
+    Then $n + 1$ is already a prime power
+
+    Case 2: 
+
+    $n + 1$ is composite
+
+    Then $n + 1$ has two factors between $1$ and $n$
+
+    $1$ and $n$ are in our previous list which have prime powers
+
+    $$\therefore n + 1 \text{ also does}$$
+\end{poof}
+
+\begin{example}
+    Let's do an example with the Fibbonacci sequence. Recall that
+
+    $$f_n: 1, 1, 2, \yellowbox{3}, 5, 8, 13, \yellowbox{21}, 34, 55, 89, \yellowbox{144}, 233$$
+
+    Let's prove that every 4th Fibbonacci number is divisible by 3
+
+    In other words,
+
+    $$3 \mid f_{4n}, \; n \in \setZ^+$$
+
+    \begin{poof}
+        BASE CASE: $n = 1, f_4 = 3, 3 \mid 3$ so the case $n = 1$ is true
+
+        INDUCTIVE CASE:
+
+        Assume $3 \mid f_{4n}$
+
+        We prove $3 \mid f_{4(n + 1)}$
+
+        \begin{align*}
+            f_{4(n + 1)} = f_{4n + 4} &= f_{4n + 3} + f_{4n + 2} \\
+            &= f_{4n + 2} + f_{4n + 1} + f_{4n + 2} \\
+            &= 2f_{4n + 2} + f_{4n + 1} \\
+            &= 2\left( f_{4n + 1} + f_{4n} \right) + f_{4n + 1} \\
+            &= 3 f_{4n + 1} + 2f_{4n} \\
+        \end{align*}
+
+        Since $3 \mid 3 f_{4n + 1}$ and $3 \mid 2f_{4n}$, then $3 \mid 3f{4n + 1} + 2f_{4n}$
+
+        $$\therefore 3 \mid f_{4(n + 1)} \text{, as desired}$$
+    \end{poof}
+\end{example}
+
+% ========== End the document ==========
+\end{document}

@@ -1,0 +1,283 @@
+% Point to the main file
+\documentclass[../../Main.tex]{subfiles}
+
+% ========== Start the document ==========
+\begin{document}
+
+\section{Exam 4 Review}
+
+\subsection{Binary and Base n}
+
+Write 1577 in binary
+
+\begin{align*}
+    1577 &= 2 \cdot 788 + \yellowbox{1} \\
+    788 &= 2 \cdot 394 + \yellowbox{0} \\
+    394 &= 2 \cdot 197 + \yellowbox{0} \\
+    197 &= 2 \cdot 98 + \yellowbox{1} \\
+    98 &= 2 \cdot 49 + \yellowbox{0} \\
+    49 &= 2 \cdot 24 + \yellowbox{1} \\
+    24 &= 2 \cdot 12 + \yellowbox{0} \\
+    12 &= 2 \cdot 6 + \yellowbox{0} \\
+    6 &= 2 \cdot 3 + \yellowbox{0} \\
+    3 &= 2 \cdot 1 + \yellowbox{1} \\
+    1 &= 2 \cdot 0 + \yellowbox{1} \\
+\end{align*}
+
+Writing the bottom to top left to right...
+
+$$\boxed{11000101001}$$
+
+We could check this by just doing 
+
+$$1577 = 2^{10} + 2^9 + \ldots $$
+
+Let's try representing 1577 in base 8. Remember that each remainder we get is the coefficient to the corresponding power
+
+\begin{align*}
+    1577 &= 8 \cdot 197 + \yellowbox{1} \\
+    197 &= 8 \cdot 24 + \yellowbox{5} \\
+    24 &= 8 \cdot 3 + \yellowbox{0} \\
+    3 &= 8 \cdot 0 + \yellowbox{3} \\
+\end{align*}
+
+Rewriting this, we get
+
+\begin{align*}
+    \underbrace{3}_{8^3}
+    \underbrace{0}_{8^3}
+    \underbrace{5}_{8^2}
+    \underbrace{1}_{8^0}
+\end{align*}
+
+So 
+
+$$1577 = 3 \cdot 8^3 + 5 \cdot 8^1 + 1 \cdot 8^0$$
+
+Now let's do it with base 16
+
+\begin{align*}
+    1577 &= 16 \cdot 98 + \yellowbox{9} \\
+    98 &= 16 \cdot 6 + \yellowbox{2} \\
+    6 &= 16 \cdot 0 + \yellowbox{6} \\
+\end{align*}
+
+$$\boxed{1577 = 629_{16}}$$
+
+$$1577 = 6 \cdot 16^2 + 2 \cdot 16^1 + 9 \cdot 16^0$$
+
+For our last example, write the $AB0CD_{16}$ in base 10 (aka normal numbers)
+
+Recall that
+
+\begin{align*}
+    A &= 10 \\
+    B &= 11 \\
+    &\vdots \\
+\end{align*}
+
+$AB0CD$ is just $10 \; 11 \; 0 \; 12 \; 13$
+
+Since there's 5 "numbers" that means we start with $16^{5 - 1} = 16^4$
+
+\begin{align*}
+    AB0CD_{16} &= 10 \cdot 16^4 + 11 \cdot 16^3 + 0 \cdot 16^2 + 12 \cdot 16^1 + 13 \cdot 16^1 \\
+    &= \boxed{700621} \tag{\text{just plug into calc}}
+\end{align*}
+
+\subsection{RSA and Encryption}
+
+\subsubsection{FLT Encrytion}
+
+For Encryption using FLT, basically
+
+We have:
+
+\begin{align*}
+    M: &\; \text{Message} \\
+    C: &\; \text{Encrypted Message} \\
+    e: &\; \text{Encryption Key} \\
+    d: &\; \text{Decryption Key} \\
+    p: &\; \text{Prime mod} \\
+\end{align*}
+
+To \textbf{encrypt} a message $M$ to $C$
+
+$$C \equiv M^e \pmod{p}$$
+
+To \textbf{decrypt} $C$ back into $M$, we must first find $d$
+
+$$ed \equiv 1 \pmod{p - 1}$$
+
+Just find $e^{-1}$ using Euclidean and plug it into
+
+$$M \equiv C^d \pmod{p}$$
+
+\subsubsection{FLT / RSA Encryption}
+
+We have:
+
+\begin{align*}
+    M: &\; \text{Message} \\
+    C: &\; \text{Encrypted Message} \\
+    e: &\; \text{Encryption Key} \\
+    d: &\; \text{Decryption Key} \\
+    p: &\; \text{Prime mod 1} \\
+    q: &\; \text{Prime mod 2} \\
+    N: &\; \text{Product of } p \cdot q \\
+\end{align*}
+
+To \textbf{encrypt} a message $M$ to $C$
+
+$$C \equiv M^e \pmod{N}$$
+
+To \textbf{decrypt} $C$ back into $M$, we must first find $d$
+
+$$ed \equiv 1 \pmod{(p - 1)(q - 1)}$$
+
+Just find $e^{-1}$ using Euclidean and plug it into
+
+$$M \equiv C^d \pmod{N}$$
+
+\subsection{Proof By Induction}
+
+$$\sum_{k = 1}^{n}k^3 = \left[ \frac{n (n + 1)}{2}\right]^2$$
+
+\begin{poof}
+    BASE CASE:
+
+    \begin{align*}
+        \sum_{k = 1}^{1}k^3 &= 1^3 = 1 \\
+        &= \left[ \frac{n (n + 1)}{2}\right]^2 = \left[ \frac{1(1 + 1)}{2}\right]^2 = 1 \\
+    \end{align*}
+
+    So the case $n = 1$ is true
+
+    INDUCITVE CASE:
+
+    Assume that $\sum_{k = 1}^{n}k^3 = \left[ \frac{n (n + 1)}{2}\right]^2$
+
+    We then prove $\sum_{k = 1}^{n + 1}k^3 = \left[ \frac{n + 1 (n + 2)}{2}\right]^2$
+
+    Let's do this by making the more complicated part (the proving part) equal to the simpler one
+
+    \begin{align*}
+        \sum_{k = 1}^{n + 1}k^3 = \sum_{k = 1}^{n}k^3 + (n + 1)^3 &= 
+        \sum_{k = 1}^{n + 1}k^3 = \left[ \frac{n(n + 2)}{2}\right]^2 + (n + 1)^3 \\
+        &= \frac{n^2(n + 1)^2}{4} + (n + 1)^3 \\
+        &= (n + 1)^2 \cdot \left[ \frac{n^2}{4} + (n + 1)\right] \\
+        &= (n + 1)^2 \cdot \left[ \frac{n^2 + 4n + 4}{4} \right] \\
+        &= (n + 1)^2 \cdot \frac{(n + 2)^2}{4} \\
+        &= \frac{(n + 1)^2(n + 2)^2}{4} \\
+        \Aboxed{&= \left[\frac{(n + 1)(n + 2)}{2}\right]^2}
+    \end{align*}
+\end{poof}
+
+\subsection{Multiples of n up to k}
+
+\begin{theorem}[Number of Multiples of n up to k]
+    To find the number of positive integers divisible by $n$ up to $k$ is given by
+
+    $$\left\lfloor \frac{k}{n} \right\rfloor$$
+
+    This DOES NOT include 0, so for all whole numbers it would be
+
+    $$\left\lfloor \frac{k}{n} \right\rfloor + 1$$
+\end{theorem}
+
+\subsection{Pigeonhole Principle}
+
+\begin{definition}[Pigeonhole Principle]
+    If there are $n$ boxes and more than $n$ objects places in these boxes, at least one box contains more than one object.
+
+    At least one box will contain 
+
+    $$\lceil \frac{k}{n} \rceil$$
+
+    objects
+\end{definition}
+
+\subsection{Permutaions and Combinations}
+
+\subsubsection{Permutations}
+
+\begin{definition}[Permutation]
+    A \yellowbox{Permutation} is one specific way a group of items can be arranged where order matters. 
+    In general, if we have $n$ objects and we want to arrange $k$ of them, then the number of ways is given by
+
+    $$\prescript{}{n}{P}_k = \frac{n!}{(n - k)!}$$
+\end{definition}
+
+\subsubsection{Combinations}
+
+\begin{definition}[Combination]
+    A \yellowbox{Combinaton} is just an arrangement where order does not matter.
+
+    The number of combinations of $k$ items taken from $n$ items is
+
+    $${n \choose k} = \prescript{}{n}{C}_k = \frac{n!}{k!(n - k)!}$$
+
+    You would say "n choose k"
+
+    Think of this as "how many ways can you arrange $k$ things in $n$ slots"
+\end{definition}
+
+\subsection{Binomial Theorem}
+
+\begin{theorem}[Binomial Theorem]
+    
+    $$\text{For } n = 0, 1, 2, \ldots, (a + b)^n = \sum_{k = 0}^{n} {n \choose k} a^{n - k}b^k$$
+
+\end{theorem}
+
+\subsection{Sum of Combinations}
+
+\begin{theorem}[Sum of Combinations]
+    $$\text{For } n = 0, 1, 2, \ldots, \sum_{k = 0}^{n}{n \choose k} = 2^n$$
+\end{theorem}
+
+\subsection{Arrangements of Letters}
+
+For a word with $k$ letters, where each letter has $n_i$ appearances, the numbers of arrangements is given by
+
+$$ \frac{k!}{n_1! \cdot n_2! \cdot \ldots \cdot n_k!}$$
+
+You basically just do
+
+$$ {k \choose n_1} \cdot {k - n_1 \choose n_2} \cdot {k - n_1 - n_2 \choose n_3} \cdot \ldots$$
+
+For a word with all unique letters, it's just
+
+$$k!$$
+
+\subsection{Stars and Bars}
+
+When you have $n$ slots and $k$ options for each slot, the number of possible combinations is 
+
+$$\frac{(n + k - 1)!}{n! \cdot (k - 1)!} = {n + k - 1 \choose k - 1}$$
+
+Another way of thinking of this is stars and bars
+
+Let
+
+\begin{align*}
+    s: &\; \text{Stars, num slots} \\
+    b: &\; \text{Bars, options - 1} \\
+\end{align*}
+
+Then the combinations is
+
+$$\frac{(s + b)!}{s! \cdot b!} = {s + b \choose b}$$
+
+\subsection{Binomial Probability}
+
+Given a limited event (ie 2 outcomes) with probability $p$,
+
+$$p(k \text{ successes in } n \text{ trials}) = {n \choose k} \cdot p^k \cdot (1 - p)^{n - k}$$
+
+\subsection{Expected Value (EV)}
+
+$$EV = \sum (\text{probability}) (\text{payoff})$$
+
+% ========== End the document ==========
+\end{document}

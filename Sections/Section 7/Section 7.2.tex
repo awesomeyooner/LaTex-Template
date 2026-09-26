@@ -1,0 +1,109 @@
+% Point to the main file
+\documentclass[../../Main.tex]{subfiles}
+
+% ========== Start the document ==========
+\begin{document}
+
+\section{Section 7.2 - Probability Theory}
+
+We didn't actually go over much
+
+\subsection{Event Independence}
+
+\begin{definition}[Event Independence]
+    If $H$ and $Q$ are events, we say $H$ and $Q$ are \yellowbox{independent} if and only if
+
+    $$P(H \cap Q) = P(H) \cdot P(Q)$$
+\end{definition}
+
+\begin{example}
+    A card is selected from a standard 52 deck. Determine the probability that
+
+    \begin{enumerate}
+        \item
+        {
+            The card is a heart
+
+            \begin{align*}
+                P(\heartsuit) &= \frac{\text{\# hearts}}{\text{\# cards}} \\
+                &= \frac{13}{52} \\
+                &= \boxed{\frac{1}{4}} \\
+            \end{align*}
+        }
+        \item 
+        {
+            The card is a queen
+
+            \begin{align*}
+                P(\text{Queen}) &= \frac{\text{\# queens}}{\text{\# cards}} \\
+                &= \frac{4}{52} \\
+                &= \boxed{\frac{1}{13}} \\
+            \end{align*}
+        }
+        \item 
+        {
+            The card is a heart and a queen
+
+            \begin{align*}
+                P(\heartsuit \text{ and queen}) &= \frac{\text{\# heart and queen}}{\text{\# cards}} \\
+                &= \frac{1}{52} 
+            \end{align*}
+
+            Notice that 
+
+            \begin{align*}
+                P(\heartsuit \text{ and queen}) &= P(\heartsuit) \cdot P(\text{queen}) \\
+            \end{align*}
+
+            This means that $H$ and $Q$ are \textbf{independent}
+        }
+    \end{enumerate}
+\end{example}
+
+I would put the examples leading up to the derivation of this next thing but I'm too lazy
+
+\subsection{Binomial Probability}
+
+\begin{definition}[Binomial Probability]
+    Given a limited event (ie 2 outcomes) with probability $p$, Then 
+
+    $$P(k \text{ successes in } n \text{ trials}) = {n \choose k} \; p^k \cdot (1 - p)^{n - k}$$
+\end{definition}
+
+\begin{example}
+    Let's do some examples
+
+    A biased coin has probability of 0.51 for landing heads when flipped. Determine the probability of the coin landing on heads exactly 6 times when the coin is flipped 10 times
+
+    \begin{align*}
+        p &= 0.51 \\
+        k &= 6 \tag{successes} \\
+        n &= 10 \\
+        \\
+        P(6 \text{ successes in } 10 \text{ trials}) &= {10 \choose 6} \; (0.51)^6 \cdot (1 - 0.51)^{10 - 6} \\
+        &\approx \boxed{0.213}
+    \end{align*}
+\end{example}
+
+\begin{example}
+    Let's do another
+
+    Determine the probability of rolling a 12 \textbf{at least once} when a pair of dice is rolled 20 times.
+
+    Since we have "at least" let's do the opposite
+
+    \begin{align*}
+        P(\text{never rolling 12 out of 20}) &= {20 \choose 0} \; \left(\frac{1}{36}\right)^0 \cdot \left(\frac{35}{36}\right)^{20} \\
+        &\approx 0.569 \ldots \\
+    \end{align*}
+
+    \begin{align*}
+        P(\text{rolling 12 at least once out of 20}) &= 1 - P(\text{never rolling 12 out of 20}) \\
+        &\approx 1 - 0.569 \\
+        &\approx \boxed{0.431} \\
+    \end{align*}
+
+\end{example}
+
+% ========== End the document ==========
+\end{document}

@@ -1,0 +1,85 @@
+% Point to the main file
+\documentclass[../../Main.tex]{subfiles}
+
+% ========== Start the document ==========
+\begin{document}
+
+\section{Section 6.4 - Binomial Identities}
+
+\begin{align*}
+    (a + b)^0 &= 1 \\
+    (a + b)^1 &= 1a + 1b \\
+    (a + b)^2 &= 1a^2 + 2a^1b^1 + 1b^2 \\
+    (a + b)^3 &= 1a^3 + 3a^2b^1 + 3a^1b^2 + 1b^3 \\
+    (a + b)^4 &= 1a^4 + 4a^3b^1 + 6a^2b^2 + 4a^1b^3 + 1b^4 \\
+    (a + b)^5 &= 1a^5 + 5a^4b^1 + 10a^3b^2 + 10a^2b^3 + 5a^1b^4 + 1b^5 \\
+    &\vdots \\
+    (a + b)^{10} &= 1a^{10} + \underbrace{10}_{10 \choose 9}a^9b^1 + \underbrace{45}_{10 \choose 8}a^8b^2 + \underbrace{120}_{10 \choose 7}a^7b^3 + \underbrace{210}_{10 \choose 6} a^6b^4 + \underbrace{252}_{10 \choose 5}a^5b^5 + \underbrace{210}_{10 \choose 4}a^4b^6 + 120a^3b^7 + 45a^2b^8 + 10 a^1b^9 + 1b^10 \\
+\end{align*}
+
+For all of these, it's 10 choose either the power of $a$ or the power of $b$. This is because the power is essentially the number of arrangements of $aaabbbbbbb$ for example
+
+This brings us to our next theorem
+
+\subsection{Binomial Theorem}
+
+\begin{theorem}[Binomial Theorem]
+    
+    $$\text{For } n = 0, 1, 2, \ldots, (a + b)^n = \sum_{k = 0}^{n} {n \choose k} a^{n - k}b^k$$
+
+    I would put the proof here but it's long and I'm lazy
+
+\end{theorem}
+
+\begin{example}
+    \begin{enumerate}
+        \item 
+        {
+            A pizza parlor has 10 toppings. How many pizzas are possible if any number of toppings can be chosen but none can be repeated?
+
+            \begin{align*}
+                \underbrace{\text{\# 0 toppings}}_{10 \choose 0} &+
+                \underbrace{\text{\# 1 topping}}_{10 \choose 1} +
+                \ldots +
+                \underbrace{\text{\# 0 toppings}}_{10 \choose 10} \\
+                &= \sum_{k = 0}^{10} {10 \choose k} \underbrace{1^{10 - k} \cdot 1^k}_{\text{to use B.T}} \\
+                &= (1 + 1)^{10} \\
+                &= 2^{10} \\
+                &= \boxed{1024} \\
+            \end{align*}
+        }
+
+        \item
+        {
+            How many bit strings are there of length 10?
+
+            $$\underline{2} \cdot \underline{2} \cdot \underline{2} \cdot \underline{2} \cdot \underline{2} \cdot \underline{2} \cdot \underline{2} \cdot \underline{2} \cdot \underline{2} \cdot \underline{2} = 2^{10} = \boxed{1024}$$
+
+            or
+
+            Place $k$ $0$'s in the bit string.
+
+            $${10 \choose 0} + {10 \choose 1} + {10 \choose 2} + \ldots + {10 \choose 10} = (1 + 1)^{10} = 2^{10} = 1024$$
+        }
+
+        \item
+        {
+            How many subsets does a set with 10 elements have?
+
+            uhhhh same thing
+        }
+    \end{enumerate}
+\end{example}
+
+\subsection{Sum of Combinations}
+
+\begin{theorem}[Sum of Combinations]
+    $$\text{For } n = 0, 1, 2, \ldots, \sum_{k = 0}^{n}{n \choose k} = 2^n$$
+\end{theorem}
+
+\begin{example}
+    uhhhhh just use the formula
+\end{example}
+
+% ========== End the document ==========
+\end{document}
