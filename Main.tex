@@ -14,7 +14,7 @@
 
 
 % Headers
-\title{\Huge{Math 6A}\\Discrete Math}
+\title{\Huge{LaTex 101}\\How to use LaTex}
 \author{\huge{Aaron Yoon}}
 \date{}
 
@@ -22,7 +22,8 @@
 \begin{document}
 
 \maketitle
-\newpage% or \cleardoublepage
+% or \cleardoublepage
+\newpage
 % \pdfbookmark[<level>]{<title>}{<dest>}
 \pdfbookmark[section]{\contentsname}{toc}
 \tableofcontents
@@ -32,13 +33,9 @@
 % Add Sections
 \subfile{Sections/Section 1/Section 1.tex}
 \subfile{Sections/Section 2/Section 2.tex}
-\setcounter{chapter}{3}
-\subfile{Sections/Section 4/Section 4.tex}
-\subfile{Sections/Section 5/Section 5.tex}
-\subfile{Sections/Section 6/Section 6.tex}
-\subfile{Sections/Section 7/Section 7.tex}
-\subfile{Sections/Section 8/Section 8.tex}
-\subfile{Sections/Review/Exam Reviews.tex}
+
+% Use this to skip a counter (like if you have Chapter 1 and 3, but not 2)
+% \setcounter{chapter}{3}
 
 % End of Document
 \end{document}

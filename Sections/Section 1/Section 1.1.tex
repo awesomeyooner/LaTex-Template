@@ -4,7 +4,9 @@
 % ========== Start the document ==========
 \begin{document}
 
-\section{Section 1.1 - Intro to Logic}
+\section{Section 1.1 - Using Commands and Theorems}
+
+Everything here will just be an example
 
 \subsection{Propositions}
 
@@ -53,19 +55,6 @@
     \end{enumerate}
 \end{example}
 
-\begin{definition}[Compound Proposition]
-    A \textbf{compound proposition} is a proposition that contains two or more \textbf{atomic} propositions. In the previous example, the two are:
-
-    \begin{enumerate}
-        \item There are 75 people in this room
-        \item The sky is purple
-    \end{enumerate}
-\end{definition}
-
-\begin{definition}[Atomic Proposition]
-    An \textbf{atomic proposition} is a proposition that cannot be broken down further into seperate propositions
-\end{definition}
-
 \begin{note}
     We denote seperate propositions as: $p , q, r$
 \end{note}
@@ -82,197 +71,6 @@
     Exclusive Or (XOR) & $p \oplus q$ & "p or q, but not both" & \TRUE when \textbf{only one} is \TRUE \\
 
 \end{tablewithheader}
-
-Here are the truth tables of each operation
-
-\begin{tablewithheader}
-    { |c|c|c|c|c|c| }
-    { $p$ & $q$ & $p \lor q$ & $p \land q$ & $\neg p$ & $p \oplus q$ }
-
-    \T & \T & \T & \T & \F & \F\\
-    \T & \F & \T & \F & \F & \T \\
-    \F & \T & \T & \F & \T & \T \\
-    \F & \F & \F & \F & \T & \F \\
-
-\end{tablewithheader}
-
-\begin{example}[Logical Operators Examples]
-
-    Let $p$ be the proposition "a is odd" and $q$ be "a is even" where $a = 3$ \\
-
-    \begin{center}
-        $p$: \; 3 is odd = \TRUE
-        \\
-        $q$: \; 9 is even = \FALSE
-    \end{center}
-
-    Write the following Propositions:
-
-    \begin{enumerate}
-        \item $\neg p$ \; (3 is even)
-        \begin{solution}
-            \FALSE
-        \end{solution}
-
-        \item $\neg q$ \; (9 is odd)
-        \begin{solution}
-            \TRUE
-        \end{solution}
-
-        \item $p \lor q$ \; (3 is odd or 9 is even)
-        \begin{solution}
-            \TRUE since 3 is odd
-        \end{solution}
-
-        \item $p \land q$ \; (3 is odd and 9 is even)
-        \begin{solution}
-            \FALSE since 9 is not even
-        \end{solution}
-
-        \item $p \land \neg q$ \; (3 is odd and 9 is odd)
-        \begin{solution}
-            \TRUE since both 3 is odd and 9 is odd
-        \end{solution}    
-    \end{enumerate}
-
-\end{example}
-
-\subsection{Conditionals}
-
-\begin{tablewithheader}
-{ |c|c|c|c| }
-{ Name & Notation & Phrasing & Truth Value }
-    Conditional & $p \implies q $ & "p implies q" or "if p then q" & Always True except when $T \implies F $ \\
-    Biconditional & $p \iff q$ & "p if and only if q" & True when $p$ and $q$ are the same value \\
-\end{tablewithheader}
-
-Here are the truth tables
-
-\begin{tablewithheader}
-{ |c|c|c|c| }
-{  $p$ & $q$ & $p \implies q$ & $p \iff q$ }
-    \T & \T & \T & \T \\
-    \T & \F & \F & \F \\
-    \F & \T & \T & \F \\
-    \F & \F & \T & \T \\
-\end{tablewithheader}
-
-\subsection{Logical Transforms}
-
-\begin{tablewithheader}
-{ |c|c|c|c| }
-{ Name & Original & Output }
-    Converse (swap) & $p \implies q$ & $q \implies p$ \\
-    Inverse (negate) & $p \implies q$ & $\neg p \implies \neg q$ \\
-    Contrapositive (converse + inverse) & $p \implies q$ & $\neg q \implies \neg p$ \\
-\end{tablewithheader}
-
-Here are the truth tables
-
-\begin{tablewithheader}
-{ |c|c|s|c|c|s| }
-{ $p$ & $q$ & $p \implies q$ & $\neg q$ & $\neg p$ & $\neg q \implies \neg p$ }
-    \TRUE & \TRUE & \TRUE & \FALSE & \FALSE & \TRUE \\
-    \TRUE & \FALSE & \FALSE & \TRUE & \FALSE & \FALSE \\
-    \FALSE & \TRUE & \TRUE & \FALSE & \TRUE & \TRUE \\
-    \FALSE & \FALSE & \TRUE\ & \TRUE & \TRUE & \TRUE \\
-\end{tablewithheader}
-
-\begin{proposition}[Contrapositive Correlation]
-    From the truth table, we see that the converse is logically equivalent to the original expression, so
-
-    \begin{center}
-        $p \implies q \equiv \neg q \implies \neg p$
-    \end{center}
-\end{proposition}
-
-\begin{definition}[Logical Equivalence]
-    Two propositions are \textbf{logically equivalent} if they have the same truth tables
-\end{definition}
-
-\begin{example}[Logical Transforms Examples]
-    Let $p$ be the proposition "it's cold outside" and $q$ be "it's snowing outside"
-    
-    \begin{enumerate}
-
-        \item $p \implies q$ (if it's cold outside, then it's snowing outside)
-        \begin{solution}
-            \FALSE
-        \end{solution}
-        
-        \item $q \implies q$ (converse) (if it's snowing outside, then it's cold outside)
-        \begin{solution}
-            \TRUE
-        \end{solution}
-        
-        \item $\neg p \implies \neg q$ (inverse) (if it's not cold outside, then it's not snowing)
-        \begin{solution}
-            \TRUE
-        \end{solution}
-        
-        \item $\neg q \implies \neg p$ (contrapositive) (if it's not snowing outside, then it's not cold outside)
-        \begin{solution}
-            \FALSE
-        \end{solution}
-
-    \end{enumerate}
-\end{example}
-
-\begin{example}[More Examples with Logical Transforms]
-
-    Let $p$ be the proposition "The triangle is equilateral" and $q$ be "The triangle is equiangular"
-
-    \begin{enumerate}
-
-        \item $p \implies q$ (if the triangle is equilateral, then triangle is equiangular")
-        \begin{solution}
-            \TRUE
-        \end{solution}
-    
-        \item $q \implies p$ (converse) (if the triangle is equiangular, then the triangle is equilateral)
-        \begin{solution}
-            \TRUE
-        \end{solution}
-    
-        \item $\neg p \implies \neg q$ (inverse) (if the triangle is not equiangular, then the triangle is not equilateral)
-        \begin{solution}
-            \TRUE
-        \end{solution}
-    
-        \item $\neg q \implies \neg p$ (contrapositive) (if the triangle is not equiangular then the triangle is not equilateral)
-        \begin{solution}
-            \TRUE
-        \end{solution}
-
-    \end{enumerate}
-\end{example}
-
-\begin{example}[Truth Table Examples]
-
-    \;
-
-    \begin{enumerate}
-        \item
-            $\neg p \lor q$
-            
-            \begin{tablewithheader}
-            { |c|c|c|c| }
-            { $p$ & $q$ & $\neg p$ & $\neg p \lor q$ }
-            
-                \T & \T & \F & \T \\
-                \T & \F & \F & \F \\
-                \F & \T & \T & \T \\
-                \F & \F & \T & \T \\
-            
-            \end{tablewithheader}
-
-        \item
-            $(p \implies r) \land (q \implies r)$
-
-            im too lazy to fill this out
-        
-    \end{enumerate}
-\end{example}
 
 % ========== End the document ==========
 \end{document}
