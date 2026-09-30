@@ -1,0 +1,40 @@
+\documentclass{report}
+
+% Contains all the "\usepackage" commands
+\input{include/preamble.tex}
+
+% Contains all the "\newtheorem" commands
+\input{include/theorems.tex}
+
+% Contains all the "\newcommand" commands
+\input{include/macros.tex}
+
+% Contains misc fonts
+\input{include/letterfonts.tex}
+
+
+% Headers
+\title{\Huge{LaTex 101}\\How to use LaTex}
+\author{\huge{Aaron Yoon}}
+\date{\today}
+
+% Start the Document
+\begin{document}
+
+\maketitle
+% or \cleardoublepage
+\newpage
+% \pdfbookmark[<level>]{<title>}{<dest>}
+\pdfbookmark[section]{\contentsname}{toc}
+\tableofcontents
+
+\pagebreak
+
+% Add Sections
+% \subfile{Sections/Section 1/Section 1.tex}
+
+% Use this to skip a counter (like if you have Chapter 1 and 3, but not 2)
+% \setcounter{chapter}{3}
+
+% End of Document
+\end{document}
