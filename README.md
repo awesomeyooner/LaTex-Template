@@ -1,6 +1,8 @@
 # LaTex-Template
 Just a place to store the template I use for LaTex lecture notes
 
+## Folder Directory
+
 ## Usage
 
 I use this in `VSCode` with the `LaTex-Workshop` plugin.
