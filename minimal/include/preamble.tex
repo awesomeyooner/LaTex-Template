@@ -11,9 +11,25 @@
 \usepackage{color} 
 \usepackage{cancel}
 \usepackage{longdivision}
+
+% Minted for Code Blocks
 \usepackage{minted}
 % Use VSCode coloring
 \usemintedstyle{vs}
+
+% Set minted default settings
+\setminted{
+    frame=lines,
+    framesep=2mm,
+    framerule=1pt,
+    rulecolor=\color{black},
+    bgcolor=gray!20,
+    baselinestretch=1.2,
+    fontsize=\footnotesize,
+    % linenos=true,
+    breaklines=true
+}
+
 
 % Change the Margins
 \usepackage[margin=1in]{geometry}
