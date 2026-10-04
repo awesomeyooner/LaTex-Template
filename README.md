@@ -5,6 +5,14 @@ Just a place to store the template I use for LaTex lecture notes
 
 ```c++
 .
+├── homework // Template for creating homework (Q1, Q1a, Q1b, etc)
+└── notes // Template for creating notes (has sections / chapters)
+```
+
+Within either `/homework` or `/notes`, you'll find three set of templates
+
+```c++
+. // /homework or /notes
 ├── full // Full example of notes
 ├── minimal // Barebones example with only Main.tex and preamble (plus custom defs)
 └── semi-minimal // Minimal but with Sections and Image folders added
@@ -21,6 +29,8 @@ Here's the contents of these folders
 ├── Sections // Child .tex files for different sections / chapters of notes
 └── template // Copy-paste contents for Main.tex and Section children and parents
     ├── Main.tex // Example of a main tex file
+    ├── Question Parent.tex // (Only in /homework) ex: Question 1 
+    ├── Question Child.tex // (Only in /homework) ex: Question 1a 
     ├── Section Child.tex // ex: Section 1.2 
     └── Section Parent.tex // ex: Section 1
 ```
