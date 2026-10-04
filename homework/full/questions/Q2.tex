@@ -1,0 +1,126 @@
+% Point to the main file
+\documentclass[../Main.tex]{subfiles}
+
+% Start the document
+\begin{document}
+
+\begin{alphabet}
+    \item 
+    {
+        We can split this into 
+
+        \begin{center}
+            total = 0 numerals + 1 numeral + at least 2 numerals
+        \end{center}
+
+        \begin{center}
+            at least 2 numerals = total - 0 numerals - 1 numeral
+        \end{center}
+
+        Let's start by finding the total. Since there are no restrictions, each position has 36 options
+
+        \begin{align*}
+            total &= \underline{36} \cdot \underline{36} \cdot \underline{36} \cdot \underline{36} \cdot \underline{36} \cdot \underline{36} \cdot \underline{36} = 36^7 
+        \end{align*}
+
+        Now for 0 numerals, the restriction is that each character has to be an uppercase letter, so each position has 26 options
+
+        \begin{align*}
+            0 \text{ numerals} &= \underline{26} \cdot \underline{26} \cdot \underline{26} \cdot \underline{26} \cdot \underline{26} \cdot \underline{26} \cdot \underline{26} = 26^7
+        \end{align*}
+
+        Lastly, 1 exact numeral means only one slot has 10 options, but out of 7 slots. So we multiply the count for 1 numeral by the ways we can put that one numeral. The rest of the slots MUST be letters
+
+        \begin{align*}
+            1 \text{ numeral} = {7 \choose 1} \cdot \underline{10} \cdot \underline{26} \cdot \underline{26} \cdot \underline{26} \cdot \underline{26} \cdot \underline{26} \cdot \underline{26} &= 7 \cdot 10 \cdot 26^6 \\
+            &= 70 \cdot 26^6
+        \end{align*}
+
+        Using our equation from above,
+
+        \begin{align*}
+            \text{at least 2 numerals} = \boxed{6^7 - 26^7 - 70 \cdot 26^6}
+        \end{align*}
+    }
+    
+    \item
+    {
+        First, let's find out the number of license plates with MILES being at the start
+
+        \begin{align*}
+            \underbrace{1}_M \cdot \underbrace{1}_I \cdot \underbrace{1}_L \cdot \underbrace{1}_E \cdot \underbrace{1}_S \cdot 36 \cdot 36 = 36^2
+        \end{align*}
+
+        Now let's see how many times we can arrange MILES with 7 slots
+
+        \begin{enumerate}
+            \item MILESxx
+            \item xMILESx
+            \item xxMILES
+        \end{enumerate}
+
+        Since there's three ways to putting MILES into 7 characters, we can just multiple $36^2$ by 3 to get
+
+        $$\boxed{3 \cdot 36^2}$$
+    }
+
+    \item
+    {
+        We can think of this as:
+
+        \begin{enumerate}
+            \item choose 3 different characters out of 36
+            \item choose 3 different spots of 7 for the first character
+            \item choose 3 spots out of 4 for the second character
+            \item choose 1 spot out of 1 for the last character
+        \end{enumerate}
+
+        Mathematically, this ends up being
+
+        \begin{align*}
+            \boxed{{36 \choose 3} \cdot {7 \choose 3} \cdot {4 \choose 3} \cdot {1 \choose 1}}
+        \end{align*}
+    }
+
+    \item 
+    {
+        Like the last one, we can think of this as
+
+        \begin{enumerate}
+            \item choose 3 different numerals out of 10
+            \item choose 1 letter out of 26
+            \item choose 3 spots out of 7 to place the numerals 
+            \item permute the 3 numbers
+            \item choose 4 spots of out 4 to place the lettters (basically just put the letters where the numbers aren't)
+        \end{enumerate}
+
+        This ends up being
+
+        \begin{align*}
+            & {10 \choose 3} \cdot {26 \choose 1} \cdot {7 \choose 3} \cdot \prescript{}{3}{P}_3 \cdot {4 \choose 4} \\
+            &= \boxed{{10 \choose 3} \cdot {26 \choose 1} \cdot {7 \choose 3} \cdot 3!} \\
+        \end{align*}
+    }
+
+    \item
+    {
+        For this one, since alphabetical order means A-Z (1 - 26) and there's 7 letters, the start can only be up to
+        
+        $$26 - 7 + 1 = 20 \; (\text{T})$$
+
+        We can think of the first character essentially controlling the entire string, so in reality all we need to do is choose
+        a valid first letter.
+
+        Using the range
+
+        $$\left[1, 20 \right]$$
+
+        We have 20 letters to choose from, means our answer is just
+
+        $$\boxed{20}$$
+    }
+
+\end{alphabet}
+
+% End the document
+\end{document}

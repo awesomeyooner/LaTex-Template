@@ -1,0 +1,31 @@
+\documentclass{report}
+
+% Contains all the "\usepackage" commands
+\input{include/preamble.tex}
+
+% Contains all the "\newtheorem" commands
+\input{include/theorems.tex}
+
+% Contains all the "\newcommand" commands
+\input{include/macros.tex}
+
+% Contains misc fonts
+\input{include/letterfonts.tex}
+
+\pagestyle{fancy}          % Enables the fancy page style
+\fancyhf{}                 % Clears default headers and footers
+
+% Header Configuration
+\lhead{Class Name}   % Appears on the top left
+\chead{HW\#}      % Appears on the top center
+\rhead{John Doe}           % Appears on the top right (prints current page number)
+
+% Start the Document
+\begin{document}
+
+\begin{enumerate}
+    \item \subfile{questions/Q1.tex}
+\end{enumerate}
+
+% End of Document
+\end{document}

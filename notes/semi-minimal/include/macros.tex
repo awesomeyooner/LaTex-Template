@@ -1,0 +1,228 @@
+% Colored Text
+\newcommand{\redtext}[1]{\textcolor{red}{#1}}
+\newcommand{\orangetext}[1]{\textcolor{orange}{#1}}
+\newcommand{\yellowtext}[1]{\textcolor{yellow}{#1}}
+\newcommand{\greentext}[1]{\textcolor{green}{#1}}
+\newcommand{\bluetext}[1]{\textcolor{blue}{#1}}
+\newcommand{\purpletext}[1]{\textcolor{purple}{#1}}
+\newcommand{\pinktext}[1]{\textcolor{pink}{#1}}
+\newcommand{\violettext}[1]{\textcolor{violet}{#1}}
+
+% Highlighted Text
+\newcommand{\redbox}[1]{\colorbox{red}{#1}}
+\newcommand{\orangebox}[1]{\colorbox{orange}{#1}}
+\newcommand{\yellowbox}[1]{\colorbox{yellow}{#1}}
+\newcommand{\greenbox}[1]{\colorbox{green}{#1}}
+\newcommand{\bluebox}[1]{\colorbox{blue}{\textcolor{white}{#1}}}
+\newcommand{\purplebox}[1]{\colorbox{purple}{\textcolor{white}{#1}}}
+\newcommand{\pinkbox}[1]{\colorbox{pink}{#1}}
+\newcommand{\violetbox}[1]{\colorbox{violet}{#1}}
+
+%%% Center Text %%%
+\newcommand{\centertext}[1]
+{%
+    \begin{center}
+        #1
+    \end{center}
+}
+
+% ===== Tables =====
+
+% Make a table with a header
+% #1 is |c|c|c|
+% #2 is H1 & H2 & H3 \\
+% Body is B1 & B2 & B3 \\
+\newenvironment{tablewithheader}[2]
+{% begin
+    \begin{center}
+
+        \begin{tabular}{#1}
+
+            % Header
+            \hline
+            #2 \\ [0.5ex]
+            \hline
+
+            % Body
+            % =====
+            \hline
+
+}
+{% end
+
+            \hline
+            % =====
+
+        \end{tabular}
+    \end{center}
+}
+
+% Make a table with a header aligned to the left
+% #1 is |c|c|c|
+% #2 is H1 & H2 & H3 \\
+% Body is B1 & B2 & B3 \\
+
+% EXAMPLE
+% \begin{tablewithheader}
+% { |c|c|c| }
+% { Col A & Col B & Col C }
+
+%     1 & 2 & 3 \\
+%     a & b & c \\ 
+%     x & y & z \\
+
+% \end{tablewithheader}
+
+\newenvironment{tablewithheaderleft}[2]
+{% begin
+
+    \begin{tabular}{#1}
+
+        % Header
+        \hline
+        #2 \\ [0.5ex]
+        \hline
+
+        % Body
+        % =====
+        \hline
+
+}
+{% end
+
+        \hline
+        % =====
+
+    \end{tabular}
+}
+
+% Make a table without a header
+% #1 is |c|c|c|
+% Body is B1 & B2 & B3 \\
+\newenvironment{tablewithoutheader}[1]
+{% begin
+    \begin{center}
+
+        \begin{tabular}{#1}
+
+            % Body
+            % =====
+            \hline
+
+}
+{% end
+
+            \hline
+            % =====
+
+        \end{tabular}
+    \end{center}
+}
+
+% FFFF00 (yellow)
+% FFFF9E (yellow)
+% When using |c|c|c| replace "c" with "s" for a highlighted column
+\newcolumntype{s}{>{\columncolor[HTML]{FFFF9E}} c}
+
+% ===== Lists =====
+
+% Numbered List
+% 
+% \begin{enumerate}
+%     \item ...
+% \end{enumerate}
+
+% Bullet-point List
+% 
+% \begin{itemize}
+%     \item ...
+% \end{itemize}
+
+% Alphabet List
+\newlist{alphabet}{enumerate}{1}
+\setlist[alphabet]{label=(\alph*)}
+
+% Roman Numeral List
+\newlist{romanlist}{enumerate}{1}
+\setlist[romanlist]{label=(\roman*)}
+
+% ===== Math =====
+
+% Multi-lined Math
+% 
+%   - Everything aligns at &
+% 
+% \begin{align*}
+%     a + b &= c \\
+%     &= 2 + 2 \tag{ This is a tag! } \\
+%     &= 4 \\
+% \end{align*}
+
+% ========== Set Notation ==========
+
+% Italics Shorthand
+\newcommand{\mathset}[1]
+{
+    \ensuremath{\mathit{#1}}
+}
+
+% Brackets Shorthand
+\newcommand{\mathinset}[1]
+{
+    \ensuremath{\{ #1 \}}
+}
+
+% Define colors for set notation
+\newcommand{\definesetcolors}{%
+
+    % color of set of Natural numbers
+    \colorlet{colN}{Red!60}
+    % color of set of Whole Numbers
+    \colorlet{colW}{OrangeRed!60}
+    % color of set of Integers
+    \colorlet{colZ}{Orange!60}
+    % color of set of Rational numbers
+    \colorlet{colQ}{Gold!60}
+    % color of set of Real numbers
+    \colorlet{colR}{ForestGreen!50}
+    % color of set of Complex numbers
+    \colorlet{colC}{CornflowerBlue!80}
+    % color of set of Hypercomplex numbers
+    \colorlet{colH}{BlueViolet!50}
+    % color of set of Transcendental numbers
+    % \colorlet{colT}{Green!30}
+
+    % center coordinate of Natural numbers
+    \coordinate (oN) at (0.0, 0.0);
+    % center coordinate of Whole Numbers
+    \coordinate (oW) at (0.5, 0.5);
+    % center coordinate of Integers
+    \coordinate (oZ) at (1.0, 1.0);
+    % center coordinate of Rational numbers
+    \coordinate (oQ) at (1.5, 1.5);
+    % center coordinate of Real numbers
+    \coordinate (oR) at (2.0, 2.0);
+    % center coordinate of Complex numbers
+    \coordinate (oC) at (2.5, 2.5);
+
+    % set of Natural numbers
+    \def\setN{(oN) ellipse (2.5 and 1.0)}
+    % set of Whole numbers
+    \def\setW{(oW) ellipse (3.5 and 2.0)}
+    % set of Integers numbers
+    \def\setZ{(oZ) ellipse (4.5 and 3.0)}
+    % set of Rational numbers
+    \def\setQ{(oQ) ellipse (5.5 and 4.0)}
+    % set of Real numbers
+    \def\setR{(oR) ellipse (6.5 and 5.0)}
+    % set of Complex numbers
+    \def\setC{(oC) ellipse (7.5 and 6.0)}
+}
+
+% ========== Discrete Specific ==========
+
+\newcommand{\T}{\greentext{T}}
+\newcommand{\F}{\redtext{F}}
+
+\newcommand{\TRUE}{\greentext{TRUE}}
+\newcommand{\FALSE}{\redtext{FALSE}}

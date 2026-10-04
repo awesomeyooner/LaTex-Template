@@ -1,0 +1,60 @@
+% Point to the main file
+\documentclass[../Main.tex]{subfiles}
+
+% Start the document
+\begin{document}
+
+We have
+
+$$\prod_{k = 1}^{n} (1 + \frac{1}{k}) = n + 1$$
+
+\begin{poof}
+
+    BASE CASE:
+
+    Let $n = 1$
+
+    \begin{align*}
+        \prod_{k = 1}^{n} (1 + \frac{1}{k}) = \prod_{k = 1}^{1} (1 + \frac{1}{k}) &= 1 + \frac{1}{1} \\
+        &= 1 + 1 \\
+        &= \boxed{2} \\
+    \end{align*}
+
+    \begin{align*}
+        n + 1 = 1 + 1 &= \boxed{2}
+    \end{align*}
+
+    \begin{align*}
+        2 &= 2 \\
+        \therefore n &= 1 \text{ holds true}
+    \end{align*}
+
+    INDUCTIVE CASE:
+
+    We assume
+
+    $$\prod_{k = 1}^{n} (1 + \frac{1}{k}) = n + 1$$
+
+    We prove:
+
+    \begin{align*}
+        \prod_{k = 1}^{n + 1} (1 + \frac{1}{k}) &= (n + 1) + 1 \\
+        &= n + 2
+    \end{align*}
+
+    \begin{align*}
+        \prod_{k = 1}^{n + 1} (1 + \frac{1}{k}) &= \prod_{k = 1}^{n} (1 + \frac{1}{k}) \cdot (1 + \frac{1}{n + 1}) \\
+        &= (n + 1) \cdot (1 + \frac{1}{n + 1}) \\
+        &= (n + 1) \cdot \frac{n + 1}{n + 1} \\
+        &= (n + 1) + 1 \\
+        &= \boxed{n + 2}
+    \end{align*}
+
+    \begin{align*}
+        n + 2 = n + 2 \checkmark
+    \end{align*}
+
+\end{poof}
+
+% End the document
+\end{document}

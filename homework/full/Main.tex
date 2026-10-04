@@ -1,0 +1,35 @@
+\documentclass{report}
+
+% Contains all the "\usepackage" commands
+\input{include/preamble.tex}
+
+% Contains all the "\newtheorem" commands
+\input{include/theorems.tex}
+
+% Contains all the "\newcommand" commands
+\input{include/macros.tex}
+
+% Contains misc fonts
+\input{include/letterfonts.tex}
+
+\pagestyle{fancy}          % Enables the fancy page style
+\fancyhf{}                 % Clears default headers and footers
+
+% Header Configuration
+\lhead{CSE-021}   % Appears on the top left
+\chead{HW1}      % Appears on the top center
+\rhead{Aaron Yoon}           % Appears on the top right (prints current page number)
+
+
+% Start the Document
+\begin{document}
+
+\begin{enumerate}
+    \item \subfile{questions/Q1.tex}
+    \item \subfile{questions/Q2.tex}
+    \item \subfile{questions/Q3.tex}
+    \item \subfile{questions/Q4.tex}
+\end{enumerate}
+
+% End of Document
+\end{document}

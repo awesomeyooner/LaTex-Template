@@ -1,0 +1,107 @@
+% Point to the main file
+\documentclass[../Main.tex]{subfiles}
+
+% Start the document
+\begin{document}
+
+\begin{alphabet}
+    
+    \item
+    {
+        The number of occurences greater than one for each letter of INCLUSIONEXCLUSION, you get
+
+        \begin{itemize}
+            \item I = 3
+            \item N = 3
+            \item C = 2
+            \item L = 2
+            \item U = 2
+            \item S = 2
+            \item O = 2
+        \end{itemize}
+
+        To find the number of arrangements with each duplicate letter not being unique, we can do
+
+        \begin{align*}
+            \text{\# arrangements without uniqueness} = \frac{\text{total arrangements w/ each letter being unique}}{\text{\# of permutations of each duplicate letter}}
+        \end{align*}
+
+        But another way of thinking about this is just
+
+        \begin{enumerate}
+            \item choose 3 out of 18 spots to place the I's
+            \item choose 3 out of the 15 spots to place the N's
+            \item choose 2 out of 13 spots to place the C's
+        \end{enumerate}
+
+        and so on
+
+        which when you simplify this, it's just
+
+        \begin{align*}
+            & \frac{18!}{3! \cdot 3! \cdot 2! \cdot 2! \cdot 2! \cdot 2! \cdot 2!} \\
+            &= \boxed{\frac{18!}{(3!)^2 \cdot (2!)^5}}
+        \end{align*}
+    }
+
+    \item
+    {
+        There are two types of orientation moves:
+
+        \begin{enumerate}
+            \item roll (3 symmetries)
+            \item yaw / pitch (2 symmetries)
+        \end{enumerate}
+
+        This means that there's \textbf{6 symmetries} ($3 \cdot 2 = 6$)
+
+        So let's just count the number of ways of coloring the prism and ignore the symmetries
+
+        There are essentially 9 slots and 9 options. Since they must be different, this is just a \textbf{permutation}
+
+        \begin{align*}
+            \text{\# of coloring ways} &= \prescript{}{9}{P}_9 \\
+            &= 9!
+        \end{align*}
+
+        We can can just divide the symmetries with the total ways of coloring
+
+        \begin{align*}
+            \boxed{\frac{9!}{6}}
+        \end{align*}
+    }
+
+    \item
+    {
+        With the contraints that order of the games doesn't matter and each player plays only one game,
+        we can just think of this as
+
+        \begin{enumerate}
+            \item choose 6 out of 18 to play one game
+            \item choose 6 out of 12 to play another game
+            \item choose 6 out of 6 to play the last game
+            \item divide by ways of permuting 3 games (since order doesn't matter)
+        \end{enumerate}
+
+        and then for each game, we need to do
+
+        \begin{enumerate}
+            \item choose 3 out of the 6 in the game to be on the first team
+            \item choose 3 out of the remaining 3 to be on the other team
+            \item divide by ways of permuting 2 teams (since order doesn't matter)
+        \end{enumerate}
+
+        So mathematically this is
+
+        \begin{align*}
+            & \frac{{18 \choose 6} \cdot {6 \choose 3} \cdot {3 \choose 3}}{\prescript{}{2}{P}_2} \cdot \frac{{12 \choose 6} \cdot {6 \choose 3} \cdot {3 \choose 3}}{\prescript{}{2}{P}_2} \cdot \frac{{6 \choose 6} \cdot {6 \choose 3} \cdot {3 \choose 3}}{\prescript{}{2}{P}_2} \cdot \frac{1}{\prescript{}{3}{P}_3} \\
+            &= {18 \choose 6} \cdot {12 \choose 6} \cdot \left({6 \choose 3} \cdot {3 \choose 3}\right)^3 \cdot {6 \choose 6} \cdot \frac{1}{3! \cdot 2! \cdot 2! \cdot 2!} \\
+            &= {18 \choose 6} \cdot {12 \choose 6} \cdot {6 \choose 3}^3 \cdot \frac{1}{3 \cdot 2 \cdot 2 \cdot 2 \cdot 2} \\
+            &= \boxed{{18 \choose 6} \cdot {12 \choose 6} \cdot {6 \choose 3}^3 \cdot \frac{1}{48}} \\
+        \end{align*}
+    }
+
+\end{alphabet}
+
+% End the document
+\end{document}

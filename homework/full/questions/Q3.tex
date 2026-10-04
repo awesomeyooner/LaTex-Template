@@ -1,0 +1,130 @@
+% Point to the main file
+\documentclass[../Main.tex]{subfiles}
+
+% Start the document
+\begin{document}
+
+\begin{alphabet}
+    
+    \item
+    {
+        Since the paintings can all be in the same room, each painting essentially has 12 options to choose from each, so this turns out to be
+
+        \begin{align}
+            \underbrace{12}_{P1} \cdot \underbrace{12}_{P2} \cdot \ldots \cdot \underbrace{12}_{P9} = \boxed{12^9}
+        \end{align}
+    }
+
+    \item 
+    {
+        In words, the museum curator would essentially be doing:
+
+        \begin{enumerate}
+            \item choose 9 rooms out of 12 for each painting
+            \item permute 9 paintings
+        \end{enumerate}
+
+        Mathematically, this is
+
+        \begin{align*}
+            {12 \choose 9} \cdot \prescript{}{9}{P}_9 &= \boxed{{12 \choose 9} \cdot 9!}
+        \end{align*}
+    }
+
+    \item
+    {
+        We can think of this as the following (exactly 1 painting is in the smallest room)
+
+        \begin{center}
+            1 in smallest = 0 in biggest and 1 in smallest + at least 1 in biggest and 1 in smallest
+        \end{center}
+
+        So
+
+        \begin{center}
+            at least 1 in biggest and 1 in smallest = 1 in smallest - 0 in biggest and 1 in smallest
+        \end{center}
+
+        For 0 in smallest, each painting just as 11 options (12 - 1 = 11) to exclude the smallest
+
+        So we must choose 1 painting out of 9 to place in the smallest, then the rest has 11 choices for rooms
+
+        \begin{align*}
+            \text{1 in smallest} = {9 \choose 1} \cdot \underbrace{1}_{P1} \cdot \underbrace{11}_{P2} \cdot \underbrace{11}_{P3} \cdot \underbrace{11}_{P4} \cdot \underbrace{11}_{P5} \cdot \underbrace{11}_{P6} \cdot \underbrace{11}_{P7} \cdot \underbrace{11}_{P8} \cdot \underbrace{11}_{P8} &= 9 \cdot 11^8
+        \end{align*}
+
+        For 0 in biggest (with 1 in smallest), one painting must be in the smallest room, and NONE can be in the biggest.
+        This means we must choose one painting out of 9 to be in the smallest, and the rest can be in any of the 10 rooms (can't be in biggest nor smallest, so $12 - 2 = 10$)
+
+        \begin{align*}
+            \text{0 in biggest and 1 in smallest} = {9 \choose 1} \cdot \underbrace{1}_{P1} \cdot \underbrace{10}_{P2} \cdot \underbrace{10}_{P3} \cdot \underbrace{10}_{P4} \cdot \underbrace{10}_{P5} \cdot \underbrace{10}_{P6} \cdot \underbrace{10}_{P7} \cdot \underbrace{10}_{P8} \cdot \underbrace{10}_{P9} &= 9 \cdot 10^8
+        \end{align*}
+
+        So now we can just plug it into our equation
+
+        \begin{align*}
+            \text{at least 1 in biggest and 1 in smallest} &= 9 \cdot 11^8 - 9 \cdot 10^8 \\
+            &= \boxed{9(11^8 - 10^8)}
+        \end{align*}
+    }
+
+    \item
+    {
+        So our contraint for this one is that A, B, and C must all be in the same room. Because they're all attached to each other, we can just think
+        of all three as one unit, so the total number of paintings we have is essentially 7.
+
+        The question then just becomes how many ways can we arrange 7 paintings in 12 rooms?
+
+        Just like the other parts, each painting has 12 options for what room to go in
+
+        \begin{align*}
+            \underbrace{12}_{ABC} \cdot \underbrace{12}_{P2} \cdot \underbrace{12}_{P3} \cdot \underbrace{12}_{P4} \cdot \underbrace{12}_{P5} \cdot \underbrace{12}_{P6} \cdot \underbrace{12}_{P7} = \boxed{12^7}
+        \end{align*}
+    }
+
+    \item
+    {
+        Somewhat similar to the last one, we can group the 9 paintings into 3 groups.
+
+        Let's define how many ways we can form groups of 3
+
+        \begin{enumerate}
+            \item choose 3 out of 9 to be in one group
+            \item choose 3 out of 6 to be in another group
+            \item choose 3 out of 3 to be in the last group
+        \end{enumerate}
+
+        So the number arrangements for groups is given by
+
+        \begin{align*}
+            \text{\# of group arrangements} &= {9 \choose 3} \cdot {6 \choose 3} \cdot {3 \choose 3} \\
+            &= {9 \choose 3} \cdot {6 \choose 3}
+        \end{align*}
+
+        so now we have our groups, we can answer the second part of the question
+
+        \begin{enumerate}
+            \item choose 3 out of 12 rooms
+        \end{enumerate}
+
+        Which is just
+
+        \begin{align*}
+            {12 \choose 3}
+        \end{align*}
+
+        So the total arrangements is just
+
+        \begin{center}
+            \# of ways to arrange 3 even groups from 9 $\cdot$ \# of ways to choose 3 rooms out of 12
+        \end{center}
+
+        \begin{align*}
+            \boxed{ {9 \choose 3} \cdot {6 \choose 3} \cdot {12 \choose 3} }
+        \end{align*}
+    }
+
+\end{alphabet}
+
+% End the document
+\end{document}
