@@ -1,0 +1,327 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% writeLaTeX Example: A quick guide to LaTeX
+%
+% Source: Dave Richeson (divisbyzero.com), Dickinson College
+% 
+% A one-size-fits-all LaTeX cheat sheet. Kept to two pages, so it 
+% can be printed (double-sided) on one piece of paper
+% 
+% Feel free to distribute this example, but please keep the referral
+% to divisbyzero.com
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% How to use writeLaTeX: 
+%
+% You edit the source code here on the left, and the preview on the
+% right shows you the result within a few seconds.
+%
+% Bookmark this page and share the URL with your co-authors. They can
+% edit at the same time!
+%
+% You can upload figures, bibliographies, custom classes and
+% styles using the files menu.
+%
+% If you're new to LaTeX, the wikibook is a great place to start:
+% http://en.wikibooks.org/wiki/LaTeX
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[10pt,landscape]{article}
+\usepackage{amssymb,amsmath,amsthm,amsfonts}
+\usepackage{multicol,multirow}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage{siunitx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{nicematrix}
+\usepackage{color} 
+\usepackage{cancel}
+\usepackage{longdivision}
+\usepackage{xfrac}
+\usepackage[landscape]{geometry}
+\usepackage[colorlinks=true,citecolor=blue,linkcolor=blue]{hyperref}
+
+
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+    { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+	{\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+	}
+\pagestyle{empty}
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\makeatother
+\setcounter{secnumdepth}{0}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+% -----------------------------------------------------------------------
+
+\begin{document}
+
+\raggedright
+\footnotesize
+
+\begin{multicols}{4}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+% -----------------------------------------------------------------------
+% PERMUTATIONS
+% -----------------------------------------------------------------------
+\section{Permutations}
+
+    The number of ways to arrange $r$ objects out of $n$ is where \textbf{order matters} is...
+
+    The number of $r$ length words over an alphabet with $n$ letters \textbf{without} repetitions
+
+    \begin{align*}
+        n: \; & \text{Total \# of objects} \\
+        r: \; & \text{\# of objects you want to choose from} \\
+        P(n, r) = \prescript{}{n}{P}_r &= n(n - 1)(n - 2) \cdot \ldots \cdot (n - r + 1) \\
+        &= \frac{n!}{(n - r)!} \\
+    \end{align*}
+
+    Some examples are:
+
+    \begin{itemize}
+        \item Different ways of choosing r roles out of a class of n students, where each role has one student playing it, and no students have multiple roles
+        \item Different ways of passing out 5 cards to a group of 5 people out of a deck of 52, where each person gets one card
+        \item Different ways of having 1st 2nd 3rd place runners in a race of 10 athletes.
+        \item Different ways to make a 4-letter word using different letters.
+    \end{itemize}
+
+% -----------------------------------------------------------------------
+% COMBINATIONS
+% -----------------------------------------------------------------------
+\section{Combinations}
+
+\begin{enumerate}
+    \item How many ways can I pick $r$ objects from $n$ distinct objects in an \textbf{unordered} set?
+    \item $r$-element subsets of a set of cardinality $n$
+    \item Length $n$ binary strings of length $r$
+\end{enumerate}
+
+\begin{align*}
+    C(n, r) &= \prescript{}{n}{C}_r = {n \choose r} = \frac{n!}{r! \cdot (n - r)!}
+\end{align*}
+
+% -----------------------------------------------------------------------
+% STARS AND BARS
+% -----------------------------------------------------------------------
+\section{Stars and Bars}
+
+\begin{align*}
+    & {n + k - 1 \choose k - 1} = {n + k - 1 \choose n} \\
+    &n: \text{ number of items} \\
+    &k: \text{ number of bins} \\
+\end{align*}
+
+Where 
+
+\begin{enumerate}
+    \item Order doesn't matter
+    \item Bins can contain 0
+    \item All items must be placed
+\end{enumerate}
+
+% -----------------------------------------------------------------------
+% INTEGER EQUATIONS
+% -----------------------------------------------------------------------
+\section{Integer Equations}
+
+\begin{align*}
+    & {n + k - 1 \choose k - 1} = {n + k - 1 \choose n} \\
+    &n: \text{ RHS } \\
+    &k: \text{ Number of variables } \\
+    &\\
+    & {n + k(1 - m) - 1 \choose k - 1} \\
+    &n: \text{ Number of items } \\
+    &k: \text{ Number of bins } \\
+    &m: \text{ At Least } \\
+\end{align*}
+
+For 
+
+$$(a_1 + c_1) + (a_2 + c_2) + \ldots (a_k + c_k) = n$$
+
+This is just saying that $a_i \geq c_i$, so just move all the constants to the left and solve like normal
+
+$$a_1 + a_2 + \ldots + a_k = n - c_1 - c_2 - \ldots - c_k$$
+
+% -----------------------------------------------------------------------
+% BINOMIAL THEOREM
+% -----------------------------------------------------------------------
+\section{Binomial Theorem}
+$$\text{For } n = 0, 1, 2, \ldots, (a + b)^n = \sum_{k = 0}^{n} {n \choose k} a^{n - k}b^k$$
+
+% -----------------------------------------------------------------------
+% INCLUSION EXCLUSION (PIE)
+% -----------------------------------------------------------------------
+\section{Inclusion Exclusion (PIE)}
+Let $A_1, A_2, \ldots , A_n$ be finite sets. Then
+
+\begin{align*}
+    &|A_1 \cup A_2 \cup \ldots \cup A_n| = \sum_{1 \leq i \leq n}^{} |A_i| \\
+    &- \sum_{1 \leq i < j \leq n}^{} | A_i \cap A_j | \\
+    &+ \sum_{1 \leq i < j < k \leq n}^{} |A_i \cap A_j \cap A_k | \\
+    &- \ldots + (-1)^{n + 1} |A_1 \cap A_2 \cap \ldots \cap A_n | \\
+\end{align*}
+
+\begin{center}
+    \textbf{ODD} sets involved: \textbf{ADD} \\
+    \textbf{EVEN} sets involved: \textbf{SUBTRACT} \\
+\end{center}
+
+% -----------------------------------------------------------------------
+% CARDINALITY OF INTERSECTIONS
+% -----------------------------------------------------------------------
+\section{Cardinality of Intersections}
+Let $A_1, A_2, \ldots , A_n$ be finite sets. Then
+
+\begin{align*}
+    &|A_1 \cap A_2 \cap \ldots \cap A_n | = |U| - \sum_{i = 1}^{n} |\overline{A_i}| \\
+    &+ \sum_{k_1 < k_2}^{} |\overline{A_{k_1}} \cap \overline{A_{k_2}}| \\
+    &- \sum_{k_1 < k_2 < k_3}^{} |\overline{A_{k_1}} \cap \overline{A_{k_2}} \cap \overline{A_{k_3}}| \\
+    &+ \ldots + (-1)^n |\overline{A_{k_1}} \cap \overline{A_{k_2}} \cap \ldots \cap \overline{A_n}|
+\end{align*}
+
+The big idea is
+
+\begin{center}
+    \textbf{ODD} number of sets, then \textbf{SUBTRACT} \\
+    \textbf{EVEN} number of sets, then \textbf{ADD} \\
+\end{center}
+
+% -----------------------------------------------------------------------
+% PROBLEMS
+% -----------------------------------------------------------------------
+\section{Problems}
+
+% -----------------------------------------------------------------------
+% LICENSE PLATES
+% -----------------------------------------------------------------------
+\subsection{License Plates}
+
+How many 7-character license plates are there that are all different letters and they are
+in alphabetical order?
+
+$$26 \choose 7$$
+
+How many 7-character license plates are there from all capital letters and they are
+in alphabetical order? They can be duplicates, so AAAAAAA is valid
+
+Use stars and bars! $x_A, x_B, x_C$ represents the number  of appearances of each letter. They all
+must sum to 7 
+
+$n = 7,\; k = 26$
+
+$${7 + 26 - 1 \choose 7} = {32 \choose 7}$$
+
+In general
+
+\begin{align*}
+    n &= \text{string length} \\
+    k &= \text{size of alphabet}
+\end{align*}
+
+% -----------------------------------------------------------------------
+% ROTATIONAL SYMMETRIES
+% -----------------------------------------------------------------------
+\subsection{Rotational Symmetries}
+
+For an $n$th polygonal prism, there are $2n$ rotational symmetries
+
+% -----------------------------------------------------------------------
+% BASKETBALL PLAYERS
+% -----------------------------------------------------------------------
+\subsection{Basketball}
+
+There are 18 different basketball players. How many ways can they organize themselves into 3
+games each with 3 players versus 3 players?
+
+$$\frac{18!}{(3!3!3!3!3!3!)(2!2!2!)3!}$$
+
+${18 \choose 3} {15 \choose 3}$ double counts, so we need to divide by $2!$. We need to divide by $3!$ too because each game
+is treated as distinct
+
+% -----------------------------------------------------------------------
+% INTEGER EQUATION BOUNDED
+% -----------------------------------------------------------------------
+\subsection{Integer Equation Bounded}
+
+\begin{align*}
+    &|U| = | \text{all vars } \leq 7 | + | \text{at least 1 var } \geq 8 | \\
+    &| \text{all vars } \leq 7 | = |U| - | \text{at least 1 var } \geq 8 | \\
+\end{align*}
+
+$$|U| = {35 \choose 5}$$
+
+$$|\text{at least 1 var being at least 8}| = |\text{1 var at least 8}| + |\text{2 vars at least 8}| + \ldots + |\text{6 vars at least 8}|$$
+
+For each subset, "$p$ var(s) at least 8", we must multiply the arrangements by ${6 \choose p}$ since we need to choose where the "at least" variables are
+
+For $p = 1$
+
+\begin{align*}
+    (a_1 + 8) + a_2 + a_3 + a_4 + a_5 + a_6 &= 30 \\
+    a_1 + a_2 + a_3 + a_4 + a_5 + a_6 &= 22 \\
+    {6 \choose 1}{27 \choose 5} &
+\end{align*}
+
+For $p = 2$
+
+\begin{align*}
+    (a_1 + 8) + (a_2 + 8) + a_3 + a_4 + a_5 + a_6 &= 30 \\
+    a_1 + a_2 + a_3 + a_4 + a_5 + a_6 &= 14 \\
+    {6 \choose 2}{19 \choose 5} &
+\end{align*}
+
+For $p = 3$
+
+\begin{align*}
+    (a_1 + 8) + (a_2 + 8) + (a_3 + 8) + a_4 + a_5 + a_6 &= 30 \\
+    a_1 + a_2 + a_3 + a_4 + a_5 + a_6 &= 6 \\
+    {6 \choose 3}{11 \choose 5} &
+\end{align*}
+
+And for $p = 4$ to $p = 6$, there's 0 solutions since the RHS would be negative
+
+But we need to be careful because we would overcount if we just add up all the sets. The solutions for $p = 2$ are INCLUDED in $p = 1$, and same for
+$p = 3$, so we need to apply Principle of Inclusion Exclusion. 
+
+Recall that for PIE, if you're accounting for an ODD number of sets, then you subtract, but EVEN you add
+
+so we add $p = 1$ and $p = 3$, but subtract $p = 2$
+
+Doing all of this, we get
+
+\begin{align*}
+    &|\text{at least 1 var being at least 8}| = \\
+    &{6 \choose 1}{27 \choose 5} - {6 \choose 2}{19 \choose 5} + {6 \choose 3}{11 \choose 5}
+\end{align*}
+
+And plugging this back into our base equation we get
+
+$$| \text{all vars } \leq 7 | = \boxed{{35 \choose 5} - {6 \choose 1}{27 \choose 5} + {6 \choose 2}{19 \choose 5} - {6 \choose 3}{11 \choose 5}}$$
+
+\end{multicols}
+
+\end{document}

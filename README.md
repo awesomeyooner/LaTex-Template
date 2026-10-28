@@ -5,6 +5,7 @@ Just a place to store the template I use for LaTex lecture notes
 
 ```c++
 .
+├── formula-sheets // Template for Formula Sheets / Cheat Sheets
 ├── homework // Template for creating homework (Q1, Q1a, Q1b, etc)
 └── notes // Template for creating notes (has sections / chapters)
 ```
